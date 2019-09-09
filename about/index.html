@@ -341,7 +341,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -512,15 +512,15 @@
     }
   }
 
-  fetch('https://app-router.leancloud.cn/2/route?appId=SHo9yYvV2E6AbxXojjy63fga-gzGzoHsz')
+  fetch('https://app-router.leancloud.cn/2/route?appId=hvYJ5EnOEnEhb6FB8U4GIcyk-gzGzoHsz')
     .then(response => response.json())
     .then(({ api_server }) => {
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
           method: method,
           headers: {
-            'X-LC-Id': 'SHo9yYvV2E6AbxXojjy63fga-gzGzoHsz',
-            'X-LC-Key': '4GLaYth5fH8s3vjwOJqo9HFL',
+            'X-LC-Id': 'hvYJ5EnOEnEhb6FB8U4GIcyk-gzGzoHsz',
+            'X-LC-Key': '4p0vYujKHfrfmxNmx1tLQV6Q',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data)
