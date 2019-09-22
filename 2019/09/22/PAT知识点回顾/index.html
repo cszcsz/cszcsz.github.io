@@ -54,31 +54,33 @@
   };
 </script>
 
-  <meta name="description" content="个人学习生活记录">
-<meta property="og:type" content="website">
-<meta property="og:title" content="csz的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="数据结构与算法知识点总结：实用技巧：1.  fill()函数的使用​    填充一维数组： 123456  int arr[10];  fill(arr, arr + 10, 2);vector&amp;lt;int&amp;gt; v&amp;#123;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&amp;#125;;  fill(v.begin(), v.end(), -1);  return 0;  ​">
+<meta name="keywords" content="算法, PAT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PAT算法知识点回顾">
+<meta property="og:url" content="http://yoursite.com/2019/09/22/PAT知识点回顾/index.html">
 <meta property="og:site_name" content="csz的博客">
-<meta property="og:description" content="个人学习生活记录">
+<meta property="og:description" content="数据结构与算法知识点总结：实用技巧：1.  fill()函数的使用​    填充一维数组： 123456  int arr[10];  fill(arr, arr + 10, 2);vector&amp;lt;int&amp;gt; v&amp;#123;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&amp;#125;;  fill(v.begin(), v.end(), -1);  return 0;  ​">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-22T11:47:02.574Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="csz的博客">
-<meta name="twitter:description" content="个人学习生活记录">
-  <link rel="canonical" href="http://yoursite.com/">
+<meta name="twitter:title" content="PAT算法知识点回顾">
+<meta name="twitter:description" content="数据结构与算法知识点总结：实用技巧：1.  fill()函数的使用​    填充一维数组： 123456  int arr[10];  fill(arr, arr + 10, 2);vector&amp;lt;int&amp;gt; v&amp;#123;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&amp;#125;;  fill(v.begin(), v.end(), -1);  return 0;  ​">
+  <link rel="canonical" href="http://yoursite.com/2019/09/22/PAT知识点回顾/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>csz的博客</title>
+  <title>PAT算法知识点回顾 | csz的博客</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -225,12 +227,13 @@
 
           <div id="content" class="content">
             
+
   <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block home">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/22/PAT知识点回顾/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -243,9 +246,8 @@
       <meta itemprop="name" content="csz的博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/22/PAT知识点回顾/" class="post-title-link" itemprop="url">PAT算法知识点回顾</a>
+        <h1 class="post-title" itemprop="name headline">PAT算法知识点回顾
+
           
         </h1>
 
@@ -300,7 +302,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="数据结构与算法知识点总结："><a href="#数据结构与算法知识点总结：" class="headerlink" title="数据结构与算法知识点总结："></a>数据结构与算法知识点总结：</h1><h4 id="实用技巧："><a href="#实用技巧：" class="headerlink" title="实用技巧："></a>实用技巧：</h4><h5 id="1-fill-函数的使用"><a href="#1-fill-函数的使用" class="headerlink" title="1.  fill()函数的使用"></a>1.  fill()函数的使用</h5><p>​    填充一维数组：</p>
+        <h1 id="数据结构与算法知识点总结："><a href="#数据结构与算法知识点总结：" class="headerlink" title="数据结构与算法知识点总结："></a>数据结构与算法知识点总结：</h1><h4 id="实用技巧："><a href="#实用技巧：" class="headerlink" title="实用技巧："></a>实用技巧：</h4><h5 id="1-fill-函数的使用"><a href="#1-fill-函数的使用" class="headerlink" title="1.  fill()函数的使用"></a>1.  fill()函数的使用</h5><p>​    填充一维数组：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> arr[<span class="number">10</span>];</span><br><span class="line">  fill(arr, arr + <span class="number">10</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;;</span><br><span class="line">  fill(v.begin(), v.end(), <span class="number">-1</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
 
 <p>​    填充二维数组：</p>
@@ -337,323 +339,54 @@
 <h4 id="3、动态规划（01背包问题）："><a href="#3、动态规划（01背包问题）：" class="headerlink" title="3、动态规划（01背包问题）："></a>3、动态规划（01背包问题）：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> v[<span class="number">1005</span>],w[<span class="number">1005</span>];</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">1005</span>][<span class="number">1005</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        dp[i][j]=dp[i<span class="number">-1</span>][j];</span><br><span class="line">        <span class="keyword">if</span>(j&gt;=v[i])</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i][j]=max(dp[i<span class="number">-1</span>][j-v[i]]+w[i],dp[i<span class="number">-1</span>][j]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;dp[n][m];</span><br></pre></td></tr></table></figure>
 
 
-        
-      
     </div>
 
     
     
     
+        
+      
+
       <footer class="post-footer">
-          <div class="post-eof"></div>
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/算法/" rel="tag"># 算法</a>
+            
+              <a href="/tags/PAT/" rel="tag"># PAT</a>
+            
+          </div>
         
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/git常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="csz">
-      <meta itemprop="description" content="个人学习生活记录">
-      <meta itemprop="image" content="/images/touxiang.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="csz的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/26/git常用命令/" class="post-title-link" itemprop="url">git常用命令</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-26 23:50:57 / 修改时间：23:58:48" itemprop="dateCreated datePublished" datetime="2019-08-26T23:50:57+08:00">2019-08-26</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            <span id="/2019/08/26/git常用命令/" class="post-meta-item leancloud_visitors" data-flag-title="git常用命令" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="从github远程克隆项目修改后再推送："><a href="#从github远程克隆项目修改后再推送：" class="headerlink" title="从github远程克隆项目修改后再推送："></a>从github远程克隆项目修改后再推送：</h4><ol>
-<li><p><code>git clone &lt;url&gt;</code>&emsp;将项目克隆到本地</p>
-</li>
-<li><p><code>git add .</code> &emsp;跟踪所有的文件</p>
-</li>
-<li><p><code>git commit -m &quot;commit message&quot;</code>  &emsp;提交文件到本地版本库</p>
-</li>
-<li><p><code>git push orgin master</code>  &emsp; 推送到远程仓库 </p>
-</li>
-<li><p><code>git status</code>  &emsp;随时查看状态信息</p>
-</li>
-</ol>
 
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/hexo常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="csz">
-      <meta itemprop="description" content="个人学习生活记录">
-      <meta itemprop="image" content="/images/touxiang.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="csz的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/26/hexo常用命令/" class="post-title-link" itemprop="url">hexo常用命令</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
               
-                
+                <a href="/2019/08/26/git常用命令/" rel="next" title="git常用命令">
+                  <i class="fa fa-chevron-left"></i> git常用命令
+                </a>
               
-
-              <time title="创建时间：2019-08-26 23:30:36 / 修改时间：23:39:45" itemprop="dateCreated datePublished" datetime="2019-08-26T23:30:36+08:00">2019-08-26</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/博客搭建问题/" itemprop="url" rel="index"><span itemprop="name">博客搭建问题</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            <span id="/2019/08/26/hexo常用命令/" class="post-meta-item leancloud_visitors" data-flag-title="hexo常用命令" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞。
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/26/hexo常用命令/">
-                阅读全文 &raquo;
-              </a>
             </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
         
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="csz">
-      <meta itemprop="description" content="个人学习生活记录">
-      <meta itemprop="image" content="/images/touxiang.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="csz的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/26/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-26 11:17:24" itemprop="dateCreated datePublished" datetime="2019-08-26T11:17:24+08:00">2019-08-26</time>
-            </span>
-          
-
-          
-            <span id="/2019/08/26/hello-world/" class="post-meta-item leancloud_visitors" data-flag-title="Hello World" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
   </div>
-  
-  
-  
-  </article>
-
-    
-  </div>
-
-  
 
 
           </div>
@@ -672,6 +405,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc" data-target="post-toc-wrap">
@@ -684,6 +422,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构与算法知识点总结："><span class="nav-number">1.</span> <span class="nav-text">数据结构与算法知识点总结：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实用技巧："><span class="nav-number">1.0.0.1.</span> <span class="nav-text">实用技巧：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-fill-函数的使用"><span class="nav-number">1.0.0.1.1.</span> <span class="nav-text">1.  fill()函数的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-memset-函数的使用"><span class="nav-number">1.0.0.1.2.</span> <span class="nav-text">2. memset()函数的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-count用于统计数组或向量中某个值出现的次数"><span class="nav-number">1.0.0.1.3.</span> <span class="nav-text">3. count用于统计数组或向量中某个值出现的次数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-erase-和remove-结合起来删除容器中的指定元素"><span class="nav-number">1.0.0.1.4.</span> <span class="nav-text">4.erase()和remove()结合起来删除容器中的指定元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-利用find-查找所有子串或字符在原字符串中的位置"><span class="nav-number">1.0.0.1.5.</span> <span class="nav-text">5.利用find()查找所有子串或字符在原字符串中的位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-C语言读入一行带空格的字符串-读到的回车符丢掉"><span class="nav-number">1.0.0.1.6.</span> <span class="nav-text">5.C语言读入一行带空格的字符串(读到的回车符丢掉)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-大整数乘法核心代码"><span class="nav-number">1.0.0.1.7.</span> <span class="nav-text">7.大整数乘法核心代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据结构与算法（补充部分，以防万一-）"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">数据结构与算法（补充部分，以防万一~）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法部分："><span class="nav-number">1.0.0.3.</span> <span class="nav-text">算法部分：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、动态规划（DP）"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">1、动态规划（DP）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#N阶楼梯上楼问题："><span class="nav-number">1.0.0.4.1.</span> <span class="nav-text">N阶楼梯上楼问题：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据结构部分："><span class="nav-number">1.0.0.5.</span> <span class="nav-text">数据结构部分：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、树："><span class="nav-number">1.0.0.6.</span> <span class="nav-text">1、树：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#后序和中序构造二叉树："><span class="nav-number">1.0.0.6.1.</span> <span class="nav-text">后序和中序构造二叉树：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#层序遍历"><span class="nav-number">1.0.0.6.2.</span> <span class="nav-text">层序遍历:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、图："><span class="nav-number">1.0.0.7.</span> <span class="nav-text">2、图：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#djikstra-dfs求最短路径："><span class="nav-number">1.0.0.7.1.</span> <span class="nav-text">djikstra+dfs求最短路径：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、并查集："><span class="nav-number">1.0.0.8.</span> <span class="nav-text">3、并查集：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、动态规划（01背包问题）："><span class="nav-number">1.0.0.9.</span> <span class="nav-text">3、动态规划（01背包问题）：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
