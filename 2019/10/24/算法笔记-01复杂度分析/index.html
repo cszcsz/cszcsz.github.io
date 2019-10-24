@@ -54,19 +54,21 @@
   };
 </script>
 
-  <meta name="description" content="从github远程克隆项目修改后再推送： git clone &amp;lt;url&amp;gt;&amp;emsp;将项目克隆到本地  git add . &amp;emsp;跟踪所有的文件  git commit -m &amp;quot;commit message&amp;quot;  &amp;emsp;提交文件到本地版本库  git push orgin master  &amp;emsp; 推送到远程仓库   git status  &amp;emsp">
-<meta name="keywords" content="git">
+  <meta name="description" content="1. 为什么要做这个笔记​    最近开始重新学习数据结构与算法知识，俗话说：读书白遍，其义自见，要想真正学好数据结构与算法，必须要经过不断地反复锤炼才行，做笔记是一个消化知识的过程，在脑海中将学到的知识重演一遍并以自己的话总结出来，这样自身的内功才能得以提升。 2、时间复杂度2.1 什么是时间复杂度 时间复杂度描述的是算法的执行时间随问题规模增长变化的趋势        2.2 为什么要引入时间">
+<meta name="keywords" content="复杂度分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git常用命令">
-<meta property="og:url" content="http://yoursite.com/2019/08/26/git常用命令/index.html">
+<meta property="og:title" content="算法笔记-01复杂度分析">
+<meta property="og:url" content="http://yoursite.com/2019/10/24/算法笔记-01复杂度分析/index.html">
 <meta property="og:site_name" content="csz的博客">
-<meta property="og:description" content="从github远程克隆项目修改后再推送： git clone &amp;lt;url&amp;gt;&amp;emsp;将项目克隆到本地  git add . &amp;emsp;跟踪所有的文件  git commit -m &amp;quot;commit message&amp;quot;  &amp;emsp;提交文件到本地版本库  git push orgin master  &amp;emsp; 推送到远程仓库   git status  &amp;emsp">
+<meta property="og:description" content="1. 为什么要做这个笔记​    最近开始重新学习数据结构与算法知识，俗话说：读书白遍，其义自见，要想真正学好数据结构与算法，必须要经过不断地反复锤炼才行，做笔记是一个消化知识的过程，在脑海中将学到的知识重演一遍并以自己的话总结出来，这样自身的内功才能得以提升。 2、时间复杂度2.1 什么是时间复杂度 时间复杂度描述的是算法的执行时间随问题规模增长变化的趋势        2.2 为什么要引入时间">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-26T15:58:48.271Z">
+<meta property="og:image" content="https://i.loli.net/2019/10/24/hWDm6Ylsf3bMu7j.jpg">
+<meta property="og:updated_time" content="2019-10-24T03:48:12.302Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git常用命令">
-<meta name="twitter:description" content="从github远程克隆项目修改后再推送： git clone &amp;lt;url&amp;gt;&amp;emsp;将项目克隆到本地  git add . &amp;emsp;跟踪所有的文件  git commit -m &amp;quot;commit message&amp;quot;  &amp;emsp;提交文件到本地版本库  git push orgin master  &amp;emsp; 推送到远程仓库   git status  &amp;emsp">
-  <link rel="canonical" href="http://yoursite.com/2019/08/26/git常用命令/">
+<meta name="twitter:title" content="算法笔记-01复杂度分析">
+<meta name="twitter:description" content="1. 为什么要做这个笔记​    最近开始重新学习数据结构与算法知识，俗话说：读书白遍，其义自见，要想真正学好数据结构与算法，必须要经过不断地反复锤炼才行，做笔记是一个消化知识的过程，在脑海中将学到的知识重演一遍并以自己的话总结出来，这样自身的内功才能得以提升。 2、时间复杂度2.1 什么是时间复杂度 时间复杂度描述的是算法的执行时间随问题规模增长变化的趋势        2.2 为什么要引入时间">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/24/hWDm6Ylsf3bMu7j.jpg">
+  <link rel="canonical" href="http://yoursite.com/2019/10/24/算法笔记-01复杂度分析/">
 
 
 <script id="page-configurations">
@@ -80,7 +82,7 @@
   };
 </script>
 
-  <title>git常用命令 | csz的博客</title>
+  <title>算法笔记-01复杂度分析 | csz的博客</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -234,7 +236,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/git常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/24/算法笔记-01复杂度分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="csz">
@@ -246,7 +248,7 @@
       <meta itemprop="name" content="csz的博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">git常用命令
+        <h1 class="post-title" itemprop="name headline">算法笔记-01复杂度分析
 
           
         </h1>
@@ -262,7 +264,7 @@
                 
               
 
-              <time title="创建时间：2019-08-26 23:50:57 / 修改时间：23:58:48" itemprop="dateCreated datePublished" datetime="2019-08-26T23:50:57+08:00">2019-08-26</time>
+              <time title="创建时间：2019-10-24 10:31:55 / 修改时间：11:48:12" itemprop="dateCreated datePublished" datetime="2019-10-24T10:31:55+08:00">2019-10-24</time>
             </span>
           
             
@@ -275,7 +277,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构与算法学习笔记/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法学习笔记</span></a></span>
 
                 
                 
@@ -284,7 +286,7 @@
           
 
           
-            <span id="/2019/08/26/git常用命令/" class="post-meta-item leancloud_visitors" data-flag-title="git常用命令" title="阅读次数">
+            <span id="/2019/10/24/算法笔记-01复杂度分析/" class="post-meta-item leancloud_visitors" data-flag-title="算法笔记-01复杂度分析" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -302,18 +304,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="从github远程克隆项目修改后再推送："><a href="#从github远程克隆项目修改后再推送：" class="headerlink" title="从github远程克隆项目修改后再推送："></a>从github远程克隆项目修改后再推送：</h4><ol>
-<li><p><code>git clone &lt;url&gt;</code>&emsp;将项目克隆到本地</p>
-</li>
-<li><p><code>git add .</code> &emsp;跟踪所有的文件</p>
-</li>
-<li><p><code>git commit -m &quot;commit message&quot;</code>  &emsp;提交文件到本地版本库</p>
-</li>
-<li><p><code>git push orgin master</code>  &emsp; 推送到远程仓库 </p>
-</li>
-<li><p><code>git status</code>  &emsp;随时查看状态信息</p>
-</li>
+        <h2 id="1-为什么要做这个笔记"><a href="#1-为什么要做这个笔记" class="headerlink" title="1. 为什么要做这个笔记"></a>1. 为什么要做这个笔记</h2><p>​    最近开始重新学习数据结构与算法知识，俗话说：读书白遍，其义自见，要想真正学好数据结构与算法，必须要经过不断地反复锤炼才行，做笔记是一个消化知识的过程，在脑海中将学到的知识重演一遍并以自己的话总结出来，这样自身的内功才能得以提升。</p>
+<h2 id="2、时间复杂度"><a href="#2、时间复杂度" class="headerlink" title="2、时间复杂度"></a>2、时间复杂度</h2><h4 id="2-1-什么是时间复杂度"><a href="#2-1-什么是时间复杂度" class="headerlink" title="2.1 什么是时间复杂度"></a>2.1 什么是时间复杂度</h4><ul>
+<li>时间复杂度描述的是算法的<strong>执行时间随问题规模增长变化的趋势</strong>      </li>
+</ul>
+<h4 id="2-2-为什么要引入时间复杂度"><a href="#2-2-为什么要引入时间复杂度" class="headerlink" title="2.2 为什么要引入时间复杂度"></a>2.2 为什么要引入时间复杂度</h4><ul>
+<li>事前对算法进行分析，指导我们写出高效的程序</li>
+<li>提高我们的逻辑思维能力和分析问题的能力</li>
+<li>与性能测试并不冲突，性能测试更为具体，而时间复杂度分析的是随问题规模增长下程序运行时间的变化趋势</li>
+</ul>
+<h4 id="2-3-怎样判断一个程序的时间复杂度（重点）"><a href="#2-3-怎样判断一个程序的时间复杂度（重点）" class="headerlink" title="2.3 怎样判断一个程序的时间复杂度（重点）"></a>2.3 怎样判断一个程序的时间复杂度（重点）</h4><ol>
+<li><strong>单段代码看高频</strong>：看最内层代码的执行次数（如：循环）</li>
+<li><strong>多段代码取最大</strong>：只考虑最高阶的项，低阶项、系数、常数都可以忽略（加法法则）</li>
+<li><strong>嵌套代码求乘积</strong>：时间复杂度为内层和外层的乘积（乘法法则）</li>
+<li><strong>多个规模求加法</strong>：时间复杂度为其求和的结果（如：O(n+m)）</li>
 </ol>
+<a id="more"></a>
+
+
+<h4 id="2-4-常见的时间复杂度"><a href="#2-4-常见的时间复杂度" class="headerlink" title="2.4 常见的时间复杂度"></a>2.4 常见的时间复杂度</h4><h5 id="O-1-lt-O-logn-lt-O-n-lt-O-nlogn-lt-O-n2-lt-O-n3-lt-O-2n-lt-O-n"><a href="#O-1-lt-O-logn-lt-O-n-lt-O-nlogn-lt-O-n2-lt-O-n3-lt-O-2n-lt-O-n" class="headerlink" title="O(1)&lt;O(logn)&lt;O(n)&lt;O(nlogn)&lt;O(n2)&lt;O(n3)&lt;O(2n)&lt;O(n!)"></a>O(1)&lt;O(logn)&lt;O(n)&lt;O(nlogn)&lt;O(n<sup>2</sup>)&lt;O(n<sup>3</sup>)&lt;O(2<sup>n</sup>)&lt;O(n!)</h5><p><img src="https://i.loli.net/2019/10/24/hWDm6Ylsf3bMu7j.jpg" alt="2.jpg"></p>
+<p>注意：对于对数阶，由于换底公式和可以省略系数，所以不管以2为底还是以3为底，我们都记作O(logn)</p>
+<h4 id="2-5-最好时间复杂度、最坏时间复杂度、平均时间复杂度、均摊时间复杂度"><a href="#2-5-最好时间复杂度、最坏时间复杂度、平均时间复杂度、均摊时间复杂度" class="headerlink" title="2.5 最好时间复杂度、最坏时间复杂度、平均时间复杂度、均摊时间复杂度"></a>2.5 最好时间复杂度、最坏时间复杂度、平均时间复杂度、均摊时间复杂度</h4><p>​    为了<strong>更准确的描述</strong>算法的复杂度，引入以上四个概念。比如下面这段代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] array = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (count == array.length) &#123;</span><br><span class="line">      <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; ++i) &#123;</span><br><span class="line">         sum = sum + array[i];</span><br><span class="line">      &#125;</span><br><span class="line">      array[<span class="number">0</span>] = sum;</span><br><span class="line">      count = <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   array[count] = val;</span><br><span class="line">   ++count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最好时间复杂度：O(1)，最坏时间复杂度：O(n)，平均时间复杂度：O(1)，均摊时间复杂度：O(1)</p>
+<ul>
+<li><h5 id="如何比较平均时间复杂度和均摊时间复杂度？"><a href="#如何比较平均时间复杂度和均摊时间复杂度？" class="headerlink" title="如何比较平均时间复杂度和均摊时间复杂度？"></a>如何比较平均时间复杂度和均摊时间复杂度？</h5><ol>
+<li>平均时间复杂度：代码在不同情况下复杂度出现量级差别，则用代码所有可能情况下执行次数的加权平均值表示。</li>
+<li>均摊时间复杂度：两个条件满足时使用：1）代码在绝大多数情况下是低级别复杂度，只有极少数情况是高级别复杂度；2）低级别和高级别复杂度出现具有时序规律。均摊结果一般都等于低级别复杂度。</li>
+</ol>
+<p><strong>总结：平均和均摊基本是一个概念，均摊是平均的一种特殊情况，可以凭感觉分析是O(1)还是O(n)，如果出现O(1)的次数远大于出现O(n)的次数，那么平均和均摊复杂度就是O(1)</strong>  </p>
+</li>
+</ul>
+<h2 id="2、空间复杂度"><a href="#2、空间复杂度" class="headerlink" title="2、空间复杂度"></a>2、空间复杂度</h2><ul>
+<li>空间复杂度较为简单。与时间复杂度类似，空间复杂度全称是渐进空间复杂度，描述的是算法的<strong>存储空间随问题规模增长的变化趋势</strong>。常见的空间复杂度就是 O(1)、O(n)、O(n<sup>2</sup>)。</li>
+</ul>
 
     </div>
 
@@ -329,7 +354,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/复杂度分析/" rel="tag"># 复杂度分析</a>
             
           </div>
         
@@ -339,8 +364,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/08/26/hexo常用命令/" rel="next" title="hexo常用命令">
-                  <i class="fa fa-chevron-left"></i> hexo常用命令
+                <a href="/2019/10/04/自我提升-表达沟通/" rel="next" title="自我提升-表达技巧">
+                  <i class="fa fa-chevron-left"></i> 自我提升-表达技巧
                 </a>
               
             </div>
@@ -348,10 +373,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/09/22/PAT知识点回顾/" rel="prev" title="PAT算法知识点回顾">
-                  PAT算法知识点回顾 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -400,7 +421,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#从github远程克隆项目修改后再推送："><span class="nav-number">1.</span> <span class="nav-text">从github远程克隆项目修改后再推送：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-为什么要做这个笔记"><span class="nav-number">1.</span> <span class="nav-text">1. 为什么要做这个笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、时间复杂度"><span class="nav-number">2.</span> <span class="nav-text">2、时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-什么是时间复杂度"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.1 什么是时间复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-为什么要引入时间复杂度"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.2 为什么要引入时间复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-怎样判断一个程序的时间复杂度（重点）"><span class="nav-number">2.0.3.</span> <span class="nav-text">2.3 怎样判断一个程序的时间复杂度（重点）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-常见的时间复杂度"><span class="nav-number">2.0.4.</span> <span class="nav-text">2.4 常见的时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#O-1-lt-O-logn-lt-O-n-lt-O-nlogn-lt-O-n2-lt-O-n3-lt-O-2n-lt-O-n"><span class="nav-number">2.0.4.1.</span> <span class="nav-text">O(1)&lt;O(logn)&lt;O(n)&lt;O(nlogn)&lt;O(n2)&lt;O(n3)&lt;O(2n)&lt;O(n!)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-最好时间复杂度、最坏时间复杂度、平均时间复杂度、均摊时间复杂度"><span class="nav-number">2.0.5.</span> <span class="nav-text">2.5 最好时间复杂度、最坏时间复杂度、平均时间复杂度、均摊时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#如何比较平均时间复杂度和均摊时间复杂度？"><span class="nav-number">2.0.5.1.</span> <span class="nav-text">如何比较平均时间复杂度和均摊时间复杂度？</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、空间复杂度"><span class="nav-number">3.</span> <span class="nav-text">2、空间复杂度</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
