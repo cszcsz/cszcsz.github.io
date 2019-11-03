@@ -10,9 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.3.0">
   <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
 
 <link rel="stylesheet" href="/css/main.css?v=7.3.0">
@@ -29,8 +29,8 @@
     version: '7.3.0',
     exturl: false,
     sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
@@ -43,8 +43,8 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="1. 关于递归的感受1.1 什么是递归&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习数据结构和算法的时候，递归和动态规划是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为递，结果返回的时候可称之为归。 ​    递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有点不适合人脑的思维方式。我们通常喜欢从简单问题">
+  <meta name="description" content="1. 关于递归的感受1.1 什么是递归&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习数据结构和算法的时候，递归和动态规划是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为递，结果返回的时候可称之为归。    &amp;nbsp;&amp;nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有">
 <meta name="keywords" content="递归">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法笔记-02递归的理解">
 <meta property="og:url" content="http://yoursite.com/2019/10/24/算法笔记-02递归的理解/index.html">
 <meta property="og:site_name" content="csz的博客">
-<meta property="og:description" content="1. 关于递归的感受1.1 什么是递归&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习数据结构和算法的时候，递归和动态规划是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为递，结果返回的时候可称之为归。 ​    递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有点不适合人脑的思维方式。我们通常喜欢从简单问题">
+<meta property="og:description" content="1. 关于递归的感受1.1 什么是递归&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习数据结构和算法的时候，递归和动态规划是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为递，结果返回的时候可称之为归。    &amp;nbsp;&amp;nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-26T11:50:20.761Z">
+<meta property="og:updated_time" content="2019-10-26T11:54:19.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法笔记-02递归的理解">
-<meta name="twitter:description" content="1. 关于递归的感受1.1 什么是递归&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习数据结构和算法的时候，递归和动态规划是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为递，结果返回的时候可称之为归。 ​    递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有点不适合人脑的思维方式。我们通常喜欢从简单问题">
+<meta name="twitter:description" content="1. 关于递归的感受1.1 什么是递归&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习数据结构和算法的时候，递归和动态规划是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为递，结果返回的时候可称之为归。    &amp;nbsp;&amp;nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有">
   <link rel="canonical" href="http://yoursite.com/2019/10/24/算法笔记-02递归的理解/">
 
 
@@ -135,7 +135,7 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-        <p class="site-subtitle">不退</p>
+        <p class="site-subtitle">每一个不曾起舞的日子，都是对生命的辜负</p>
       
   </div>
 
@@ -207,9 +207,36 @@
     <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -218,6 +245,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+
+  <a href="https://github.com/cszcsz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
 
     <main id="main" class="main">
@@ -273,7 +302,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-26 19:50:20" itemprop="dateModified" datetime="2019-10-26T19:50:20+08:00">2019-10-26</time>
+                <time title="修改时间：2019-10-26 19:54:19" itemprop="dateModified" datetime="2019-10-26T19:54:19+08:00">2019-10-26</time>
               </span>
             
           
@@ -310,19 +339,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-关于递归的感受"><a href="#1-关于递归的感受" class="headerlink" title="1. 关于递归的感受"></a>1. 关于递归的感受</h2><h4 id="1-1-什么是递归"><a href="#1-1-什么是递归" class="headerlink" title="1.1 什么是递归"></a>1.1 什么是递归</h4><p>&nbsp;&nbsp;&nbsp;在我学习数据结构和算法的时候，<strong>递归</strong>和<strong>动态规划</strong>是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为<strong>递</strong>，结果返回的时候可称之为<strong>归</strong>。</p>
-<p>​    递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有点不适合人脑的思维方式。我们通常喜欢从简单问题出发，发现事物的规律，从而推导出一般性的结论（类似<em>数学归纳法</em>的过程）。而递归则是从最后要解决的问题着眼，将问题分解为一个或若干个子问题，从而继续解决子问题直到遇到边界条件。<br></p>
+        <h2 id="1-关于递归的感受"><a href="#1-关于递归的感受" class="headerlink" title="1. 关于递归的感受"></a>1. 关于递归的感受</h2><h4 id="1-1-什么是递归"><a href="#1-1-什么是递归" class="headerlink" title="1.1 什么是递归"></a>1.1 什么是递归</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在我学习数据结构和算法的时候，<strong>递归</strong>和<strong>动态规划</strong>是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为<strong>递</strong>，结果返回的时候可称之为<strong>归</strong>。</p>
+<p>   &nbsp;&nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有点不适合人脑的思维方式。我们通常喜欢从简单问题出发，发现事物的规律，从而推导出一般性的结论（类似<em>数学归纳法</em>的过程）。而递归则是从最后要解决的问题着眼，将问题分解为一个或若干个子问题，从而继续解决子问题直到遇到边界条件。<br></p>
 <p>​    例：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 经典的爬楼梯问题:一步可以上一阶或两阶台阶，问n阶台阶有多少种走法？</span></span><br><span class="line"><span class="comment">// 递推公式:f(n)=f(n-1)+f(n-2)   边界条件:f(1)=1,f(2)=2</span></span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">if</span>(n==<span class="number">2</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">       <span class="keyword">return</span> f(n<span class="number">-1</span>)+f(n<span class="number">-2</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <p>​    </p>
-<h4 id="1-2-思维误区"><a href="#1-2-思维误区" class="headerlink" title="1.2 思维误区"></a>1.2 思维误区</h4><p>​    我们往往陷入了一个<strong>思维误区：遇到递归问题时，总是下意识的尝试用人脑去模拟递归调用的过程，觉得不模拟出这个过程就认为自己没有理解递归，甚至打击到自己的自信心。其实这是不对的！！！很多大牛都无法人脑模拟稍微复杂点的递归问题，我们完全不用想一层层的调用关系。</strong>  </p>
-<h4 id="1-3-如何思考递归问题"><a href="#1-3-如何思考递归问题" class="headerlink" title="1.3 如何思考递归问题"></a>1.3 如何思考递归问题</h4><p>​    那么怎样去思考递归问题呢？举个例子，我们将待分析的问题A分解成若干个子问题B、C、D，然后去思考A与子问题B、C、D之间的关系，再摸索出边界条件就可以了<strong>。简而言之，就是寻找原问题和子问题之间的关系，找到递推公式，再找到边界条件。这样，递归的代码也自然好实现了。</strong>  </p>
+<h4 id="1-2-思维误区"><a href="#1-2-思维误区" class="headerlink" title="1.2 思维误区"></a>1.2 思维误区</h4><p>  &nbsp;&nbsp;  我们往往陷入了一个<strong>思维误区：遇到递归问题时，总是下意识的尝试用人脑去模拟递归调用的过程，觉得不模拟出这个过程就认为自己没有理解递归，甚至打击到自己的自信心。其实这是不对的！！！很多大牛都无法人脑模拟稍微复杂点的递归问题，我们完全不用想一层层的调用关系。</strong>  </p>
+<p>​     </p>
+<h4 id="1-3-如何思考递归问题"><a href="#1-3-如何思考递归问题" class="headerlink" title="1.3 如何思考递归问题"></a>1.3 如何思考递归问题</h4><p>​    &nbsp;&nbsp;那么怎样去思考递归问题呢？举个例子，我们将待分析的问题A分解成若干个子问题B、C、D，然后去思考A与子问题B、C、D之间的关系，再摸索出边界条件就可以了<strong>。简而言之，就是寻找原问题和子问题之间的关系，找到递推公式，再找到边界条件。这样，递归的代码也自然好实现了。</strong>  </p>
+<p>​     </p>
 <h4 id="1-4-什么情况下可以用递归来解决问题"><a href="#1-4-什么情况下可以用递归来解决问题" class="headerlink" title="1.4 什么情况下可以用递归来解决问题"></a>1.4 什么情况下可以用递归来解决问题</h4><ol>
 <li>原问题可以分解为一个或多个子问题</li>
 <li>子问题除了问题规模比原问题小外，求解思路完全相同</li>
 <li>存在边界条件（递归终止条件）      </li>
 </ol>
+<p>​    </p>
 <h4 id="1-5-递归的利与弊"><a href="#1-5-递归的利与弊" class="headerlink" title="1.5 递归的利与弊"></a>1.5 递归的利与弊</h4><ul>
 <li>递归代码的表达力很强，十分简洁优雅。</li>
 <li>空间复杂度高，有堆栈溢出风险，过多的函数调用会耗时</li>
@@ -382,6 +414,9 @@
 
           </div>
           
+    
+    <div class="comments" id="gitalk-container"></div>
+  
 
         </div>
           
@@ -678,6 +713,7 @@
 
 
 
+  <script src="/js/local-search.js?v=7.3.0"></script>
 
 
 
@@ -690,12 +726,32 @@
 
 
 
+
+
+  
 
   
 
   
 
-  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'e35cc00c5095013ceb92',
+      clientSecret: 'd6ffb456dd3d76bb88ced754e9fd3802ef4c0fb5',
+      repo: 'cszcsz.github.io',
+      owner: 'cszcsz',
+      admin: ['cszcsz'],
+      id: '8c118b9fdef10df78ddba0fed47f2ad8',
+        language: 'zh-CN',
+      
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>
