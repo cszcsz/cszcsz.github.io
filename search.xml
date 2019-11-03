@@ -1,37 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>算法笔记-02递归的理解</title>
-    <url>/2019/10/24/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-02%E9%80%92%E5%BD%92%E7%9A%84%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="1-关于递归的感受"><a href="#1-关于递归的感受" class="headerlink" title="1. 关于递归的感受"></a>1. 关于递归的感受</h2><h4 id="1-1-什么是递归"><a href="#1-1-什么是递归" class="headerlink" title="1.1 什么是递归"></a>1.1 什么是递归</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在我学习数据结构和算法的时候，<strong>递归</strong>和<strong>动态规划</strong>是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为<strong>递</strong>，结果返回的时候可称之为<strong>归</strong>。</p>
-<p>   &nbsp;&nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有点不适合人脑的思维方式。我们通常喜欢从简单问题出发，发现事物的规律，从而推导出一般性的结论（类似<em>数学归纳法</em>的过程）。而递归则是从最后要解决的问题着眼，将问题分解为一个或若干个子问题，从而继续解决子问题直到遇到边界条件。<br></p>
-<p>​    例：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 经典的爬楼梯问题:一步可以上一阶或两阶台阶，问n阶台阶有多少种走法？</span></span><br><span class="line"><span class="comment">// 递推公式:f(n)=f(n-1)+f(n-2)   边界条件:f(1)=1,f(2)=2</span></span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">if</span>(n==<span class="number">2</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">       <span class="keyword">return</span> f(n<span class="number">-1</span>)+f(n<span class="number">-2</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    </p>
-<h4 id="1-2-思维误区"><a href="#1-2-思维误区" class="headerlink" title="1.2 思维误区"></a>1.2 思维误区</h4><p>  &nbsp;&nbsp;  我们往往陷入了一个<strong>思维误区：遇到递归问题时，总是下意识的尝试用人脑去模拟递归调用的过程，觉得不模拟出这个过程就认为自己没有理解递归，甚至打击到自己的自信心。其实这是不对的！！！很多大牛都无法人脑模拟稍微复杂点的递归问题，我们完全不用想一层层的调用关系。</strong>  </p>
-<p>​     </p>
-<h4 id="1-3-如何思考递归问题"><a href="#1-3-如何思考递归问题" class="headerlink" title="1.3 如何思考递归问题"></a>1.3 如何思考递归问题</h4><p>​    &nbsp;&nbsp;那么怎样去思考递归问题呢？举个例子，我们将待分析的问题A分解成若干个子问题B、C、D，然后去思考A与子问题B、C、D之间的关系，再摸索出边界条件就可以了<strong>。简而言之，就是寻找原问题和子问题之间的关系，找到递推公式，再找到边界条件。这样，递归的代码也自然好实现了。</strong>  </p>
-<p>​     </p>
-<h4 id="1-4-什么情况下可以用递归来解决问题"><a href="#1-4-什么情况下可以用递归来解决问题" class="headerlink" title="1.4 什么情况下可以用递归来解决问题"></a>1.4 什么情况下可以用递归来解决问题</h4><ol>
-<li>原问题可以分解为一个或多个子问题</li>
-<li>子问题除了问题规模比原问题小外，求解思路完全相同</li>
-<li>存在边界条件（递归终止条件）      </li>
-</ol>
-<p>​    </p>
-<h4 id="1-5-递归的利与弊"><a href="#1-5-递归的利与弊" class="headerlink" title="1.5 递归的利与弊"></a>1.5 递归的利与弊</h4><ul>
-<li>递归代码的表达力很强，十分简洁优雅。</li>
-<li>空间复杂度高，有堆栈溢出风险，过多的函数调用会耗时</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数据结构与算法学习笔记</category>
-      </categories>
-      <tags>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>算法笔记-01复杂度分析</title>
     <url>/2019/10/24/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-01%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<h2 id="1-为什么要做这个笔记"><a href="#1-为什么要做这个笔记" class="headerlink" title="1. 为什么要做这个笔记"></a>1. 为什么要做这个笔记</h2><p>​    最近开始重新学习数据结构与算法知识，俗话说：读书白遍，其义自见，要想真正学好数据结构与算法，必须要经过不断地反复锤炼才行，做笔记是一个消化知识的过程，在脑海中将学到的知识重演一遍并以自己的话总结出来，这样自身的内功才能得以提升。</p>
@@ -75,6 +44,37 @@
       </categories>
       <tags>
         <tag>复杂度分析</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>算法笔记-02递归的理解</title>
+    <url>/2019/10/24/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-02%E9%80%92%E5%BD%92%E7%9A%84%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="1-关于递归的感受"><a href="#1-关于递归的感受" class="headerlink" title="1. 关于递归的感受"></a>1. 关于递归的感受</h2><h4 id="1-1-什么是递归"><a href="#1-1-什么是递归" class="headerlink" title="1.1 什么是递归"></a>1.1 什么是递归</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在我学习数据结构和算法的时候，<strong>递归</strong>和<strong>动态规划</strong>是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为<strong>递</strong>，结果返回的时候可称之为<strong>归</strong>。</p>
+<p>   &nbsp;&nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有点不适合人脑的思维方式。我们通常喜欢从简单问题出发，发现事物的规律，从而推导出一般性的结论（类似<em>数学归纳法</em>的过程）。而递归则是从最后要解决的问题着眼，将问题分解为一个或若干个子问题，从而继续解决子问题直到遇到边界条件。<br></p>
+<p>​    例：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 经典的爬楼梯问题:一步可以上一阶或两阶台阶，问n阶台阶有多少种走法？</span></span><br><span class="line"><span class="comment">// 递推公式:f(n)=f(n-1)+f(n-2)   边界条件:f(1)=1,f(2)=2</span></span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">if</span>(n==<span class="number">2</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">       <span class="keyword">return</span> f(n<span class="number">-1</span>)+f(n<span class="number">-2</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<h4 id="1-2-思维误区"><a href="#1-2-思维误区" class="headerlink" title="1.2 思维误区"></a>1.2 思维误区</h4><p>  &nbsp;&nbsp;  我们往往陷入了一个<strong>思维误区：遇到递归问题时，总是下意识的尝试用人脑去模拟递归调用的过程，觉得不模拟出这个过程就认为自己没有理解递归，甚至打击到自己的自信心。其实这是不对的！！！很多大牛都无法人脑模拟稍微复杂点的递归问题，我们完全不用想一层层的调用关系。</strong>  </p>
+<p>​     </p>
+<h4 id="1-3-如何思考递归问题"><a href="#1-3-如何思考递归问题" class="headerlink" title="1.3 如何思考递归问题"></a>1.3 如何思考递归问题</h4><p>​    &nbsp;&nbsp;那么怎样去思考递归问题呢？举个例子，我们将待分析的问题A分解成若干个子问题B、C、D，然后去思考A与子问题B、C、D之间的关系，再摸索出边界条件就可以了<strong>。简而言之，就是寻找原问题和子问题之间的关系，找到递推公式，再找到边界条件。这样，递归的代码也自然好实现了。</strong>  </p>
+<p>​     </p>
+<h4 id="1-4-什么情况下可以用递归来解决问题"><a href="#1-4-什么情况下可以用递归来解决问题" class="headerlink" title="1.4 什么情况下可以用递归来解决问题"></a>1.4 什么情况下可以用递归来解决问题</h4><ol>
+<li>原问题可以分解为一个或多个子问题</li>
+<li>子问题除了问题规模比原问题小外，求解思路完全相同</li>
+<li>存在边界条件（递归终止条件）      </li>
+</ol>
+<p>​    </p>
+<h4 id="1-5-递归的利与弊"><a href="#1-5-递归的利与弊" class="headerlink" title="1.5 递归的利与弊"></a>1.5 递归的利与弊</h4><ul>
+<li>递归代码的表达力很强，十分简洁优雅。</li>
+<li>空间复杂度高，有堆栈溢出风险，过多的函数调用会耗时</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据结构与算法学习笔记</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
