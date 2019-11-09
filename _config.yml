@@ -13,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://cszcsz.gihub.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -82,11 +82,16 @@ deploy:
   repo: git@github.com:cszcsz/cszcsz.github.io.git
   branch: master
 
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+
 
 # Live2D
 ## https://github.com/EYHN/hexo-helper-live2d
 live2d:
-  enable: true
+  enable: false
   # enable: false
   scriptFrom: local # 默认
   pluginRootPath: live2dw/ # 插件在站点上的根目录(相对路径)
