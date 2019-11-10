@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>算法笔记-02递归的理解</title>
+    <url>/2019/11/01/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-02%E9%80%92%E5%BD%92%E7%9A%84%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="1-关于递归的感受"><a href="#1-关于递归的感受" class="headerlink" title="1. 关于递归的感受"></a>1. 关于递归的感受</h2><h4 id="1-1-什么是递归"><a href="#1-1-什么是递归" class="headerlink" title="1.1 什么是递归"></a>1.1 什么是递归</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在我学习数据结构和算法的时候，<strong>递归</strong>和<strong>动态规划</strong>是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为<strong>递</strong>，结果返回的时候可称之为<strong>归</strong>。</p>
+<p>   &nbsp;&nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有点不适合人脑的思维方式。我们通常喜欢从简单问题出发，发现事物的规律，从而推导出一般性的结论（类似<em>数学归纳法</em>的过程）。而递归则是从最后要解决的问题着眼，将问题分解为一个或若干个子问题，从而继续解决子问题直到遇到边界条件。<br></p>
+<p>​    例：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 经典的爬楼梯问题:一步可以上一阶或两阶台阶，问n阶台阶有多少种走法？</span></span><br><span class="line"><span class="comment">// 递推公式:f(n)=f(n-1)+f(n-2)   边界条件:f(1)=1,f(2)=2</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> f(n<span class="number">-1</span>)+f(n<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<h4 id="1-2-思维误区"><a href="#1-2-思维误区" class="headerlink" title="1.2 思维误区"></a>1.2 思维误区</h4><p>  &nbsp;&nbsp;  我们往往陷入了一个<strong>思维误区：遇到递归问题时，总是下意识的尝试用人脑去模拟递归调用的过程，觉得不模拟出这个过程就认为自己没有理解递归，甚至打击到自己的自信心。其实这是不对的！！！很多大牛都无法人脑模拟稍微复杂点的递归问题，我们完全不用想一层层的调用关系。</strong>  </p>
+<p>​     </p>
+<h4 id="1-3-如何思考递归问题"><a href="#1-3-如何思考递归问题" class="headerlink" title="1.3 如何思考递归问题"></a>1.3 如何思考递归问题</h4><p>​    &nbsp;&nbsp;那么怎样去思考递归问题呢？举个例子，我们将待分析的问题A分解成若干个子问题B、C、D，然后去思考A与子问题B、C、D之间的关系，再摸索出边界条件就可以了<strong>。简而言之，就是寻找原问题和子问题之间的关系，找到递推公式，再找到边界条件。这样，递归的代码也自然好实现了。</strong>  </p>
+<p>​     </p>
+<h4 id="1-4-什么情况下可以用递归来解决问题"><a href="#1-4-什么情况下可以用递归来解决问题" class="headerlink" title="1.4 什么情况下可以用递归来解决问题"></a>1.4 什么情况下可以用递归来解决问题</h4><ol>
+<li>原问题可以分解为一个或多个子问题</li>
+<li>子问题除了问题规模比原问题小外，求解思路完全相同</li>
+<li>存在边界条件（递归终止条件）      </li>
+</ol>
+<p>​    </p>
+<h4 id="1-5-递归的利与弊"><a href="#1-5-递归的利与弊" class="headerlink" title="1.5 递归的利与弊"></a>1.5 递归的利与弊</h4><ul>
+<li><p>递归代码的表达力很强，十分简洁优雅。</p>
+</li>
+<li><p>空间复杂度高，有堆栈溢出风险，过多的函数调用会耗时</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据结构与算法学习笔记</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>算法笔记-01复杂度分析</title>
+    <url>/2019/10/24/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-01%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="1-为什么要做这个笔记"><a href="#1-为什么要做这个笔记" class="headerlink" title="1. 为什么要做这个笔记"></a>1. 为什么要做这个笔记</h2><p>​    最近开始重新学习数据结构与算法知识，俗话说：读书白遍，其义自见，要想真正学好数据结构与算法，必须要经过不断地反复锤炼才行，做笔记是一个消化知识的过程，在脑海中将学到的知识重演一遍并以自己的话总结出来，这样自身的内功才能得以提升。</p>
+<h2 id="2、时间复杂度"><a href="#2、时间复杂度" class="headerlink" title="2、时间复杂度"></a>2、时间复杂度</h2><h4 id="2-1-什么是时间复杂度"><a href="#2-1-什么是时间复杂度" class="headerlink" title="2.1 什么是时间复杂度"></a>2.1 什么是时间复杂度</h4><ul>
+<li><p>时间复杂度描述的是算法的<strong>执行时间随问题规模增长变化的趋势</strong></p>
+<p>​      </p>
+</li>
+</ul>
+<h4 id="2-2-为什么要引入时间复杂度"><a href="#2-2-为什么要引入时间复杂度" class="headerlink" title="2.2 为什么要引入时间复杂度"></a>2.2 为什么要引入时间复杂度</h4><ul>
+<li><p>事前对算法进行分析，指导我们写出高效的程序</p>
+</li>
+<li><p>提高我们的逻辑思维能力和分析问题的能力</p>
+</li>
+<li><p>与性能测试并不冲突，性能测试更为具体，而时间复杂度分析的是随问题规模增长下程序运行时间的变化趋势</p>
+</li>
+</ul>
+<h4 id="2-3-怎样判断一个程序的时间复杂度（重点）"><a href="#2-3-怎样判断一个程序的时间复杂度（重点）" class="headerlink" title="2.3 怎样判断一个程序的时间复杂度（重点）"></a>2.3 怎样判断一个程序的时间复杂度（重点）</h4><ol>
+<li><strong>单段代码看高频</strong>：看最内层代码的执行次数（如：循环）</li>
+<li><strong>多段代码取最大</strong>：只考虑最高阶的项，低阶项、系数、常数都可以忽略（加法法则）</li>
+<li><strong>嵌套代码求乘积</strong>：时间复杂度为内层和外层的乘积（乘法法则）</li>
+<li><strong>多个规模求加法</strong>：时间复杂度为其求和的结果（如：O(n+m)）</li>
+</ol>
+<a id="more"></a>
+
+
+
+
+
+<h4 id="2-4-常见的时间复杂度"><a href="#2-4-常见的时间复杂度" class="headerlink" title="2.4 常见的时间复杂度"></a>2.4 常见的时间复杂度</h4><h5 id="O-1-lt-O-logn-lt-O-n-lt-O-nlogn-lt-O-n2-lt-O-n3-lt-O-2n-lt-O-n"><a href="#O-1-lt-O-logn-lt-O-n-lt-O-nlogn-lt-O-n2-lt-O-n3-lt-O-2n-lt-O-n" class="headerlink" title="O(1)&lt;O(logn)&lt;O(n)&lt;O(nlogn)&lt;O(n2)&lt;O(n3)&lt;O(2n)&lt;O(n!)"></a>O(1)&lt;O(logn)&lt;O(n)&lt;O(nlogn)&lt;O(n<sup>2</sup>)&lt;O(n<sup>3</sup>)&lt;O(2<sup>n</sup>)&lt;O(n!)</h5><p><img src="https://i.loli.net/2019/10/24/hWDm6Ylsf3bMu7j.jpg" alt="2.jpg"></p>
+<p>注意：对于对数阶，由于换底公式和可以省略系数，所以不管以2为底还是以3为底，我们都记作O(logn)</p>
+<h4 id="2-5-最好时间复杂度、最坏时间复杂度、平均时间复杂度、均摊时间复杂度"><a href="#2-5-最好时间复杂度、最坏时间复杂度、平均时间复杂度、均摊时间复杂度" class="headerlink" title="2.5 最好时间复杂度、最坏时间复杂度、平均时间复杂度、均摊时间复杂度"></a>2.5 最好时间复杂度、最坏时间复杂度、平均时间复杂度、均摊时间复杂度</h4><p>​    为了<strong>更准确的描述</strong>算法的复杂度，引入以上四个概念。比如下面这段代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span>[] array = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (count == array.length) &#123;</span><br><span class="line">      <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; ++i) &#123;</span><br><span class="line">         sum = sum + array[i];</span><br><span class="line">      &#125;</span><br><span class="line">      array[<span class="number">0</span>] = sum;</span><br><span class="line">      count = <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   array[count] = val;</span><br><span class="line">   ++count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最好时间复杂度：O(1)，最坏时间复杂度：O(n)，平均时间复杂度：O(1)，均摊时间复杂度：O(1)</p>
+<ul>
+<li><h5 id="如何比较平均时间复杂度和均摊时间复杂度？"><a href="#如何比较平均时间复杂度和均摊时间复杂度？" class="headerlink" title="如何比较平均时间复杂度和均摊时间复杂度？"></a>如何比较平均时间复杂度和均摊时间复杂度？</h5><ol>
+<li>平均时间复杂度：代码在不同情况下复杂度出现量级差别，则用代码所有可能情况下执行次数的加权平均值表示。</li>
+<li>均摊时间复杂度：两个条件满足时使用：1）代码在绝大多数情况下是低级别复杂度，只有极少数情况是高级别复杂度；2）低级别和高级别复杂度出现具有时序规律。均摊结果一般都等于低级别复杂度。</li>
+</ol>
+<p><strong>总结：平均和均摊基本是一个概念，均摊是平均的一种特殊情况，可以凭感觉分析是O(1)还是O(n)，如果出现O(1)的次数远大于出现O(n)的次数，那么平均和均摊复杂度就是O(1)</strong>  </p>
+</li>
+</ul>
+<h2 id="2、空间复杂度"><a href="#2、空间复杂度" class="headerlink" title="2、空间复杂度"></a>2、空间复杂度</h2><ul>
+<li>空间复杂度较为简单。与时间复杂度类似，空间复杂度全称是渐进空间复杂度，描述的是算法的<strong>存储空间随问题规模增长的变化趋势</strong>。常见的空间复杂度就是 O(1)、O(n)、O(n<sup>2</sup>)。</li>
+<li><strong>注意：</strong>算法的空间复杂度考虑的是算法在<strong>运行过程中临时占用的存储空间</strong>。而不考虑输入输出数据所占用的存储空间（因为它是由问题本身决定的，不随算法的不同而改变）。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据结构与算法学习笔记</category>
+      </categories>
+      <tags>
+        <tag>复杂度分析</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自我提升-表达技巧</title>
+    <url>/2019/10/04/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87-%E8%A1%A8%E8%BE%BE%E6%B2%9F%E9%80%9A/</url>
+    <content><![CDATA[<h2 id="如何逻辑清晰地向别人表达自己的观点？"><a href="#如何逻辑清晰地向别人表达自己的观点？" class="headerlink" title="如何逻辑清晰地向别人表达自己的观点？"></a>如何逻辑清晰地向别人表达自己的观点？</h2><h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a><em>基本</em></h3><ul>
+<li>好的表达包含<strong>“观点”</strong>+<strong>”客观事实“</strong></li>
+<li>好的表达要有结构，可以使用<strong>“讲三点”</strong>方法（重要的事情讲三点）</li>
+<li>好的表达应富有<strong>逻辑</strong>，经得起<strong>推敲</strong></li>
+</ul>
+<p><img src="https://i.loli.net/2019/10/04/95eHDRgNlKtdkIm.jpg" alt="1.jpg"></p>
+<h3 id="训练方法"><a href="#训练方法" class="headerlink" title="训练方法"></a><em>训练方法</em></h3><h4 id="1-复盘练习法"><a href="#1-复盘练习法" class="headerlink" title="1.复盘练习法"></a>1.复盘练习法</h4><p>​    回顾当时沟通的目的，<strong>重演过程</strong>并分析原因，探寻对话规律</p>
+<h4 id="2-复述练习法"><a href="#2-复述练习法" class="headerlink" title="2.复述练习法"></a>2.复述练习法</h4><p>​    想提高沟通表达能力，最简单有效的方法就是<strong>复述一个故事</strong>，可以用手机录音</p>
+<h4 id="3-电梯法则练习法"><a href="#3-电梯法则练习法" class="headerlink" title="3.电梯法则练习法"></a>3.电梯法则练习法</h4><p>​     要在最短的时间内，把事情表达清楚，凡事直奔主题、结果，将表达内容<strong>归纳</strong>在3个要点以内，30s之内完成。</p>
+]]></content>
+      <categories>
+        <category>自我提升</category>
+      </categories>
+      <tags>
+        <tag>自我提升</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PAT算法知识点回顾</title>
+    <url>/2019/09/22/PAT%E7%9F%A5%E8%AF%86%E7%82%B9%E5%9B%9E%E9%A1%BE/</url>
+    <content><![CDATA[<h1 id="数据结构与算法知识点总结："><a href="#数据结构与算法知识点总结：" class="headerlink" title="数据结构与算法知识点总结："></a>数据结构与算法知识点总结：</h1><h4 id="实用技巧："><a href="#实用技巧：" class="headerlink" title="实用技巧："></a>实用技巧：</h4><h5 id="1-fill-函数的使用"><a href="#1-fill-函数的使用" class="headerlink" title="1.  fill()函数的使用"></a>1.  fill()函数的使用</h5><p>​    填充一维数组：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">int</span> arr[<span class="number">10</span>];</span><br><span class="line">  fill(arr, arr + <span class="number">10</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;;</span><br><span class="line">  fill(v.begin(), v.end(), <span class="number">-1</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​    填充二维数组：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">fill(dis[<span class="number">0</span>], dis[<span class="number">0</span>]+maxn*maxn, INF);</span><br><span class="line"><span class="comment">// 因为dis[0]才是dis的首元素dis[0][0]的地址fill()函数的使用</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-memset-函数的使用"><a href="#2-memset-函数的使用" class="headerlink" title="2. memset()函数的使用"></a>2. memset()函数的使用</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span> a); </span><br><span class="line">    <span class="comment">//注意：memset为字节填充，如果填充整形数组只能填充0和-1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-count用于统计数组或向量中某个值出现的次数"><a href="#3-count用于统计数组或向量中某个值出现的次数" class="headerlink" title="3. count用于统计数组或向量中某个值出现的次数"></a>3. count用于统计数组或向量中某个值出现的次数</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//向量计数</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(v.begin(), v.end(), <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(v.begin(), v.end(), <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(v.begin(), v.end(), <span class="number">6</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//数组计数</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(a, a + <span class="number">10</span>, <span class="number">0</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(a, a + <span class="number">10</span>, <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(a, a + <span class="number">10</span>, <span class="number">4</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-erase-和remove-结合起来删除容器中的指定元素"><a href="#4-erase-和remove-结合起来删除容器中的指定元素" class="headerlink" title="4.erase()和remove()结合起来删除容器中的指定元素"></a>4.erase()和remove()结合起来删除容器中的指定元素</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vec.erase( remove(vec.begin(), vec.end(), <span class="string">'A'</span>), vec.end() );</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-利用find-查找所有子串或字符在原字符串中的位置"><a href="#5-利用find-查找所有子串或字符在原字符串中的位置" class="headerlink" title="5.利用find()查找所有子串或字符在原字符串中的位置"></a>5.利用find()查找所有子串或字符在原字符串中的位置</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>((pos=str.find(c,pos))!=<span class="built_in">string</span>::npos)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 其它代码</span></span><br><span class="line">	pos++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-C语言读入一行带空格的字符串-读到的回车符丢掉"><a href="#5-C语言读入一行带空格的字符串-读到的回车符丢掉" class="headerlink" title="5.C语言读入一行带空格的字符串(读到的回车符丢掉)"></a>5.C语言读入一行带空格的字符串(读到的回车符丢掉)</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]"</span>,str);    <span class="comment">//^表示非，意思只要没有遇到回车符\n，都读进来</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="7-大整数乘法核心代码"><a href="#7-大整数乘法核心代码" class="headerlink" title="7.大整数乘法核心代码"></a>7.大整数乘法核心代码</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num1.size();i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;num2.size();j++)</span><br><span class="line">    &#123;</span><br><span class="line">        result[i+j]+=num1[i]*num2[j];       <span class="comment">//核心</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;result.size();i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(result[i]&gt;=<span class="number">10</span>)                       <span class="comment">//统一处理进位</span></span><br><span class="line">    &#123;</span><br><span class="line">        result[i+<span class="number">1</span>]+=result[i]/<span class="number">10</span>;       </span><br><span class="line">        result[i]=result[i]%<span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+
+
+<h4 id="数据结构与算法（补充部分，以防万一-）"><a href="#数据结构与算法（补充部分，以防万一-）" class="headerlink" title="数据结构与算法（补充部分，以防万一~）"></a>数据结构与算法（补充部分，以防万一~）</h4><h4 id="算法部分："><a href="#算法部分：" class="headerlink" title="算法部分："></a>算法部分：</h4><h4 id="1、动态规划（DP）"><a href="#1、动态规划（DP）" class="headerlink" title="1、动态规划（DP）"></a>1、动态规划（DP）</h4><h5 id="N阶楼梯上楼问题："><a href="#N阶楼梯上楼问题：" class="headerlink" title="N阶楼梯上楼问题："></a>N阶楼梯上楼问题：</h5><p>​    一次可以走两阶或一阶，问有多少种上楼方式。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> f[<span class="number">100</span>];</span><br><span class="line">f[<span class="number">1</span>]=<span class="number">1</span>;f[<span class="number">2</span>]=<span class="number">2</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    f[i]=f[i<span class="number">-1</span>]+f[i<span class="number">-2</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;f[n]&lt;&lt;<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据结构部分："><a href="#数据结构部分：" class="headerlink" title="数据结构部分："></a>数据结构部分：</h4><h4 id="1、树："><a href="#1、树：" class="headerlink" title="1、树："></a>1、树：</h4><h5 id="后序和中序构造二叉树："><a href="#后序和中序构造二叉树：" class="headerlink" title="后序和中序构造二叉树："></a>后序和中序构造二叉树：</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> leftChild[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">int</span> rightChild[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">buildTree</span><span class="params">(<span class="keyword">int</span> post[],<span class="keyword">int</span> in[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> root = post[n<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(in[i]!=root&amp;&amp;i&lt;n)</span><br><span class="line">        i++;</span><br><span class="line">    leftChild[root]=buildTree(post,in,i);</span><br><span class="line">    rightChild[root]=buildTree(post+i,in+i+<span class="number">1</span>,n-i<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历:"></a>层序遍历:</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">levelOrder</span><span class="params">(<span class="keyword">int</span> root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> flag=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    q.push(root);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(flag==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">cout</span>&lt;&lt;q.front();</span><br><span class="line">          flag=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">" "</span>&lt;&lt;q.front();</span><br><span class="line">        <span class="keyword">if</span>(leftChild[q.front()]!=<span class="number">0</span>)</span><br><span class="line">            q.push(leftChild[q.front()]);</span><br><span class="line">        <span class="keyword">if</span>(rightChild[q.front()]!=<span class="number">0</span>)</span><br><span class="line">            q.push(rightChild[q.front()]);</span><br><span class="line">        q.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、图："><a href="#2、图：" class="headerlink" title="2、图："></a>2、图：</h4><h5 id="djikstra-dfs求最短路径："><a href="#djikstra-dfs求最短路径：" class="headerlink" title="djikstra+dfs求最短路径："></a>djikstra+dfs求最短路径：</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">djikstra</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> k=<span class="number">-1</span>,temp_min=INF;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(dis[j]&lt;temp_min&amp;&amp;!visited[j])</span><br><span class="line">            &#123;</span><br><span class="line">                temp_min=dis[j];</span><br><span class="line">                k=j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(k==<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        visited[k]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!visited[j])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(dis[k]+edge[k][j]&lt;dis[j]&amp;&amp;edge[k][j]!=INF)</span><br><span class="line">                &#123;</span><br><span class="line">                    dis[j]=dis[k]+edge[k][j];</span><br><span class="line">                    pre[j].clear();</span><br><span class="line">                    pre[j].push_back(k);            <span class="comment">//pre[]用于后面用dfs求出最短路径上的点</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(dis[k]+edge[k][j]==dis[j]&amp;&amp;edge[k][j]!=INF)</span><br><span class="line">                &#123;</span><br><span class="line">                    pre[j].push_back(k);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//打印出多条最短路径</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> v)</span>                       </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    temppath.push_back(v);</span><br><span class="line">    <span class="keyword">if</span>(v==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> need=<span class="number">0</span>,back=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=temppath.size()<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> id=temppath[i];</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;id&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        temppath.pop_back();</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;pre[v].size();i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dfs(pre[v][i]);</span><br><span class="line">    &#125;</span><br><span class="line">    temppath.pop_back();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、并查集："><a href="#3、并查集：" class="headerlink" title="3、并查集："></a>3、并查集：</h4><p>联想江湖掌门帮派的例子~</p>
+<p><strong>find（查）函数：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> son,tmp;</span><br><span class="line">    son = root;</span><br><span class="line">    <span class="keyword">while</span>(root!=pre[root])</span><br><span class="line">        root=pre[root];</span><br><span class="line">    <span class="keyword">while</span>(son!=root)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp=pre[son];</span><br><span class="line">        pre[son]=root;</span><br><span class="line">        son=tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>union（并）函数：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> r1,<span class="keyword">int</span> r2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    x=find(r1);</span><br><span class="line">    y=find(r2);</span><br><span class="line">    <span class="keyword">if</span>(x!=y)</span><br><span class="line">        pre[x]=y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、动态规划（01背包问题）："><a href="#3、动态规划（01背包问题）：" class="headerlink" title="3、动态规划（01背包问题）："></a>3、动态规划（01背包问题）：</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> v[<span class="number">1005</span>],w[<span class="number">1005</span>];</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">1005</span>][<span class="number">1005</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        dp[i][j]=dp[i<span class="number">-1</span>][j];</span><br><span class="line">        <span class="keyword">if</span>(j&gt;=v[i])</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i][j]=max(dp[i<span class="number">-1</span>][j-v[i]]+w[i],dp[i<span class="number">-1</span>][j]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;dp[n][m];</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>PAT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git常用命令</title>
+    <url>/2019/08/26/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h4 id="从github远程克隆项目修改后再推送："><a href="#从github远程克隆项目修改后再推送：" class="headerlink" title="从github远程克隆项目修改后再推送："></a>从github远程克隆项目修改后再推送：</h4><ol>
+<li><code>git clone &lt;url&gt;</code>&emsp;将项目克隆到本地</li>
+<li><code>git add .</code> &emsp;跟踪所有的文件</li>
+<li><code>git commit -m &quot;commit message&quot;</code>  &emsp;提交文件到本地版本库</li>
+<li><code>git push orgin master</code>  &emsp; 推送到远程仓库 </li>
+<li><code>git status</code>  &emsp;随时查看状态信息</li>
+<li><code>git checkout -b 分支名</code>  创建一个新分支并切换到该分支</li>
+</ol>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo食用指南</title>
+    <url>/2019/08/26/hexo%E9%A3%9F%E7%94%A8%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<h2 id="1-基本命令"><a href="#1-基本命令" class="headerlink" title="1.基本命令"></a>1.基本命令</h2><ol>
+<li><code>hexo new &quot;新文章标题&quot;</code>  &emsp;新建文章   </li>
+<li><code>hexo new page &quot;页面名称&quot;</code>&emsp;新建页面</li>
+<li><code>hexo clean</code> &emsp;清除缓存</li>
+<li><code>hexo g</code>&emsp;生成静态网页</li>
+<li><code>hexo s</code>&emsp;启动本地服务器并监听变化自动更新显示</li>
+<li><code>hexo d</code> &emsp;部署</li>
+</ol>
+<h2 id="2-发布博客"><a href="#2-发布博客" class="headerlink" title="2.发布博客"></a>2.发布博客</h2><p>执行<code>hexo clean</code>、<code>hexo g</code>、<code>hexo d</code>来发布博客</p>
+<p>我将这三个命令写到了deploy.sh这个脚本文件中，以后部署只用执行脚本<code>sh deploy.sh</code>就可以啦~</p>
+<h2 id="3-日常备份"><a href="#3-日常备份" class="headerlink" title="3.日常备份"></a>3.日常备份</h2><p>执行<code>git add .</code>、<code>git commit -m &quot;&quot;</code>、<code>git push origin hexo</code>来备份</p>
+<p>（注：我的是master分支用来放public里的页面文件用于展示，hexo分支用来备份源文件）</p>
+<p>​    </p>
+<a id="more"></a>
+
+<h2 id="4-恢复"><a href="#4-恢复" class="headerlink" title="4.恢复"></a>4.恢复</h2><p>电脑重装后或想在其他电脑上修改博客步骤：</p>
+<ol>
+<li><p>安装git</p>
+</li>
+<li><p>安装Node.js和npm</p>
+</li>
+<li><p>执行<code>git clone -b hexo git@github.com:cszcsz/cszcsz.github.io.git</code>  (注：这里只克隆hexo分支)</p>
+</li>
+<li><p>在项目文件夹内执行如下命令：<code>npm install hexo-cli -g</code>、<code>npm install</code>、<code>npm install hexo-deployer-git</code></p>
+</li>
+</ol>
+<p>补充操作：添加ssh-keys</p>
+<ol>
+<li>执行<code>ssh-keygen -t rsa -C &quot;yourname@email.com&quot;</code></li>
+<li>用户文件夹下的.ssh目录会生成id_rsa和id_rsa.pub两个文件，其中id_rsa是私钥，id_rsa.pub是公钥</li>
+<li>登录github，在设置里面new SSH key，在key文本框里粘贴公钥id_rsa.pub文件的内容</li>
+<li>可以用<code>ssh git@github.com</code>来验证连接</li>
+</ol>
+<h2 id="5-附hexo项目文件说明"><a href="#5-附hexo项目文件说明" class="headerlink" title="5.附hexo项目文件说明"></a>5.附hexo项目文件说明</h2><ol>
+<li><p><code>_config.yml</code>站点的配置文件，需要拷贝；</p>
+</li>
+<li><p><code>themes/</code>主题文件夹，需要拷贝；</p>
+</li>
+<li><p><code>source</code>博客文章的.md文件，需要拷贝；</p>
+</li>
+<li><p><code>scaffolds/</code>文章的模板，需要拷贝；</p>
+</li>
+<li><p><code>package.json</code>安装包的名称，需要拷贝；</p>
+</li>
+<li><p><code>.gitignore</code>限定在push时哪些文件可以忽略，需要拷贝</p>
+</li>
+<li><p><code>.git/</code>主题和站点都有，标志这是一个git项目，不需要拷贝；</p>
+</li>
+<li><p><code>node_modules/</code>是安装包的目录，在执行<code>npm install</code>的时候会重新生成，不需要拷贝；</p>
+</li>
+<li><p><code>public</code>是<code>hexo g</code>生成的静态网页，不需要拷贝；</p>
+</li>
+<li><p><code>.deploy_git</code>同上，<code>hexo g</code>也会生成，不需要拷贝；</p>
+</li>
+<li><p><code>db.json</code>文件，不需要拷贝。</p>
+<p>注：不需要拷贝的正是<code>.gitignore</code>里忽略的</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>博客搭建问题</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+</search>
