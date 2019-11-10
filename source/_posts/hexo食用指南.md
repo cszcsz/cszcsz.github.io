@@ -34,6 +34,9 @@ description: 生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞�
 
 ​    
 
+  
+
+
 
 <!--more-->
 
@@ -42,16 +45,34 @@ description: 生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞�
 电脑重装后或想在其他电脑上修改博客步骤：
 
 1. 安装git
-2. 安装Node.js和npm
-3. 执行`git clone git@github.com:cszcsz/cszcsz.github.io.git`
+2. 安装Node.js
+3. 执行`git clone -b hexo git@github.com:cszcsz/cszcsz.github.io.git`  (注：这里只克隆hexo分支)
 4. 在项目文件夹内执行如下命令：`npm install hexo-cli -g`、`npm install`、`npm install hexo-deployer-git`
+5. 记住：hexo分支用于备份源文件，master分支用于存放public文件夹里的内容
+
+
 
 补充操作：添加ssh-keys
 
-1. 执行`ssh-keygen -t rsa -C "yourname@email.com`
-
+1. 执行`ssh-keygen -t rsa -C "yourname@email.com"`
 2. 用户文件夹下的.ssh目录会生成id_rsa和id_rsa.pub两个文件，其中id_rsa是私钥，id_rsa.pub是公钥
 3. 登录github，在设置里面new SSH key，在key文本框里粘贴公钥id_rsa.pub文件的内容
+4. 可以用`ssh git@github.com`来验证连接
+
+
+
+**配置过程中可能遇到的问题：**
+
+**问题1：**
+
+​	提示`TypeError: can't read property count of undefined`且错误是在`hexo-baidu-url-submit`包中
+
+解决方法：删除该包即可`npm uninstall hexo-baidu-url-submit`
+
+
+
+  
+
 
   
 
@@ -65,7 +86,7 @@ description: 生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞�
 
 4. `scaffolds/`文章的模板，需要拷贝；
 
-5. `package.json`安装包的名称，需要拷贝；
+5. `package.json`安装包的名称，需要拷贝（如果有`package-lock.json`文件也一并上传，作用是控制依赖包版本号）；
 
 6. `.gitignore`限定在push时哪些文件可以忽略，需要拷贝
 
