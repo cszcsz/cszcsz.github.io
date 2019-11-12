@@ -48,16 +48,23 @@ description: 生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞�
 2. 安装Node.js
 3. 执行`git clone -b hexo git@github.com:cszcsz/cszcsz.github.io.git`  (注：这里只克隆hexo分支)
 4. 在项目文件夹内执行如下命令：`npm install hexo-cli -g`、`npm install`、`npm install hexo-deployer-git`
-5. 记住：hexo分支用于备份源文件，master分支用于存放public文件夹里的内容
+5. 记住：hexo分支用于备份源文件，master分支用于存放public文件夹里的内容。linux下需要再命令前面加上sudo改变权限
 
 
 
-补充操作：添加ssh-keys
+补充操作：
+
+添加ssh-keys
 
 1. 执行`ssh-keygen -t rsa -C "yourname@email.com"`
 2. 用户文件夹下的.ssh目录会生成id_rsa和id_rsa.pub两个文件，其中id_rsa是私钥，id_rsa.pub是公钥
 3. 登录github，在设置里面new SSH key，在key文本框里粘贴公钥id_rsa.pub文件的内容
 4. 可以用`ssh git@github.com`来验证连接
+
+git设置全局用户名和邮箱
+
+   	1. `git config --global user.name "xxx"`
+   	2. `git config -- global user.email "xxx@qq.com"`
 
 
 
@@ -74,7 +81,7 @@ description: 生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞�
   
 
 
-  
+
 
 ## 5.附hexo项目文件说明
 
