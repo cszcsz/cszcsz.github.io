@@ -11,13 +11,13 @@
 <meta name="theme-color" content="#222">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.3.0">
   <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
 
 <link rel="stylesheet" href="/css/main.css?v=7.3.0">
 
-
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monaco:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="从github远程克隆项目修改后再推送： git clone &amp;lt;url&amp;gt;&amp;emsp;将项目克隆到本地 git add . &amp;emsp;跟踪所有的文件 git commit -m &amp;quot;commit message&amp;quot;  &amp;emsp;提交文件到本地版本库 git push orgin master  &amp;emsp; 推送到远程仓库  git status  &amp;emsp;随时查">
+  <meta name="description" content="从github远程克隆项目修改后再推送： git clone &amp;lt;url&amp;gt;&amp;emsp;将项目克隆到本地  git clone -b &amp;quot;branchname&amp;quot; &amp;lt;url&amp;gt; 克隆远程项目分支到本地  git add . &amp;emsp;跟踪所有的文件  git commit -m &amp;quot;commit message&amp;quot;  &amp;emsp;提交文件到本地版">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git常用命令">
 <meta property="og:url" content="https://cszcsz.gihub.io/2019/08/26/git常用命令/index.html">
 <meta property="og:site_name" content="csz的博客">
-<meta property="og:description" content="从github远程克隆项目修改后再推送： git clone &amp;lt;url&amp;gt;&amp;emsp;将项目克隆到本地 git add . &amp;emsp;跟踪所有的文件 git commit -m &amp;quot;commit message&amp;quot;  &amp;emsp;提交文件到本地版本库 git push orgin master  &amp;emsp; 推送到远程仓库  git status  &amp;emsp;随时查">
+<meta property="og:description" content="从github远程克隆项目修改后再推送： git clone &amp;lt;url&amp;gt;&amp;emsp;将项目克隆到本地  git clone -b &amp;quot;branchname&amp;quot; &amp;lt;url&amp;gt; 克隆远程项目分支到本地  git add . &amp;emsp;跟踪所有的文件  git commit -m &amp;quot;commit message&amp;quot;  &amp;emsp;提交文件到本地版">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-10T02:51:16.778Z">
+<meta property="og:updated_time" content="2019-11-18T01:15:32.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git常用命令">
-<meta name="twitter:description" content="从github远程克隆项目修改后再推送： git clone &amp;lt;url&amp;gt;&amp;emsp;将项目克隆到本地 git add . &amp;emsp;跟踪所有的文件 git commit -m &amp;quot;commit message&amp;quot;  &amp;emsp;提交文件到本地版本库 git push orgin master  &amp;emsp; 推送到远程仓库  git status  &amp;emsp;随时查">
+<meta name="twitter:description" content="从github远程克隆项目修改后再推送： git clone &amp;lt;url&amp;gt;&amp;emsp;将项目克隆到本地  git clone -b &amp;quot;branchname&amp;quot; &amp;lt;url&amp;gt; 克隆远程项目分支到本地  git add . &amp;emsp;跟踪所有的文件  git commit -m &amp;quot;commit message&amp;quot;  &amp;emsp;提交文件到本地版">
   <link rel="canonical" href="https://cszcsz.gihub.io/2019/08/26/git常用命令/">
 
 
@@ -268,7 +268,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="csz">
       <meta itemprop="description" content="个人学习生活记录">
-      <meta itemprop="image" content="/images/touxiang.jpeg">
+      <meta itemprop="image" content="/images/touxiang2.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -302,7 +302,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-10 10:51:16" itemprop="dateModified" datetime="2019-11-10T10:51:16+08:00">2019-11-10</time>
+                <time title="修改时间：2019-11-18 09:15:32" itemprop="dateModified" datetime="2019-11-18T09:15:32+08:00">2019-11-18</time>
               </span>
             
           
@@ -332,12 +332,24 @@
 
       
         <h4 id="从github远程克隆项目修改后再推送："><a href="#从github远程克隆项目修改后再推送：" class="headerlink" title="从github远程克隆项目修改后再推送："></a>从github远程克隆项目修改后再推送：</h4><ol>
-<li><code>git clone &lt;url&gt;</code>&emsp;将项目克隆到本地</li>
-<li><code>git add .</code> &emsp;跟踪所有的文件</li>
-<li><code>git commit -m &quot;commit message&quot;</code>  &emsp;提交文件到本地版本库</li>
-<li><code>git push orgin master</code>  &emsp; 推送到远程仓库 </li>
-<li><code>git status</code>  &emsp;随时查看状态信息</li>
-<li><code>git checkout -b 分支名</code>  创建一个新分支并切换到该分支</li>
+<li><p><code>git clone &lt;url&gt;</code>&emsp;将项目克隆到本地</p>
+</li>
+<li><p><code>git clone -b &quot;branchname&quot; &lt;url&gt;</code> 克隆远程项目分支到本地</p>
+</li>
+<li><p><code>git add .</code> &emsp;跟踪所有的文件</p>
+</li>
+<li><p><code>git commit -m &quot;commit message&quot;</code>  &emsp;提交文件到本地版本库</p>
+</li>
+<li><p><code>git push orgin &quot;branchname&quot;</code>  &emsp; 推送到远程仓库分支 </p>
+</li>
+<li><p><code>git pull</code>  拉取远程分支并合并</p>
+</li>
+<li><p><code>git status</code>  &emsp;随时查看状态信息</p>
+</li>
+<li><p><code>git branch &quot;branchname&quot;</code>  创建分支</p>
+</li>
+<li><p><code>git checkout -b 分支名</code>  创建一个新分支并切换到该分支</p>
+</li>
 </ol>
 
     </div>
@@ -436,7 +448,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
-      src="/images/touxiang.jpeg"
+      src="/images/touxiang2.jpg"
       alt="csz">
   <p class="site-author-name" itemprop="name">csz</p>
   <div class="site-description" itemprop="description">个人学习生活记录</div>
@@ -446,7 +458,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -500,7 +512,13 @@
         
           
         
-        <span class="site-state-item-count">7</span>
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

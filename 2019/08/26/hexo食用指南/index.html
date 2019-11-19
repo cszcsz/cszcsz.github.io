@@ -11,13 +11,13 @@
 <meta name="theme-color" content="#222">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.3.0">
   <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
 
 <link rel="stylesheet" href="/css/main.css?v=7.3.0">
 
-
+<link rel="stylesheet" href="//fonts.proxy.ustclug.org/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monaco:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
@@ -62,7 +62,7 @@
 <meta property="og:site_name" content="csz的博客">
 <meta property="og:description" content="生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-10T03:26:29.887Z">
+<meta property="og:updated_time" content="2019-11-18T01:15:32.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo食用指南">
 <meta name="twitter:description" content="生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞。">
@@ -268,7 +268,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="csz">
       <meta itemprop="description" content="个人学习生活记录">
-      <meta itemprop="image" content="/images/touxiang.jpeg">
+      <meta itemprop="image" content="/images/touxiang2.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -302,7 +302,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-10 11:26:29" itemprop="dateModified" datetime="2019-11-10T11:26:29+08:00">2019-11-10</time>
+                <time title="修改时间：2019-11-18 09:15:32" itemprop="dateModified" datetime="2019-11-18T09:15:32+08:00">2019-11-18</time>
               </span>
             
           
@@ -354,16 +354,19 @@
 <li>安装Node.js</li>
 <li>执行<code>git clone -b hexo git@github.com:cszcsz/cszcsz.github.io.git</code>  (注：这里只克隆hexo分支)</li>
 <li>在项目文件夹内执行如下命令：<code>npm install hexo-cli -g</code>、<code>npm install</code>、<code>npm install hexo-deployer-git</code></li>
-<li>记住：hexo分支用于备份源文件，master分支用于存放public文件夹里的内容</li>
+<li>记住：hexo分支用于备份源文件，master分支用于存放public文件夹里的内容。linux下需要再命令前面加上sudo改变权限</li>
 </ol>
-<p>补充操作：添加ssh-keys</p>
+<p>补充操作：</p>
+<p>添加ssh-keys</p>
 <ol>
 <li>执行<code>ssh-keygen -t rsa -C &quot;yourname@email.com&quot;</code></li>
 <li>用户文件夹下的.ssh目录会生成id_rsa和id_rsa.pub两个文件，其中id_rsa是私钥，id_rsa.pub是公钥</li>
 <li>登录github，在设置里面new SSH key，在key文本框里粘贴公钥id_rsa.pub文件的内容</li>
 <li>可以用<code>ssh git@github.com</code>来验证连接</li>
 </ol>
-<p><strong>配置过程中可能遇到的问题：</strong></p>
+<p>git设置全局用户名和邮箱</p>
+<pre><code>1. `git config --global user.name &quot;xxx&quot;`
+2. `git config -- global user.email &quot;xxx@qq.com&quot;`</code></pre><p><strong>配置过程中可能遇到的问题：</strong></p>
 <p><strong>问题1：</strong></p>
 <p>​    提示<code>TypeError: can&#39;t read property count of undefined</code>且错误是在<code>hexo-baidu-url-submit</code>包中</p>
 <p>解决方法：删除该包即可<code>npm uninstall hexo-baidu-url-submit</code></p>
@@ -485,7 +488,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
-      src="/images/touxiang.jpeg"
+      src="/images/touxiang2.jpg"
       alt="csz">
   <p class="site-author-name" itemprop="name">csz</p>
   <div class="site-description" itemprop="description">个人学习生活记录</div>
@@ -495,7 +498,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -549,7 +552,13 @@
         
           
         
-        <span class="site-state-item-count">7</span>
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

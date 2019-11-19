@@ -54,19 +54,22 @@
   };
 </script>
 
-  <meta name="description" content="1. 关于递归的感受1.1 什么是递归&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习数据结构和算法的时候，递归和动态规划是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为递，结果返回的时候可称之为归。    &amp;nbsp;&amp;nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有">
-<meta name="keywords" content="递归">
+  <meta name="description" content="基本概念 散列表(Hash Table)又叫哈希表，它通过散列函数将键值映射到表中的一个位置(数组下标)来访问对象。它的底层运用了数组支持下标随机访问的特性，基本上可以在O(1)的时间复杂度下完成查找、插入和删除操作。  散列函数(Hash Function)又叫哈希函数，是一种从任何一种数据中创建小的”数字指纹”的方法，完成键值到散列值的映射，散列函数计算得到的散列值是一个非负整数。  散列冲突">
+<meta name="keywords" content="散列表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法笔记-02递归的理解">
-<meta property="og:url" content="https://cszcsz.gihub.io/2019/11/01/算法笔记-02递归的理解/index.html">
+<meta property="og:title" content="算法笔记-05散列表">
+<meta property="og:url" content="https://cszcsz.gihub.io/2019/11/19/算法笔记-05散列表/index.html">
 <meta property="og:site_name" content="csz的博客">
-<meta property="og:description" content="1. 关于递归的感受1.1 什么是递归&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习数据结构和算法的时候，递归和动态规划是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为递，结果返回的时候可称之为归。    &amp;nbsp;&amp;nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有">
+<meta property="og:description" content="基本概念 散列表(Hash Table)又叫哈希表，它通过散列函数将键值映射到表中的一个位置(数组下标)来访问对象。它的底层运用了数组支持下标随机访问的特性，基本上可以在O(1)的时间复杂度下完成查找、插入和删除操作。  散列函数(Hash Function)又叫哈希函数，是一种从任何一种数据中创建小的”数字指纹”的方法，完成键值到散列值的映射，散列函数计算得到的散列值是一个非负整数。  散列冲突">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-10T02:51:16.782Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/hashtable.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/hashmap2.png">
+<meta property="og:updated_time" content="2019-11-19T03:41:44.027Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法笔记-02递归的理解">
-<meta name="twitter:description" content="1. 关于递归的感受1.1 什么是递归&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习数据结构和算法的时候，递归和动态规划是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为递，结果返回的时候可称之为归。    &amp;nbsp;&amp;nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有">
-  <link rel="canonical" href="https://cszcsz.gihub.io/2019/11/01/算法笔记-02递归的理解/">
+<meta name="twitter:title" content="算法笔记-05散列表">
+<meta name="twitter:description" content="基本概念 散列表(Hash Table)又叫哈希表，它通过散列函数将键值映射到表中的一个位置(数组下标)来访问对象。它的底层运用了数组支持下标随机访问的特性，基本上可以在O(1)的时间复杂度下完成查找、插入和删除操作。  散列函数(Hash Function)又叫哈希函数，是一种从任何一种数据中创建小的”数字指纹”的方法，完成键值到散列值的映射，散列函数计算得到的散列值是一个非负整数。  散列冲突">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/hashtable.png">
+  <link rel="canonical" href="https://cszcsz.gihub.io/2019/11/19/算法笔记-05散列表/">
 
 
 <script id="page-configurations">
@@ -80,7 +83,7 @@
   };
 </script>
 
-  <title>算法笔记-02递归的理解 | csz的博客</title>
+  <title>算法笔记-05散列表 | csz的博客</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -263,7 +266,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/11/01/算法笔记-02递归的理解/">
+    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/11/19/算法笔记-05散列表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="csz">
@@ -275,7 +278,7 @@
       <meta itemprop="name" content="csz的博客">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">算法笔记-02递归的理解
+        <h2 class="post-title" itemprop="name headline">算法笔记-05散列表
 
           
         </h2>
@@ -291,19 +294,11 @@
                 
               
 
-              <time title="创建时间：2019-11-01 10:31:55" itemprop="dateCreated datePublished" datetime="2019-11-01T10:31:55+08:00">2019-11-01</time>
+              <time title="创建时间：2019-11-19 09:32:02 / 修改时间：11:41:44" itemprop="dateCreated datePublished" datetime="2019-11-19T09:32:02+08:00">2019-11-19</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-10 10:51:16" itemprop="dateModified" datetime="2019-11-10T10:51:16+08:00">2019-11-10</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -331,28 +326,69 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-关于递归的感受"><a href="#1-关于递归的感受" class="headerlink" title="1. 关于递归的感受"></a>1. 关于递归的感受</h2><h4 id="1-1-什么是递归"><a href="#1-1-什么是递归" class="headerlink" title="1.1 什么是递归"></a>1.1 什么是递归</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在我学习数据结构和算法的时候，<strong>递归</strong>和<strong>动态规划</strong>是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为<strong>递</strong>，结果返回的时候可称之为<strong>归</strong>。</p>
-<p>   &nbsp;&nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有点不适合人脑的思维方式。我们通常喜欢从简单问题出发，发现事物的规律，从而推导出一般性的结论（类似<em>数学归纳法</em>的过程）。而递归则是从最后要解决的问题着眼，将问题分解为一个或若干个子问题，从而继续解决子问题直到遇到边界条件。<br></p>
-<p>​    例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 经典的爬楼梯问题:一步可以上一阶或两阶台阶，问n阶台阶有多少种走法？</span></span><br><span class="line"><span class="comment">// 递推公式:f(n)=f(n-1)+f(n-2)   边界条件:f(1)=1,f(2)=2</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> f(n<span class="number">-1</span>)+f(n<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    </p>
-<h4 id="1-2-思维误区"><a href="#1-2-思维误区" class="headerlink" title="1.2 思维误区"></a>1.2 思维误区</h4><p>  &nbsp;&nbsp;  我们往往陷入了一个<strong>思维误区：遇到递归问题时，总是下意识的尝试用人脑去模拟递归调用的过程，觉得不模拟出这个过程就认为自己没有理解递归，甚至打击到自己的自信心。其实这是不对的！！！很多大牛都无法人脑模拟稍微复杂点的递归问题，我们完全不用想一层层的调用关系。</strong>  </p>
-<p>​     </p>
-<h4 id="1-3-如何思考递归问题"><a href="#1-3-如何思考递归问题" class="headerlink" title="1.3 如何思考递归问题"></a>1.3 如何思考递归问题</h4><p>​    &nbsp;&nbsp;那么怎样去思考递归问题呢？举个例子，我们将待分析的问题A分解成若干个子问题B、C、D，然后去思考A与子问题B、C、D之间的关系，再摸索出边界条件就可以了<strong>。简而言之，就是寻找原问题和子问题之间的关系，找到递推公式，再找到边界条件。这样，递归的代码也自然好实现了。</strong>  </p>
-<p>​     </p>
-<h4 id="1-4-什么情况下可以用递归来解决问题"><a href="#1-4-什么情况下可以用递归来解决问题" class="headerlink" title="1.4 什么情况下可以用递归来解决问题"></a>1.4 什么情况下可以用递归来解决问题</h4><ol>
-<li>原问题可以分解为一个或多个子问题</li>
-<li>子问题除了问题规模比原问题小外，求解思路完全相同</li>
-<li>存在边界条件（递归终止条件）      </li>
-</ol>
-<p>​    </p>
-<h4 id="1-5-递归的利与弊"><a href="#1-5-递归的利与弊" class="headerlink" title="1.5 递归的利与弊"></a>1.5 递归的利与弊</h4><ul>
-<li><p>递归代码的表达力很强，十分简洁优雅。</p>
+        <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li><p><strong>散列表</strong>(Hash Table)又叫哈希表，它通过散列函数将键值映射到表中的一个位置(数组下标)来访问对象。它的底层运用了数组支持下标随机访问的特性，基本上可以在O(1)的时间复杂度下完成查找、插入和删除操作。</p>
 </li>
-<li><p>空间复杂度高，有堆栈溢出风险，过多的函数调用会耗时</p>
+<li><p><strong>散列函数</strong>(Hash Function)又叫哈希函数，是一种从任何一种数据中创建小的”数字指纹”的方法，完成键值到散列值的映射，散列函数计算得到的散列值是一个非负整数。</p>
+</li>
+<li><p><strong>散列冲突</strong>，当存在key1≠key2而Hash(key1)=Hash(key2)的时候，称发生了散列冲突。</p>
+</li>
+<li><p><strong>装载因子</strong>，衡量散列表元素填充程度的指标，定义为（填入表中的元素个数 / 散列表长度），如果有n个元素放到了大小为m的散列表中，那么装载因子就为n/m。所以基于开放地址法来解决散列冲突的散列表装载因子不会大于1，而基于拉链法则可以大于1。<strong>装载因子越大，说明空闲位置越少，冲突越多，散列表的性能会下降</strong></p>
 </li>
 </ul>
+<p><img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/hashtable.png" width="600px" height="400px"> </p>
+<h3 id="什么是好的散列函数"><a href="#什么是好的散列函数" class="headerlink" title="什么是好的散列函数"></a>什么是好的散列函数</h3><ul>
+<li>将键值映射得到的<strong>散列值尽可能随机且分布均匀</strong>。最完美的情况是不同的key对应的散列值都不一样，但几乎不可能</li>
+<li><strong>计算复杂度小</strong>。过于复杂的计算会降低散列表的性能。</li>
+</ul>
+<h3 id="如何设计散列函数"><a href="#如何设计散列函数" class="headerlink" title="如何设计散列函数"></a>如何设计散列函数</h3><p>常见的散列函数设计方法有：直接寻址法、除留余数法、数据分析法、平方取中法、折叠法、随机数法等。</p>
+<p>举三个栗子：</p>
+<ul>
+<li><p>直接寻址法：f(key)=key或f(key)=a*key+b。取键值或键值的某个线性函数值作为散列值。</p>
+</li>
+<li><p>除留余数法：f(key)=key mod p(p&lt;=m)。例如对于英文单词”world”可以先逐位对字母的ASCII码进行求和，再将求和结果mod散列表的长度作为散列值。</p>
+</li>
+<li><p>数据分析法：对应手机号码这个key，分析可知手机号码后面几位的值比较随机，因此可以取手机号后四位作为散列值。</p>
+</li>
+</ul>
+<h3 id="如何解决散列冲突"><a href="#如何解决散列冲突" class="headerlink" title="如何解决散列冲突"></a>如何解决散列冲突</h3><ol>
+<li><p><strong>开放地址法</strong></p>
+<p><strong>核心思想</strong>：如果出现了散列冲突，我们就重新探测一个空闲位置将其插入。开放地址法其中又包括线性探测、二次探测和双重散列。</p>
+<ul>
+<li><p>线性探测法</p>
+<p>插入：如果映射到的槽位已经存在元素(即发生了冲突)，我们就从这开始依次遍历下一个槽位直到找到一个空槽位进行插入。</p>
+<p>查找：从映射到的槽位开始逐一比较待查找元素的key值和槽内元素的key，如果相同则找到；若遍历到了一个空槽位则没有找到即不存在该元素。</p>
+<p>删除：不能直接把查找到的元素所在槽“清空”，否则会导致查找算法失效。每次删除一个元素，需要在该槽位添加一个”delete”标记，表示这是执行过删除操作的空槽位，当查找算法遍历到已标记的槽位不会退出，而是跳过该槽继续往下查找。</p>
+</li>
+<li><p>二次探测</p>
+<p>顾名思义，不像线性探测法那样逐一遍历，而是以0<sup>2</sup>,1<sup>2</sup>,2<sup>2</sup>…这样的步长进行探测。</p>
+</li>
+<li><p>双重散列</p>
+<p>意思是不用一个散列函数，而是使用一组散列函数hash1(key),hash2(key),hash3(key)…我们先用第一个散列函数，如果位置已被占用，再用第二个散列函数，依次类推。</p>
+</li>
+</ul>
+<p><strong>优点</strong>：数据都存在数组中，可以有效利用CPU缓存加快查找速度；序列化比较简单。</p>
+<p><strong>缺点</strong>：删除操作比较麻烦；装载因子的上限不能太大，比拉链法更浪费存储空间。</p>
+<p><strong>适用场景</strong>：当数据量小、装载因子小的时候。</p>
+</li>
+</ol>
+<ol start="2">
+<li><p><strong>拉链法</strong></p>
+<p><strong>核心思想</strong>：散列表中的每个”槽“都对应一个链表，所有散列值相同的元素我们都放到相同槽位对应的链表中。</p>
+<p><strong>优点</strong>：当装载因子变大，即使变成10，只要散列值均匀，也就是链表长度变长而已，虽然效率下降，但比顺序查找还是快得多；存储大对象时，指针所占内存可忽略不计；更加灵活，支持更多的优化策略，比如用红黑树代替链表(可以避免散列表时间复杂度退化到O(n)，JAVA中的HashMap就是这样优化的)。</p>
+<p><strong>缺点</strong>：链表中的结点是零散分布在内存中的，对CPU缓存不是很友好；存储小对象时，指针的额外空间开销不可忽略。</p>
+<p><strong>适用场景</strong>：存储大对象、大数据量的散列表；需要支持更多优化策略的时候。</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/hashmap2.png" width="650px" height="400px/">
+
+
+
+</li>
+</ol>
+<h3 id="装载因子过大怎么办"><a href="#装载因子过大怎么办" class="headerlink" title="装载因子过大怎么办"></a>装载因子过大怎么办</h3><p>采用<strong>动态扩容</strong>的机制。针对数组的扩容，数据搬移比较简单。但针对散列表的扩容却要复杂一些，因为散列表的大小变了，数据的存储位置也变了，这时<strong>需要通过散列函数重新计算每个数据的存储位置</strong>。</p>
+<p>要<strong>避免</strong>低效的<strong>一次性扩容</strong>，我们可以<strong>将扩容操作穿插在插入操作</strong>的过程中：</p>
+<p>当装载因子触达阈值之后，我们只申请新空间，但并不将老的数据搬移到新散列表中。 当有新数据要插入时，我们将新数据插入新散列表中，并且从老的散列表中拿出一个数据放入到新散列表。对于查询操作，为了兼容了新、老散列表中的数据，我们先从新散列表中查找，如果没有找到，再去老的散列表中查找。 通过这样均摊的方法，将一次性扩容的代价，均摊到多次插入操作中，就避免了一次性扩容耗时过多的情况。这种实现方式，任何情况下，插入一个数据的时间复杂度都是 O(1)。 </p>
+<h3 id="散列表和链表、跳表的结合"><a href="#散列表和链表、跳表的结合" class="headerlink" title="散列表和链表、跳表的结合"></a>散列表和链表、跳表的结合</h3><p>散列表这种数据结构虽然支持非常高效的数据插入、删除、查找操作，但是散列表中的数据都是通过散列函数打乱之后无规律存储的。也就说，它无法支持按照某种顺序快速地遍历数据。</p>
+<p>如果希望按照顺序遍历散列表中的数据，那我们需要将散列表中的数据拷贝到数组中，然后排序，再遍历。因为散列表是动态数据结构，不停地有数据的插入、删除，所以每当我们希望按顺序遍历散列表中的数据的时候，都需要先排序，那效率势必会很低。为了解决这个问题，我们可以将散列表和链表（或者跳表）结合在一起使用。</p>
 
     </div>
 
@@ -368,7 +404,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/递归/" rel="tag"># 递归</a>
+              <a href="/tags/散列表/" rel="tag"># 散列表</a>
             
           </div>
         
@@ -378,8 +414,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/24/算法笔记-01复杂度分析/" rel="next" title="算法笔记-01复杂度分析">
-                  <i class="fa fa-chevron-left"></i> 算法笔记-01复杂度分析
+                <a href="/2019/11/17/算法笔记-04查找/" rel="next" title="算法笔记-04查找">
+                  <i class="fa fa-chevron-left"></i> 算法笔记-04查找
                 </a>
               
             </div>
@@ -387,10 +423,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/11/16/算法笔记-03排序/" rel="prev" title="算法笔记-03排序">
-                  算法笔记-03排序 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -442,7 +474,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-关于递归的感受"><span class="nav-number">1.</span> <span class="nav-text">1. 关于递归的感受</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-什么是递归"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1 什么是递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-思维误区"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2 思维误区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-如何思考递归问题"><span class="nav-number">1.0.3.</span> <span class="nav-text">1.3 如何思考递归问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-什么情况下可以用递归来解决问题"><span class="nav-number">1.0.4.</span> <span class="nav-text">1.4 什么情况下可以用递归来解决问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-递归的利与弊"><span class="nav-number">1.0.5.</span> <span class="nav-text">1.5 递归的利与弊</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是好的散列函数"><span class="nav-number">2.</span> <span class="nav-text">什么是好的散列函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设计散列函数"><span class="nav-number">3.</span> <span class="nav-text">如何设计散列函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何解决散列冲突"><span class="nav-number">4.</span> <span class="nav-text">如何解决散列冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装载因子过大怎么办"><span class="nav-number">5.</span> <span class="nav-text">装载因子过大怎么办</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列表和链表、跳表的结合"><span class="nav-number">6.</span> <span class="nav-text">散列表和链表、跳表的结合</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -654,7 +686,7 @@
       repo: 'cszcsz.github.io',
       owner: 'cszcsz',
       admin: ['cszcsz'],
-      id: '65d844142afe4805b29ffe99068bf4d5',
+      id: '1af223b707169d5f76df4106d92de44e',
         language: 'zh-CN',
       
       distractionFreeMode: 'true'

@@ -1,6 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>算法笔记-05散列表</title>
+    <url>/2019/11/19/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-05%E6%95%A3%E5%88%97%E8%A1%A8/</url>
+    <content><![CDATA[<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li><p><strong>散列表</strong>(Hash Table)又叫哈希表，它通过散列函数将键值映射到表中的一个位置(数组下标)来访问对象。它的底层运用了数组支持下标随机访问的特性，基本上可以在O(1)的时间复杂度下完成查找、插入和删除操作。</p>
+</li>
+<li><p><strong>散列函数</strong>(Hash Function)又叫哈希函数，是一种从任何一种数据中创建小的”数字指纹”的方法，完成键值到散列值的映射，散列函数计算得到的散列值是一个非负整数。</p>
+</li>
+<li><p><strong>散列冲突</strong>，当存在key1≠key2而Hash(key1)=Hash(key2)的时候，称发生了散列冲突。</p>
+</li>
+<li><p><strong>装载因子</strong>，衡量散列表元素填充程度的指标，定义为（填入表中的元素个数 / 散列表长度），如果有n个元素放到了大小为m的散列表中，那么装载因子就为n/m。所以基于开放地址法来解决散列冲突的散列表装载因子不会大于1，而基于拉链法则可以大于1。<strong>装载因子越大，说明空闲位置越少，冲突越多，散列表的性能会下降</strong></p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/hashtable.png" width="600px" height="400px"> </p>
+<h3 id="什么是好的散列函数"><a href="#什么是好的散列函数" class="headerlink" title="什么是好的散列函数"></a>什么是好的散列函数</h3><ul>
+<li>将键值映射得到的<strong>散列值尽可能随机且分布均匀</strong>。最完美的情况是不同的key对应的散列值都不一样，但几乎不可能</li>
+<li><strong>计算复杂度小</strong>。过于复杂的计算会降低散列表的性能。</li>
+</ul>
+<h3 id="如何设计散列函数"><a href="#如何设计散列函数" class="headerlink" title="如何设计散列函数"></a>如何设计散列函数</h3><p>常见的散列函数设计方法有：直接寻址法、除留余数法、数据分析法、平方取中法、折叠法、随机数法等。</p>
+<p>举三个栗子：</p>
+<ul>
+<li><p>直接寻址法：f(key)=key或f(key)=a*key+b。取键值或键值的某个线性函数值作为散列值。</p>
+</li>
+<li><p>除留余数法：f(key)=key mod p(p&lt;=m)。例如对于英文单词”world”可以先逐位对字母的ASCII码进行求和，再将求和结果mod散列表的长度作为散列值。</p>
+</li>
+<li><p>数据分析法：对应手机号码这个key，分析可知手机号码后面几位的值比较随机，因此可以取手机号后四位作为散列值。</p>
+</li>
+</ul>
+<h3 id="如何解决散列冲突"><a href="#如何解决散列冲突" class="headerlink" title="如何解决散列冲突"></a>如何解决散列冲突</h3><ol>
+<li><p><strong>开放地址法</strong></p>
+<p><strong>核心思想</strong>：如果出现了散列冲突，我们就重新探测一个空闲位置将其插入。开放地址法其中又包括线性探测、二次探测和双重散列。</p>
+<ul>
+<li><p>线性探测法</p>
+<p>插入：如果映射到的槽位已经存在元素(即发生了冲突)，我们就从这开始依次遍历下一个槽位直到找到一个空槽位进行插入。</p>
+<p>查找：从映射到的槽位开始逐一比较待查找元素的key值和槽内元素的key，如果相同则找到；若遍历到了一个空槽位则没有找到即不存在该元素。</p>
+<p>删除：不能直接把查找到的元素所在槽“清空”，否则会导致查找算法失效。每次删除一个元素，需要在该槽位添加一个”delete”标记，表示这是执行过删除操作的空槽位，当查找算法遍历到已标记的槽位不会退出，而是跳过该槽继续往下查找。</p>
+</li>
+<li><p>二次探测</p>
+<p>顾名思义，不像线性探测法那样逐一遍历，而是以0<sup>2</sup>,1<sup>2</sup>,2<sup>2</sup>…这样的步长进行探测。</p>
+</li>
+<li><p>双重散列</p>
+<p>意思是不用一个散列函数，而是使用一组散列函数hash1(key),hash2(key),hash3(key)…我们先用第一个散列函数，如果位置已被占用，再用第二个散列函数，依次类推。</p>
+</li>
+</ul>
+<p><strong>优点</strong>：数据都存在数组中，可以有效利用CPU缓存加快查找速度；序列化比较简单。</p>
+<p><strong>缺点</strong>：删除操作比较麻烦；装载因子的上限不能太大，比拉链法更浪费存储空间。</p>
+<p><strong>适用场景</strong>：当数据量小、装载因子小的时候。</p>
+</li>
+</ol>
+<ol start="2">
+<li><p><strong>拉链法</strong></p>
+<p><strong>核心思想</strong>：散列表中的每个”槽“都对应一个链表，所有散列值相同的元素我们都放到相同槽位对应的链表中。</p>
+<p><strong>优点</strong>：当装载因子变大，即使变成10，只要散列值均匀，也就是链表长度变长而已，虽然效率下降，但比顺序查找还是快得多；存储大对象时，指针所占内存可忽略不计；更加灵活，支持更多的优化策略，比如用红黑树代替链表(可以避免散列表时间复杂度退化到O(n)，JAVA中的HashMap就是这样优化的)。</p>
+<p><strong>缺点</strong>：链表中的结点是零散分布在内存中的，对CPU缓存不是很友好；存储小对象时，指针的额外空间开销不可忽略。</p>
+<p><strong>适用场景</strong>：存储大对象、大数据量的散列表；需要支持更多优化策略的时候。</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/hashmap2.png" width="650px" height="400px/">
+
+
+
+</li>
+</ol>
+<h3 id="装载因子过大怎么办"><a href="#装载因子过大怎么办" class="headerlink" title="装载因子过大怎么办"></a>装载因子过大怎么办</h3><p>采用<strong>动态扩容</strong>的机制。针对数组的扩容，数据搬移比较简单。但针对散列表的扩容却要复杂一些，因为散列表的大小变了，数据的存储位置也变了，这时<strong>需要通过散列函数重新计算每个数据的存储位置</strong>。</p>
+<p>要<strong>避免</strong>低效的<strong>一次性扩容</strong>，我们可以<strong>将扩容操作穿插在插入操作</strong>的过程中：</p>
+<p>当装载因子触达阈值之后，我们只申请新空间，但并不将老的数据搬移到新散列表中。 当有新数据要插入时，我们将新数据插入新散列表中，并且从老的散列表中拿出一个数据放入到新散列表。对于查询操作，为了兼容了新、老散列表中的数据，我们先从新散列表中查找，如果没有找到，再去老的散列表中查找。 通过这样均摊的方法，将一次性扩容的代价，均摊到多次插入操作中，就避免了一次性扩容耗时过多的情况。这种实现方式，任何情况下，插入一个数据的时间复杂度都是 O(1)。 </p>
+<h3 id="散列表和链表、跳表的结合"><a href="#散列表和链表、跳表的结合" class="headerlink" title="散列表和链表、跳表的结合"></a>散列表和链表、跳表的结合</h3><p>散列表这种数据结构虽然支持非常高效的数据插入、删除、查找操作，但是散列表中的数据都是通过散列函数打乱之后无规律存储的。也就说，它无法支持按照某种顺序快速地遍历数据。</p>
+<p>如果希望按照顺序遍历散列表中的数据，那我们需要将散列表中的数据拷贝到数组中，然后排序，再遍历。因为散列表是动态数据结构，不停地有数据的插入、删除，所以每当我们希望按顺序遍历散列表中的数据的时候，都需要先排序，那效率势必会很低。为了解决这个问题，我们可以将散列表和链表（或者跳表）结合在一起使用。</p>
+]]></content>
+      <categories>
+        <category>数据结构与算法学习笔记</category>
+      </categories>
+      <tags>
+        <tag>散列表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>算法笔记-04查找</title>
+    <url>/2019/11/17/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-04%E6%9F%A5%E6%89%BE/</url>
+    <content><![CDATA[<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二分查找是非常高效的算法，时间复杂度为O(logn)。但存在一定的<strong>局限性</strong>：</p>
+<ol>
+<li>二分查找依赖<strong>顺序表</strong>结构，比如数组</li>
+<li>二分查找适用于已经<strong>有序</strong>的数据</li>
+<li>二分查找适用于插入和删除操作不频繁，一次排序多次查找的场景中，不适合动态变化的数据集合</li>
+<li>数据量太小或数据量太大(如：1GB，这时就需要1GB的连续内存空间，比较难分配)都不适合</li>
+</ol>
+<br>
+
+<h3 id="二分查找的变形问题"><a href="#二分查找的变形问题" class="headerlink" title="二分查找的变形问题"></a>二分查找的变形问题</h3><ul>
+<li>查找第一个值等于给定值的元素</li>
+<li>查找最后一个值等于给定值的元素</li>
+<li>查找第一个大于等于给定值的元素</li>
+<li>查找最后一个小于等于给定值的元素</li>
+</ul>
+<p>注意：变形问题代码很容易写错，一定要理解后亲手撸一遍代码～</p>
+<br>
+
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><p>1.基本形态</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 二分查找：在互不相同的一组有序数中查找给定值元素(最基本的形态)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BinarySearch</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> val,<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(lo&gt;hi)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi-lo)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(val==nums[mid])</span><br><span class="line">        <span class="keyword">return</span> mid;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(val&lt;nums[mid])</span><br><span class="line">        hi = mid<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(val&gt;nums[mid])</span><br><span class="line">        lo = mid+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> BinarySearch(nums,val,lo,hi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>2.查找第一个值等于给定值的元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 二分查找变体1：在一组有序数中,查找第一个等于给定值的元素</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FindFirstEquVal</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> val,<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(lo&gt;hi)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi-lo)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(val&lt;nums[mid])</span><br><span class="line">        hi = mid<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(val&gt;nums[mid])</span><br><span class="line">        lo = mid+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mid==lo||nums[mid<span class="number">-1</span>]!=val)</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            hi = mid<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> FindFirstEquVal(nums,val,lo,hi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<a id="more"></a>
+
+<p>3.查找最后一个值等于给定值的元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 二分查找变体2：在一组有序数中,查找最后一个等于给定值的元素</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FindLastEquVal</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> val,<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(lo&gt;hi)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi-lo)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(val&lt;nums[mid])</span><br><span class="line">        hi = mid<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(val&gt;nums[mid])</span><br><span class="line">        lo = mid+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mid==hi||nums[mid+<span class="number">1</span>]!=val)</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            lo = mid+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> FindFirstEquVal(nums,val,lo,hi); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>4.查找第一个大于等于给定值的元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 二分查找变体3：在一组有序数中,查找第一个大于等于给定值的元素</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FindFirstGreatThanVal</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> val,<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(lo&gt;hi)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi-lo)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(val&gt;nums[mid])</span><br><span class="line">        lo = mid+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mid==lo||nums[mid<span class="number">-1</span>]&lt;val)</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            hi = mid<span class="number">-1</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> FindFirstGreatThanVal(nums,val,lo,hi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>5.查找最后一个小于等于给定值的元素</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 二分查找变体4：在一组有序数中,查找最后一个小于等于给定值的元素</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FindLastSmallThanVal</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> val,<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(lo&gt;hi)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> mid = lo + ((hi-lo)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(val&lt;nums[mid])</span><br><span class="line">        hi = mid<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(mid==hi||nums[mid+<span class="number">1</span>]&gt;val)</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            lo = mid+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> FindLastSmallThanVal(nums,val,lo,hi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数据结构与算法学习笔记</category>
+      </categories>
+      <tags>
+        <tag>查找</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>算法笔记-03排序</title>
+    <url>/2019/11/16/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-03%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h3 id="总结表"><a href="#总结表" class="headerlink" title="总结表"></a>总结表</h3><table>
+<thead>
+<tr>
+<th align="center">排序算法</th>
+<th align="center">平均时间复杂度</th>
+<th align="center">最好情况</th>
+<th align="center">最坏情况</th>
+<th align="center">空间复杂度</th>
+<th align="center">稳定性</th>
+<th align="center">排序方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">冒泡排序</td>
+<td align="center">O(n<sup>2</sup>)</td>
+<td align="center">O(n)</td>
+<td align="center">O(n<sup>2</sup>)</td>
+<td align="center">O(1)</td>
+<td align="center">稳定</td>
+<td align="center">in-place</td>
+</tr>
+<tr>
+<td align="center">选择排序</td>
+<td align="center">O(n<sup>2</sup>)</td>
+<td align="center">O(n<sup>2</sup>)</td>
+<td align="center">O(n<sup>2</sup>)</td>
+<td align="center">O(1)</td>
+<td align="center">不稳定</td>
+<td align="center">in-place</td>
+</tr>
+<tr>
+<td align="center">插入排序</td>
+<td align="center">O(n<sup>2</sup>)</td>
+<td align="center">O(n)</td>
+<td align="center">O(n<sup>2</sup>)</td>
+<td align="center">O(1)</td>
+<td align="center">稳定</td>
+<td align="center">in-place</td>
+</tr>
+<tr>
+<td align="center">归并排序</td>
+<td align="center">O(nlogn)</td>
+<td align="center">O(nlogn)</td>
+<td align="center">O(nlogn)</td>
+<td align="center">O(n)</td>
+<td align="center">稳定</td>
+<td align="center">out-place</td>
+</tr>
+<tr>
+<td align="center">快速排序</td>
+<td align="center">O(nlogn)</td>
+<td align="center">O(nlogn)</td>
+<td align="center">O(n<sup>2</sup>)</td>
+<td align="center">O(logn)</td>
+<td align="center">不稳定</td>
+<td align="center">in-place</td>
+</tr>
+<tr>
+<td align="center">堆排序</td>
+<td align="center">O(nlogn)</td>
+<td align="center">O(nlogn)</td>
+<td align="center">O(nlogn)</td>
+<td align="center">O(1)</td>
+<td align="center">不稳定</td>
+<td align="center">in-place</td>
+</tr>
+<tr>
+<td align="center">桶排序</td>
+<td align="center">O(n+k)</td>
+<td align="center">O(n+k)</td>
+<td align="center">O(n<sup>2</sup>)</td>
+<td align="center">O(n+k)</td>
+<td align="center">稳定</td>
+<td align="center">out-place</td>
+</tr>
+<tr>
+<td align="center">计数排序</td>
+<td align="center">O(n+k)</td>
+<td align="center">O(n+k)</td>
+<td align="center">O(n+k)</td>
+<td align="center">O(k)</td>
+<td align="center">稳定</td>
+<td align="center">out-place</td>
+</tr>
+<tr>
+<td align="center">基数排序</td>
+<td align="center">O(n*k)</td>
+<td align="center">O(n*k)</td>
+<td align="center">O(n*k)</td>
+<td align="center">O(n+k)</td>
+<td align="center">稳定</td>
+<td align="center">out-place</td>
+</tr>
+</tbody></table>
+<p>  注：排序方式in-place意思是原地排序，与内部排序和外部排序(数据存储在外部磁盘中，无法一次全部加载到内存中)的概念不同。</p>
+<br>
+
+<h3 id="各类排序算法实现"><a href="#各类排序算法实现" class="headerlink" title="各类排序算法实现"></a>各类排序算法实现</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a><strong>冒泡排序</strong></h4><p><strong>基本思想</strong>：每一趟逐次比较相邻元素，总是把值大的元素(泡泡)往上冒，一趟可以放好一个元素的位置，执行n趟即可。加入一个flag标志(如果某一趟没有执行交换操作则说明已经有序，即可提前结束排序)可以优化最好情况的时间复杂度到O(n)。</p>
+<p>C++实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1.冒泡排序</span></span><br><span class="line"><span class="comment">// 时间复杂度:最好-O(n),最坏-O(n^2)，平均-O(n^2)  </span></span><br><span class="line"><span class="comment">// 空间复杂度:O(1)</span></span><br><span class="line"><span class="comment">// 稳定排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> flag;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        flag=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n-i<span class="number">-1</span>;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j]&gt;nums[j+<span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                flag=<span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">int</span> temp = nums[j];</span><br><span class="line">                nums[j]=nums[j+<span class="number">1</span>];</span><br><span class="line">                nums[j+<span class="number">1</span>]=temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Python实现：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">BubbleSort</span><span class="params">(data)</span>:</span></span><br><span class="line">    length = len(data)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(length):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(length-i<span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> data[j]&gt;data[j+<span class="number">1</span>]:</span><br><span class="line">                data[j+<span class="number">1</span>],data[j] = data[j],data[j+<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<a id="more"></a>
+
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a><strong>选择排序</strong></h4><p><strong>基本思想</strong>：每次从未排序区间选择一个最小的元素放到已排序区间</p>
+<p> C++实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 2.选择排序</span></span><br><span class="line"><span class="comment">// 时间复杂度:最好-O(n^2),最坏-O(n^2)，平均-O(n^2)  </span></span><br><span class="line"><span class="comment">// 空间复杂度:O(1)</span></span><br><span class="line"><span class="comment">// 不稳定排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SelectSort</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> tempMin=nums[i],index=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j]&lt;tempMin)</span><br><span class="line">            &#123;</span><br><span class="line">                tempMin=nums[j];</span><br><span class="line">                index=j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        nums[index]=nums[i];</span><br><span class="line">        nums[i]=tempMin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Python实现：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">SelectSort</span><span class="params">(data)</span>:</span></span><br><span class="line">    length=len(data)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(length):</span><br><span class="line">        tempMin,index=data[i],i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,length):</span><br><span class="line">            <span class="keyword">if</span> data[j]&lt;tempMin:</span><br><span class="line">                tempMin=data[j]</span><br><span class="line">                index=j</span><br><span class="line">        data[index]=data[i]</span><br><span class="line">        data[i]=tempMin</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p><strong>基本思想</strong>：每次从未排序区间往已排序区间插入元素</p>
+<p>C++实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 2.插入排序</span></span><br><span class="line"><span class="comment">// 时间复杂度:最好-O(n),最坏-O(n^2)，平均-O(n^2)  </span></span><br><span class="line"><span class="comment">// 空间复杂度:O(1)</span></span><br><span class="line"><span class="comment">// 稳定排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> n)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 初始化：假定一个元素是已排序区间，之后的元素为未排序区间</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = nums[i],j;</span><br><span class="line">        <span class="keyword">for</span>(j=i<span class="number">-1</span>;j&gt;=<span class="number">0</span>;j--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(tmp&gt;=nums[j])</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                nums[j+<span class="number">1</span>]=nums[j];</span><br><span class="line">        &#125;</span><br><span class="line">        nums[j+<span class="number">1</span>]=tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Python实现：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">InsertSort</span><span class="params">(data)</span>:</span></span><br><span class="line">    length=len(data)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,length):</span><br><span class="line">        temp=data[i]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> temp&gt;data[j]:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                data[j+<span class="number">1</span>]=data[j]</span><br><span class="line">        data[j+<span class="number">1</span>]=temp</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><p><strong>基本思想</strong>：利用分治的思想，自底向上，关键在于归并(Merge)操作。</p>
+<p>C++实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 4.归并排序</span></span><br><span class="line"><span class="comment">// 时间复杂度：所有情况下都是O(nlogn)</span></span><br><span class="line"><span class="comment">// 空间复杂度：每次归并需要开辟一个临时数组然后释放，所以是O(n)</span></span><br><span class="line"><span class="comment">// 稳定性：稳定</span></span><br><span class="line"><span class="comment">// 递推式：sort(p,q) = merge(sort(p,r),sort(r+1,q))  边界条件:p&gt;=q</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSortR</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> p,<span class="keyword">int</span> q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p&gt;=q)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> r = (p+q)/<span class="number">2</span>;</span><br><span class="line">    MergeSortR(nums,p,r);</span><br><span class="line">    MergeSortR(nums,r+<span class="number">1</span>,q);</span><br><span class="line">    Merge(nums,p,q,r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//把nums[p...r]和nums[r+1,q]合并到nums[p...q]</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> p,<span class="keyword">int</span> q,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n=q-p+<span class="number">1</span>,i=p,j=r+<span class="number">1</span>,k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> *tmp = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    <span class="comment">//二路归并</span></span><br><span class="line">    <span class="keyword">while</span> (i&lt;=r&amp;&amp;j&lt;=q)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[i]&lt;=nums[j])</span><br><span class="line">            tmp[k++]=nums[i++];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            tmp[k++]=nums[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//把其中一个剩余的数组中的数搬到临时数组中</span></span><br><span class="line">    <span class="keyword">int</span> start=i,end=r;</span><br><span class="line">    <span class="keyword">if</span>(j&lt;=q)</span><br><span class="line">    &#123;</span><br><span class="line">       start=j;</span><br><span class="line">       end=q;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (start&lt;=end)</span><br><span class="line">        tmp[k++]=nums[start++];</span><br><span class="line">    <span class="comment">//将tmp临时数组拷贝回nums数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> t=<span class="number">0</span>;t&lt;=q-p;t++)</span><br><span class="line">        nums[p+t]=tmp[t];</span><br><span class="line">    <span class="keyword">delete</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    MergeSortR(nums,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><p><strong>基本思想</strong>：也利用了分治思想，自顶向下，关键在于分区(Partition)操作。</p>
+<p>补充：为了避免快排退化到O(n<sup>2</sup>)，选择分区元素可以采取不同的策略：1.三点取中法 2.随机选择法</p>
+<p>C++实现:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 5.快速排序</span></span><br><span class="line"><span class="comment">// 时间复杂度：最坏(数组逆序):O(n^2),平均(大多数情况):O(nlogn)</span></span><br><span class="line"><span class="comment">// 空间复杂度：O(1)</span></span><br><span class="line"><span class="comment">// 稳定性：不稳定</span></span><br><span class="line"><span class="comment">// 递推式：sort(A[p..q]) = sort(A[p..r-1])+sort(A[r+1..q]) 终止条件:p&gt;=q</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSortR</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> p,<span class="keyword">int</span> q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p&gt;=q)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> r=Partition(nums,p,q);</span><br><span class="line">    QuickSortR(nums,p,r<span class="number">-1</span>);</span><br><span class="line">    QuickSortR(nums,r+<span class="number">1</span>,q);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> p,<span class="keyword">int</span> q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> val=nums[q],i=p,j=p;</span><br><span class="line">    <span class="keyword">for</span>(;i&lt;q;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[i]&lt;=val)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> temp=nums[i];</span><br><span class="line">            nums[i]=nums[j];</span><br><span class="line">            nums[j]=temp;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    nums[q]=nums[j];</span><br><span class="line">    nums[j]=val;</span><br><span class="line">    <span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QuickSortR(nums,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h4><p><strong>基本思想</strong>：将n个数据根据数据范围逐一放入m个桶中(桶之间是有序的)，再对桶内进行排序(如使用快排)，最后遍历桶逐一输出即可。</p>
+<p><strong>时间复杂度分析</strong>：每个桶里有k=n/m个元素。每个桶内部使用快速排序，时间复杂度为O(k*logk)，m个桶的时间复杂度就是O(m*k*logk)，又因为k=n/m，替换掉k得到O(n*log(n/m))，当m接近n时，log(n/m)是一个很小的常量可以忽略。所以桶排序的时间复杂度接近O(n)。极端情况下，如果数据都被划到一个桶里，就退化为O(nlogn)的算法了。</p>
+<p>应用场景：桶排序比较适合应用在外部排序中。比如数据量太大无法一次全部加载到内存中，那么可以根据数据范围创建一定数量的桶。扫描文件将数据放到相应的桶中，然后将每个桶放到内存中进行快速排序。最后再按照桶的顺序依次将数据写入一个文件就可以了。</p>
+<br>
+
+<h4 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h4><p>基本思想：计数排序实际上是桶排序的一种特殊情况，每个桶里的数据都是相同的，省掉了桶内排序的时间。计数排序的一般步骤为：1.确定数组中数据的范围(最大值)&nbsp;2.遍历数据计算每个元素的个数并存放到计数数组中&nbsp;3.对计数数组依次累加，此时存放的是小于等于某值的元素个数。&nbsp;4.根据计数数组将原数据放到合适的位置</p>
+<p>应用场景：考生成绩排序</p>
+<br>
+
+<h4 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h4><p>基本思想：从低位到高位根据每一位来排序(用桶排序或计数排序)。对数据要求比较高：可以独立分割出位来进行比较，而且位之间有递进关系，每一位的数据范围也不能太大，要用稳定的线性排序算法来排序。所以如果有k位的话，时间复杂度就是O(k*n);</p>
+<p>应用场景：电话号码排序，英文单词排序</p>
+]]></content>
+      <categories>
+        <category>数据结构与算法学习笔记</category>
+      </categories>
+      <tags>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>算法笔记-02递归的理解</title>
     <url>/2019/11/01/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-02%E9%80%92%E5%BD%92%E7%9A%84%E7%90%86%E8%A7%A3/</url>
     <content><![CDATA[<h2 id="1-关于递归的感受"><a href="#1-关于递归的感受" class="headerlink" title="1. 关于递归的感受"></a>1. 关于递归的感受</h2><h4 id="1-1-什么是递归"><a href="#1-1-什么是递归" class="headerlink" title="1.1 什么是递归"></a>1.1 什么是递归</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在我学习数据结构和算法的时候，<strong>递归</strong>和<strong>动态规划</strong>是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为<strong>递</strong>，结果返回的时候可称之为<strong>归</strong>。</p>
@@ -164,12 +453,24 @@
     <title>git常用命令</title>
     <url>/2019/08/26/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h4 id="从github远程克隆项目修改后再推送："><a href="#从github远程克隆项目修改后再推送：" class="headerlink" title="从github远程克隆项目修改后再推送："></a>从github远程克隆项目修改后再推送：</h4><ol>
-<li><code>git clone &lt;url&gt;</code>&emsp;将项目克隆到本地</li>
-<li><code>git add .</code> &emsp;跟踪所有的文件</li>
-<li><code>git commit -m &quot;commit message&quot;</code>  &emsp;提交文件到本地版本库</li>
-<li><code>git push orgin master</code>  &emsp; 推送到远程仓库 </li>
-<li><code>git status</code>  &emsp;随时查看状态信息</li>
-<li><code>git checkout -b 分支名</code>  创建一个新分支并切换到该分支</li>
+<li><p><code>git clone &lt;url&gt;</code>&emsp;将项目克隆到本地</p>
+</li>
+<li><p><code>git clone -b &quot;branchname&quot; &lt;url&gt;</code> 克隆远程项目分支到本地</p>
+</li>
+<li><p><code>git add .</code> &emsp;跟踪所有的文件</p>
+</li>
+<li><p><code>git commit -m &quot;commit message&quot;</code>  &emsp;提交文件到本地版本库</p>
+</li>
+<li><p><code>git push orgin &quot;branchname&quot;</code>  &emsp; 推送到远程仓库分支 </p>
+</li>
+<li><p><code>git pull</code>  拉取远程分支并合并</p>
+</li>
+<li><p><code>git status</code>  &emsp;随时查看状态信息</p>
+</li>
+<li><p><code>git branch &quot;branchname&quot;</code>  创建分支</p>
+</li>
+<li><p><code>git checkout -b 分支名</code>  创建一个新分支并切换到该分支</p>
+</li>
 </ol>
 ]]></content>
       <categories>
@@ -203,16 +504,19 @@
 <li>安装Node.js</li>
 <li>执行<code>git clone -b hexo git@github.com:cszcsz/cszcsz.github.io.git</code>  (注：这里只克隆hexo分支)</li>
 <li>在项目文件夹内执行如下命令：<code>npm install hexo-cli -g</code>、<code>npm install</code>、<code>npm install hexo-deployer-git</code></li>
-<li>记住：hexo分支用于备份源文件，master分支用于存放public文件夹里的内容</li>
+<li>记住：hexo分支用于备份源文件，master分支用于存放public文件夹里的内容。linux下需要再命令前面加上sudo改变权限</li>
 </ol>
-<p>补充操作：添加ssh-keys</p>
+<p>补充操作：</p>
+<p>添加ssh-keys</p>
 <ol>
 <li>执行<code>ssh-keygen -t rsa -C &quot;yourname@email.com&quot;</code></li>
 <li>用户文件夹下的.ssh目录会生成id_rsa和id_rsa.pub两个文件，其中id_rsa是私钥，id_rsa.pub是公钥</li>
 <li>登录github，在设置里面new SSH key，在key文本框里粘贴公钥id_rsa.pub文件的内容</li>
 <li>可以用<code>ssh git@github.com</code>来验证连接</li>
 </ol>
-<p><strong>配置过程中可能遇到的问题：</strong></p>
+<p>git设置全局用户名和邮箱</p>
+<pre><code>1. `git config --global user.name &quot;xxx&quot;`
+2. `git config -- global user.email &quot;xxx@qq.com&quot;`</code></pre><p><strong>配置过程中可能遇到的问题：</strong></p>
 <p><strong>问题1：</strong></p>
 <p>​    提示<code>TypeError: can&#39;t read property count of undefined</code>且错误是在<code>hexo-baidu-url-submit</code>包中</p>
 <p>解决方法：删除该包即可<code>npm uninstall hexo-baidu-url-submit</code></p>
