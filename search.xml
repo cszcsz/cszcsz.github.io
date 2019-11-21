@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>算法笔记-07二叉搜索树</title>
-    <url>/2019/11/21/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-07%E4%BA%8C%E5%8F%89%E6%A0%91&amp;%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
+    <url>/2019/11/21/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-07%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</url>
     <content><![CDATA[<h3 id="二叉树的存储方式"><a href="#二叉树的存储方式" class="headerlink" title="二叉树的存储方式"></a>二叉树的存储方式</h3><ul>
 <li><p>基于指针或者引用的二叉<strong>链式存储</strong>法</p>
 </li>
