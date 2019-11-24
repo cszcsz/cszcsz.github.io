@@ -260,6 +260,224 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/11/24/算法笔记-08红黑树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="csz">
+      <meta itemprop="description" content="个人学习生活记录">
+      <meta itemprop="image" content="/images/touxiang2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="csz的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/24/算法笔记-08红黑树/" class="post-title-link" itemprop="url">算法笔记-08红黑树</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-24 10:20:17 / 修改时间：16:52:16" itemprop="dateCreated datePublished" datetime="2019-11-24T10:20:17+08:00">2019-11-24</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构与算法学习笔记/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h3><p>红黑树是一个实现非常复杂的高效动态数据结构，在学习红黑树前，非常有必要先引入2-3查找树。<strong>红黑树是由2-3查找树演化而来的，可以说红黑树就是2-3查找树的一种实现方式。</strong></p>
+<p>网络上的很多博客、资料在介绍红黑树时总是先摆出红黑树所满足的几个条件，然后就像“玩魔方”似的遇到特定情况就按公式进行“还原”以满足红黑树的几个条件。<strong>但是，这种背公式的学习方式不出几天就忘的差不多了，想要真正的理解红黑树的原理，就必须<u>建立红黑树和2-3查找树的对应关系</u>。</strong></p>
+<p>首先我们来看2-3查找树（有的地方也叫做2-3-4树）：</p>
+<blockquote>
+<p>定义：一颗2-3查找树或为一棵空树，或由2-结点和3-结点组成的查找树</p>
+</blockquote>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/redblacktree1.png" height="40%" width="40%/">
+
+<p><strong>一颗完美平衡的2-3查找树中的所有空链接到根结点的距离应该都是相同的。</strong></p>
+<br>
+
+<h4 id="2-3树的插入"><a href="#2-3树的插入" class="headerlink" title="2-3树的插入"></a>2-3树的插入</h4><p>2-3树的插入情况可以用一句话来概括：<strong>遇到2-结点则将其插入变为3-结点；遇到3-结点则先临时变为4-结点再分解为两个2-结点并把中键移动到父节点中，就这样一直向上不断分解临时的4-结点并将中键插入更高层的父节点，若根结点最后为4-结点，则同样分解并且树的高度+1。</strong></p>
+<p>情况1：向2-结点中插入新键</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124110408.png" height="50%" width="50%/">
+
+<p>情况2：向只有一个3结点的树插入新键</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124110810.png" height="50%" width="60%/">
+
+<p>情况3：向父节点为2-结点的3-结点插入新键</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124111300.png" height="50%" width="60%/">
+
+<p>情况4：向父节点为3-结点的3-结点插入新键</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124111809.png" width="70%" height="60%/">
+
+<br>
+
+<h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p>2-3树非常的平衡，任意空链接到根结点的路径长度都是相等的。<strong>但是我们离真正的实现还有一段距离，这种直白的表示方法实现起来并不方便。</strong>我们需要维护2-结点和3-结点，将一种数据类型转换为另一种等等，而它们所产生的开销可能会使算法比标准的二叉查找树更慢。</p>
+<p>所以我们采取一种折中的方案，用红黑二叉查找树(红黑树)来实现2-3树。</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124113242.png" height="50%" width="80%/">
+
+<p><strong>注意：我们说某个结点的颜色时，指的是指向该结点的链接颜色。</strong></p>
+<p>红黑树的另一种定义是含有红黑链接并满足下列条件的二叉查找树：</p>
+<ul>
+<li><p>根节点总为黑色（每次插入后都将根结点设为黑色；当根结点由红变黑时，树的<strong>黑链接</strong>高度就会加1）</p>
+</li>
+<li><p>红链接均为左链接（能够减少可能出现的情况，简化代码）</p>
+</li>
+<li><p>没有任何一个结点同时和两条红链接相连（对应2-3树中没有4-结点）</p>
+</li>
+<li><p>该树是<strong>完美黑色平衡</strong>的，即任意空链接到根结点的路径上的<strong>黑链接数量相同</strong></p>
+</li>
+</ul>
+<p>满足这样定义的红黑树和相应的2-3树是一一对应的。<strong>如果我们将由红链接相连的结点合并，得到的就是一棵2-3树。</strong></p>
+<p>红黑树既是二叉查找树，也是2-3树，因此我们可以将两个算法的优点<strong>结合</strong>起来：<strong>二叉查找树中简洁高效的查找方法和2-3树中高效的平衡插入算法。</strong></p>
+<br>
+
+<h4 id="旋转、颜色转换"><a href="#旋转、颜色转换" class="headerlink" title="旋转、颜色转换"></a>旋转、颜色转换</h4><p>在进行红黑树插入操作前先理解几个基本操作：</p>
+<ul>
+<li><p><strong>左旋</strong>（对某个结点执行<strong>左旋操作</strong>就是<strong>向左旋转该结点的右子链接</strong>，根结点互换。类似<strong>旋转哑铃</strong>！）</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124120647.png" width="90%" height="50%/">
+
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node* <span class="title">rotateLeft</span><span class="params">(Node* h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Node* x = h-&gt;right;</span><br><span class="line">    h-&gt;right = x-&gt;left;</span><br><span class="line">    x-&gt;left = h;</span><br><span class="line">    x-&gt;color = h-&gt;color;</span><br><span class="line">    h-&gt;color = RED;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>右旋</strong></p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124121038.png" height="50%" width="90%/">
+
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Node* rotateRight(Node* h)</span><br><span class="line">&#123;</span><br><span class="line">    Node* x = h-&gt;left;</span><br><span class="line">    h-&gt;left = x-&gt;right;</span><br><span class="line">    x-&gt;right = h;</span><br><span class="line">    x-&gt;color = h-&gt;color;</span><br><span class="line">    h-&gt;color = RED;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>颜色转换</strong>（等价于2-3树中分解4-结点并将中键移到父节点中的过程！！！）</li>
+</ul>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124121701.png" height="60%" width="60%/">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">flipColors</span><span class="params">(Node* h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    h-&gt;color = RED;</span><br><span class="line">    h-&gt;left-&gt;color = BLACK;</span><br><span class="line">    h-&gt;right-&gt;color = BLACK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="红黑树的插入"><a href="#红黑树的插入" class="headerlink" title="红黑树的插入"></a>红黑树的插入</h4><p>注意：红黑树插入的结点是红色的(即<strong>用红色链接指向刚插入的结点</strong>)，每次插入后都将根结点设为黑色。</p>
+<p>与2-3树类似，红黑树的插入也有上述情况，一定要对应着2-3树的插入来理解红黑树的插入，这里概括为2种情况</p>
+<p><strong>情况1：向2-结点插入新键</strong>（类比2-3树向一个2-结点插入新键变为3-结点）</p>
+<ul>
+<li>向左插入：什么也不做</li>
+</ul>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124152240.png" width="35%" height="35%/">
+
+<ul>
+<li><p>向右插入：左旋（因为出现了红色右链接，我们规定红链接只能以左链接的形式存在）</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124152550.png" width="60%" height="50%/">
+
+</li>
+</ul>
+<p><strong>情况2：向3-结点插入新键</strong>（类比2-3树向一个3-结点插入新键，分解成两个2-结点并把中键向父节点传递）</p>
+<ul>
+<li><p>向左插入(新键最小)：先右旋再颜色转换</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124153527.png" width="85%" height="50%">
+</li>
+<li><p>向右插入(新键最大)：直接颜色转换</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124153953.png" width="85%" height="50%/">
+</li>
+<li><p>向中间插入(新键介于两者之间)：</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124154534.png" width="100%" height="60%/">
+
+</li>
+</ul>
+<p><strong>核心：要在一个3-结点下插入新键，先创建一个临时的4-结点，将其分解并将红链接由中间键传递给它的父节点。重复这个过程，我们就能将红链接在树中自下向上传递，直到遇到一个2-结点或根结点。</strong></p>
+<p>总之，只要使用左旋转、右旋转、颜色转换这三个简单的操作，我们就能保证插入后红黑树和2-3树的一一对应关系。</p>
+<p>在沿着插入点到根结点路径上移到时所经过的每个结点中顺序完成以下操作，我们就能完成插入操作：</p>
+<ul>
+<li>如果右子节点是红色的而左子节点是黑色的，进行左旋转</li>
+<li>如果左子结点是红色的且它的左子结点也是红色的，进行右旋转</li>
+<li>如果左右子节点都是红色的，进行颜色转换</li>
+</ul>
+<br>
+
+<h4 id="红黑树插入算法实现"><a href="#红黑树插入算法实现" class="headerlink" title="红黑树插入算法实现"></a>红黑树插入算法实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node* <span class="title">set</span><span class="params">(Node* h, Key key, Value val)</span>                 <span class="comment">//C++的map容器就是用红黑树实现的</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(h==<span class="literal">nullptr</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Node(key,val,RED);</span><br><span class="line">    <span class="keyword">int</span> cmp = key.compareTo(h.key);</span><br><span class="line">    <span class="keyword">if</span>(cmp&lt;<span class="number">0</span>) h-&gt;left = put(h-&gt;left,key,val);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(cmp&gt;<span class="number">0</span>) h-&gt;right = put(h-&gt;right,key,val);</span><br><span class="line">    <span class="keyword">else</span> h.val = val;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;right) &amp;&amp; !isRed(h-&gt;left)) h = rotateLeft(h);</span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;left) &amp;&amp; isRed(h-&gt;left-&gt;left)) h = rotateRight(h);</span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;left) &amp;&amp; isRed(h-&gt;right)) flipColors(h);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> h</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>红黑树的删除操作比插入操作更复杂一点，这里就不说明了，详情可以看《算法》上的分析。</p>
+<br>
+
+<h4 id="红黑树的性质"><a href="#红黑树的性质" class="headerlink" title="红黑树的性质"></a>红黑树的性质</h4><ul>
+<li><p><strong>一颗大小为N的红黑树高度不会超过2lgN</strong></p>
+<p>红黑树的<strong>最差情况</strong>是它所对应的2-3树左边的路径结点全是3-结点而其余均为2-结点。这样将3-结点展开用红链接+两个2-结点表示的话，最左边的路径长度是只包含2-结点路径长度(lgN)的两倍，即2lgN。</p>
+</li>
+<li><p><strong>红黑树中查找、插入、删除等操作最坏情况下所需时间是对数级别的，即O(logN)</strong></p>
+</li>
+<li><p><strong>红黑树支持有序性的操作</strong>（因为红黑树也是二叉查找树嘛~）</p>
+</li>
+</ul>
+<br>
+
+<h4 id="红黑树-VS-AVL树"><a href="#红黑树-VS-AVL树" class="headerlink" title="红黑树 VS AVL树"></a>红黑树 VS AVL树</h4><ul>
+<li><p>红黑树的查询性能略微逊色于AVL树。(AVL树高度平衡，最多存在1层的高度差；而红黑树最坏情况存在lgN的高度差)</p>
+</li>
+<li><p>红黑树在插入和删除上优于AVL树。(AVL树每次插入删除会进行大量的平衡度计算，而红黑树为了维持红黑性质所做的红黑变换和旋转的开销，相较于AVL树为了维持平衡的开销要小得多)</p>
+</li>
+<li><p><strong>红黑树有着良好的稳定性和完整的功能，性能表现也很不错，综合实力强</strong> </p>
+</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/11/21/算法笔记-07二叉搜索树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -289,11 +507,19 @@
                 
               
 
-              <time title="创建时间：2019-11-21 16:14:08 / 修改时间：16:39:36" itemprop="dateCreated datePublished" datetime="2019-11-21T16:14:08+08:00">2019-11-21</time>
+              <time title="创建时间：2019-11-21 16:14:08" itemprop="dateCreated datePublished" datetime="2019-11-21T16:14:08+08:00">2019-11-21</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-24 16:46:13" itemprop="dateModified" datetime="2019-11-24T16:46:13+08:00">2019-11-24</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -336,6 +562,15 @@
 <li>每个节点仍只存储一个数据，但插入相同数据的时候<strong>当作大于这个节点</strong>来处理</li>
 </ul>
 <p>二叉查找树不管是插入、删除还是查找，时间复杂度都与树的<strong>高度</strong>成正比即O(height)。 平衡二叉查找树的高度接近 logn，所以插入、删除、查找操作的时间复杂度也比较稳定，是 O(logn) 。</p>
+<br>
+
+<h3 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h3><p><strong>AVL树</strong>是最早被发明的<a href="https://zh.wikipedia.org/wiki/自平衡二叉查找树" target="_blank" rel="noopener">自平衡二叉查找树</a>。在AVL树中，任一节点对应的两棵子树的最大高度差为1，因此它也被称为<strong>高度平衡树</strong>。查找、插入和删除在平均和最坏情况下的<a href="https://zh.wikipedia.org/wiki/时间复杂度" target="_blank" rel="noopener">时间复杂度</a>都是<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/653ab6d6fd99537d220f179d2591955ff4f37b99" alt="O(\log{n})">。增加和删除元素的操作则可能需要借由一次或多次<a href="https://zh.wikipedia.org/wiki/树旋转" target="_blank" rel="noopener">树旋转</a>，以实现树的重新平衡。 </p>
+<p>需要对以下四种情况执行平衡操作(旋转)：LL,LR,RL,RR</p>
+<p>其实现则是在普通的二叉搜索树插入、删除操作完成后增加平衡的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">AVLTreeNode</span>&lt;T&gt;* <span class="title">AVLTree</span>&lt;T&gt;:</span>:add(AVLTreeNode&lt;T&gt;* &amp;tree, T data)&#123;</span><br><span class="line">    <span class="keyword">if</span> (tree == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        tree = <span class="keyword">new</span> AVLTreeNode&lt;T&gt;(data, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (data &lt; tree-&gt;data)&#123; </span><br><span class="line">        <span class="comment">//将新加入的节点插入左子树 </span></span><br><span class="line">        tree-&gt;Left = add(tree-&gt;Left, data);</span><br><span class="line">        <span class="comment">//检查加入新的结点之后树是否失去平衡 </span></span><br><span class="line">        <span class="keyword">if</span> (height(tree-&gt;Left) - height(tree-&gt;Right) == <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (data &lt; tree-&gt;Left-&gt;data)</span><br><span class="line">                tree = LL_Rotation(tree);<span class="comment">//左左，新加入之后左儿子的左儿子深了  </span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                tree = LR_Rotation(tree);<span class="comment">//左右，新加入之后左儿子的右儿子深了</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将新加入的节点插入右子树 </span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (data &gt; tree-&gt;data) &#123;</span><br><span class="line">        tree-&gt;Right = add(tree-&gt;Right, data);</span><br><span class="line">        <span class="comment">//检查加入新的结点之后树是否失去平衡 </span></span><br><span class="line">        <span class="keyword">if</span> (height(tree-&gt;Right) - height(tree-&gt;Left) == <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (data &gt; tree-&gt;Right-&gt;data)</span><br><span class="line">                tree = RR_Rotation(tree);<span class="comment">//右右，新加入之后右儿子的右儿子深了  </span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                tree = RL_Rotation(tree);<span class="comment">//右左，新加入之后右儿子的左儿子深了  </span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="comment">//该节点已经在树中 </span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"该节点已经存在树中"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//更新更前当前节点的高度 </span></span><br><span class="line">    tree-&gt;height = max( height(tree-&gt;Left), height(tree-&gt;Right)) + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tree;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
 <h3 id="平衡的二叉搜索树-VS-散列表"><a href="#平衡的二叉搜索树-VS-散列表" class="headerlink" title="平衡的二叉搜索树 VS 散列表"></a>平衡的二叉搜索树 VS 散列表</h3><p>二叉查找树在比较平衡的情况下，插入、删除、查找操作时间复杂度才是 O(logn)，相对散列表，好像并没有什么优势，那我们为什么还要用二叉查找树呢？ </p>
 <ol>
 <li>散列表中的数据是无序存储的，如果要输出有序的数据，需要先进行排序。而对于二叉查找树来说，我们只需要中序遍历，就可以在 O(n) 的时间复杂度内，输出有序的数据序列 </li>
@@ -825,7 +1060,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-18 09:15:32" itemprop="dateModified" datetime="2019-11-18T09:15:32+08:00">2019-11-18</time>
+                <time title="修改时间：2019-11-24 10:15:54" itemprop="dateModified" datetime="2019-11-24T10:15:54+08:00">2019-11-24</time>
               </span>
             
           
@@ -894,6 +1129,15 @@
 <td align="center">in-place</td>
 </tr>
 <tr>
+<td align="center">希尔排序</td>
+<td align="center">O(n<sup>1.3</sup>)</td>
+<td align="center">O(n)</td>
+<td align="center">O(n<sup>2</sup>)</td>
+<td align="center">O(1)</td>
+<td align="center">不稳定</td>
+<td align="center">in-place</td>
+</tr>
+<tr>
 <td align="center">归并排序</td>
 <td align="center">O(nlogn)</td>
 <td align="center">O(nlogn)</td>
@@ -949,6 +1193,7 @@
 </tr>
 </tbody></table>
 <p>  注：排序方式in-place意思是原地排序，与内部排序和外部排序(数据存储在外部磁盘中，无法一次全部加载到内存中)的概念不同。</p>
+<p><strong>排序的本质就是消除逆序数</strong>，如果采用”交换相邻元素”的办法来消除逆序，每次正好只消除一个，因此必须执行O(n<sup>2</sup>)的交换次数，这就是冒泡、插入等算法只能到平方级的原因。<strong>基于交换元素的排序想要突破这个下界，必须执行一些比较、交换相隔比较远的元素，使得一次交换能消除多个逆序</strong>，像希尔、快排、堆排等算法都是交换比较远的元素，只不过规则各不相同罢了。</p>
 <br>
 
 <h3 id="各类排序算法实现"><a href="#各类排序算法实现" class="headerlink" title="各类排序算法实现"></a>各类排序算法实现</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a><strong>冒泡排序</strong></h4><p><strong>基本思想</strong>：每一趟逐次比较相邻元素，总是把值大的元素(泡泡)往上冒，一趟可以放好一个元素的位置，执行n趟即可。加入一个flag标志(如果某一趟没有执行交换操作则说明已经有序，即可提前结束排序)可以优化最好情况的时间复杂度到O(n)。</p>
@@ -1442,119 +1687,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/08/26/git常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="csz">
-      <meta itemprop="description" content="个人学习生活记录">
-      <meta itemprop="image" content="/images/touxiang2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="csz的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/26/git常用命令/" class="post-title-link" itemprop="url">git常用命令</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-26 23:50:57" itemprop="dateCreated datePublished" datetime="2019-08-26T23:50:57+08:00">2019-08-26</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-18 09:15:32" itemprop="dateModified" datetime="2019-11-18T09:15:32+08:00">2019-11-18</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="从github远程克隆项目修改后再推送："><a href="#从github远程克隆项目修改后再推送：" class="headerlink" title="从github远程克隆项目修改后再推送："></a>从github远程克隆项目修改后再推送：</h4><ol>
-<li><p><code>git clone &lt;url&gt;</code>&emsp;将项目克隆到本地</p>
-</li>
-<li><p><code>git clone -b &quot;branchname&quot; &lt;url&gt;</code> 克隆远程项目分支到本地</p>
-</li>
-<li><p><code>git add .</code> &emsp;跟踪所有的文件</p>
-</li>
-<li><p><code>git commit -m &quot;commit message&quot;</code>  &emsp;提交文件到本地版本库</p>
-</li>
-<li><p><code>git push orgin &quot;branchname&quot;</code>  &emsp; 推送到远程仓库分支 </p>
-</li>
-<li><p><code>git pull</code>  拉取远程分支并合并</p>
-</li>
-<li><p><code>git status</code>  &emsp;随时查看状态信息</p>
-</li>
-<li><p><code>git branch &quot;branchname&quot;</code>  创建分支</p>
-</li>
-<li><p><code>git checkout -b 分支名</code>  创建一个新分支并切换到该分支</p>
-</li>
-</ol>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1607,7 +1739,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1671,7 +1803,9 @@
         
           
         
-        <span class="site-state-item-count">12</span>
+          
+        
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
