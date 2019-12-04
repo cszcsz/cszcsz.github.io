@@ -76,7 +76,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124153527.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124153953.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191124154534.png">
-<meta property="og:updated_time" content="2019-11-24T08:52:16.108Z">
+<meta property="og:updated_time" content="2019-12-03T02:51:50.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法笔记-08红黑树">
 <meta name="twitter:description" content="2-3查找树红黑树是一个实现非常复杂的高效动态数据结构，在学习红黑树前，非常有必要先引入2-3查找树。红黑树是由2-3查找树演化而来的，可以说红黑树就是2-3查找树的一种实现方式。 网络上的很多博客、资料在介绍红黑树时总是先摆出红黑树所满足的几个条件，然后就像“玩魔方”似的遇到特定情况就按公式进行“还原”以满足红黑树的几个条件。但是，这种背公式的学习方式不出几天就忘的差不多了，想要真正的理解红黑树">
@@ -306,11 +306,19 @@
                 
               
 
-              <time title="创建时间：2019-11-24 10:20:17 / 修改时间：16:52:16" itemprop="dateCreated datePublished" datetime="2019-11-24T10:20:17+08:00">2019-11-24</time>
+              <time title="创建时间：2019-11-24 10:20:17" itemprop="dateCreated datePublished" datetime="2019-11-24T10:20:17+08:00">2019-11-24</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-03 10:51:50" itemprop="dateModified" datetime="2019-12-03T10:51:50+08:00">2019-12-03</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -445,9 +453,11 @@
 <li>如果左子结点是红色的且它的左子结点也是红色的，进行右旋转</li>
 <li>如果左右子节点都是红色的，进行颜色转换</li>
 </ul>
+<a id="more"></a>
+
 <br>
 
-<h4 id="红黑树插入算法实现"><a href="#红黑树插入算法实现" class="headerlink" title="红黑树插入算法实现"></a>红黑树插入算法实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node* <span class="title">set</span><span class="params">(Node* h, Key key, Value val)</span>                 <span class="comment">//C++的map容器就是用红黑树实现的</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(h==<span class="literal">nullptr</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Node(key,val,RED);</span><br><span class="line">    <span class="keyword">int</span> cmp = key.compareTo(h.key);</span><br><span class="line">    <span class="keyword">if</span>(cmp&lt;<span class="number">0</span>) h-&gt;left = put(h-&gt;left,key,val);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(cmp&gt;<span class="number">0</span>) h-&gt;right = put(h-&gt;right,key,val);</span><br><span class="line">    <span class="keyword">else</span> h.val = val;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;right) &amp;&amp; !isRed(h-&gt;left)) h = rotateLeft(h);</span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;left) &amp;&amp; isRed(h-&gt;left-&gt;left)) h = rotateRight(h);</span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;left) &amp;&amp; isRed(h-&gt;right)) flipColors(h);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> h</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="红黑树插入算法实现"><a href="#红黑树插入算法实现" class="headerlink" title="红黑树插入算法实现"></a>红黑树插入算法实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node* <span class="title">set</span><span class="params">(Node* h, Key key, Value val)</span>     <span class="comment">//C++的map容器就是用红黑树实现的</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(h==<span class="literal">nullptr</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Node(key,val,RED);</span><br><span class="line">    <span class="keyword">int</span> cmp = key.compareTo(h.key);</span><br><span class="line">    <span class="keyword">if</span>(cmp&lt;<span class="number">0</span>) h-&gt;left = put(h-&gt;left,key,val);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(cmp&gt;<span class="number">0</span>) h-&gt;right = put(h-&gt;right,key,val);</span><br><span class="line">    <span class="keyword">else</span> h.val = val;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;right) &amp;&amp; !isRed(h-&gt;left)) h = rotateLeft(h);</span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;left) &amp;&amp; isRed(h-&gt;left-&gt;left)) h = rotateRight(h);</span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;left) &amp;&amp; isRed(h-&gt;right)) flipColors(h);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> h</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>红黑树的删除操作比插入操作更复杂一点，这里就不说明了，详情可以看《算法》上的分析。</p>
 <br>
@@ -505,6 +515,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/11/26/C++知识仓库/" rel="prev" title="C++知识仓库">
+                  C++知识仓库 <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -574,7 +588,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -599,7 +613,9 @@
         
           
         
-        <span class="site-state-item-count">5</span>
+          
+        
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -640,7 +656,11 @@
         
           
         
-        <span class="site-state-item-count">13</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

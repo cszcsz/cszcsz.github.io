@@ -260,6 +260,541 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/12/03/算法笔记-11字符串匹配算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="csz">
+      <meta itemprop="description" content="个人学习生活记录">
+      <meta itemprop="image" content="/images/touxiang2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="csz的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/12/03/算法笔记-11字符串匹配算法/" class="post-title-link" itemprop="url">算法笔记-11字符串匹配算法</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-03 08:29:23" itemprop="dateCreated datePublished" datetime="2019-12-03T08:29:23+08:00">2019-12-03</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-04 20:51:26" itemprop="dateModified" datetime="2019-12-04T20:51:26+08:00">2019-12-04</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构与算法学习笔记/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="BF算法"><a href="#BF算法" class="headerlink" title="BF算法"></a>BF算法</h2><p>BF是Brute Force的缩写，即暴力匹配算法</p>
+<h4 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a><strong>算法思想</strong></h4><p>我们在主串中考查起始下标从0、1、2…n-m开始且长度为m的n-m+1个子串，看它们是否有跟模式串匹配的。（考察某一子串和模式串是否匹配的方法是逐一字符比较）</p>
+<h4 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a><strong>时间复杂度分析</strong></h4><p>举个栗子，若主串为aaaaaa，模式串为aab。那么每次都要对比模式串中的m个字符，要对比n-m+1次，<strong>所以这种算法的最坏情况下的时间复杂度是O(n*m)。</strong></p>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a><strong>应用</strong></h4><p>尽管BF算法时间复杂度比较高，但在实际的项目它却是一个比较常用算法。为啥呢？原因主要有以下两点：1.实际的软件开发中，主串和模式串的长度都不会太长；另外，在统计意义上，大部分情况下的算法执行效率比O(n*m)高。2.朴素字符串匹配算法思想和实现都很简单，意味着不容易出错，符合KISS(Keep it Simple and Stupid)设计原则。</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a><strong>实现</strong></h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BM算法，暴力匹配，朴素算法，O(n*m)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Serach</span><span class="params">(String txt,String pat)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N = txt.length();</span><br><span class="line">    <span class="keyword">int</span> M = pat.length();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N-M;i++)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;M;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(txt[i+j]!=pat[j])</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(j==M)</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="RK算法"><a href="#RK算法" class="headerlink" title="RK算法"></a>RK算法</h2><p>RK是Rabin-Karp这两位发明人名字的简写。本质上是BF算法的升级版，引入了<strong>哈希算法</strong>。</p>
+<h4 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a><strong>算法思想</strong></h4><p>通过哈希算法对主串中的n-m+1个长度为m的字串求哈希值，用它们的哈希值去和模式串的哈希值比较，如果某个字串的哈希值与模式串的相等，那就说明对应的字串和模式串匹配了。</p>
+<h4 id="哈希函数的设计"><a href="#哈希函数的设计" class="headerlink" title="哈希函数的设计"></a><strong>哈希函数的设计</strong></h4><p>RK算法要求哈希算法设计的比较精巧，如果求每个子串的哈希值时都要遍历一次子串就太耗时了，这样反而得不偿失了，我们需要找到两个相邻子串哈希值的关系，用递推的方式一遍求出n-m+1个子串的哈希值。举个栗子：对于包含英文小写字母的字符串<code>cba</code>，我们将a<del>z映射到整数0</del>25，这样“cba”的哈希值就是’c’×26<sup>2</sup>+b×26+a=2*×26<sup>2</sup>+1×26+0=1353。就是用二十六进制来表示一个字符串，该二十六进制的十进制值就是哈希值。</p>
+<h4 id="时间复杂度分析-1"><a href="#时间复杂度分析-1" class="headerlink" title="时间复杂度分析"></a><strong>时间复杂度分析</strong></h4><p>第一部分，求n-m+1个子串的哈希值只需要扫描一遍主串就可以了，时间复杂度为O(n)；第二部分，模式串哈希值与每个子串的哈希值比较的时间复杂度是O(1)，总共需要比较n-m+1次，所以这部分时间复杂度也是O(n)。<strong>所以RK算法整体的时间的复杂度是O(n)。</strong></p>
+<br>
+
+<h2 id="BM算法"><a href="#BM算法" class="headerlink" title="BM算法"></a>BM算法</h2><p>BM算法一种非常高效的字符串匹配算法，它的性能是KMP算法的3~4倍，BM算法本质上是寻找某种规律，看能不能让模式串一次往后滑动好几位。BM算法的匹配顺序与另外几个算法不同，它是按照模式串下标从大到小的顺序，<strong>倒着匹配</strong>的。</p>
+<h4 id="坏字符规则"><a href="#坏字符规则" class="headerlink" title="坏字符规则"></a><strong>坏字符规则</strong></h4><p>当遇到不匹配的字符时，称<strong>主串中</strong>对应位置的字符为<strong>坏字符</strong>（bad character）。基本思想：当发生不匹配时，我们记坏字符在模式串中对应的下标为S<sub>i</sub>，坏字符若在模式串中存在，则把坏字符在模式串中的下标记为X<sub>i</sub>，若不存在则为-1。那么，模式串向后移动的位数为S<sub>i</sub>-X<sub>i</sub>。如果坏字符在模式串中出现多次，则选择靠后的那一个。<strong>注意：</strong>单纯使用坏字符规则还不够，因为S<sub>i</sub>-X<sub>i</sub>可能是负数，如：主串:<code>aaaaaaa</code>，模式串:<code>baaa</code>，所以BM算法还要用到好后缀规则。</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191204195243.png" width="60%">
+
+<h4 id="好后缀规则"><a href="#好后缀规则" class="headerlink" title="好后缀规则"></a>好后缀规则</h4><p>好后缀规则原理与坏字符处理方法类似，当我们遇到不匹配的字符时，我们在模式串中从后向前寻找第一个与好后缀匹配的子串，然后我们将模式串向后移动使它们对齐，如下图所示：</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191204200405.png" width="60%">
+
+<p>若找不到，则会出现以下情况：</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191204202008.png" width="60%">
+
+<p>如图，<strong>若一次性将模式串移动到好好后缀的后面(左分支)，则会出现错过正确匹配的情况</strong>，显然这样移动过头了。我们知道在这种情况下，当主串中的好后缀与模式串重合时，肯定不能匹配。但一次性移动过头使之完全不重合又有可能错过匹配的情况。<strong>所以，折中起来就是要移动模式串，使主串中的好后缀与模式串存在部分重合！</strong></p>
+<p><strong>所以，针对这种情况，我们不仅要看好后缀在模式串中，是否有另一个匹配的子串，我们还要考察好后缀的后缀子串，是否存在跟模式串的前缀子串匹配的。</strong>    </p>
+<p>现在，坏字符规则和好后缀规则已经清楚了，那么我们到底是选择哪个作为移动的方案呢？我<strong>们可以分别计算好后缀和坏字符往后滑动的位数，然后取两个数中最大的，作为模式串往后滑动的位数</strong>。这种处理方法还可以避免我们前面提到的，根据坏字符规则，计算得到的往后滑动的位数，有可能是负数的情况。</p>
+<h4 id="时间复杂度分析-2"><a href="#时间复杂度分析-2" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h4><p>BM算法在最好情况下的时间复杂度是很低的，只有O(n/m)。比如：主串为<code>aabaabaaa</code>，模式串为<code>aaa</code>，那么每次模式串都向后移动m位。</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><p>我们如何查找坏字符在模式串中的位置呢？如果我们每次拿坏字符在模式串中顺序查找，这样势必很慢，会影响匹配效率。想要更高效的查找，就得用到我们的散列表了。我们可以将模式串中的字符和对应的下标存在散列表中。比如我们创建一个大小为256的数组<code>bc[256]</code>，数组下标对应字符的ASCII码值，数组的值为对应的下标(若有重复字符则存靠后的下标)。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用hash表存坏字符下标</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initBC</span><span class="params">(String pat,<span class="keyword">int</span> bc[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = pat.length();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="keyword">sizeof</span>(bc)/<span class="keyword">sizeof</span>(<span class="keyword">int</span>);i++)</span><br><span class="line">    	bc[i] = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> ascii = (<span class="keyword">int</span>)pat[i];</span><br><span class="line">        bc[ascii] = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不考虑好后缀规则的代码</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BM</span><span class="params">(String txt,String pat)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = txt.length();</span><br><span class="line">    <span class="keyword">int</span> m = pat.length();</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;=n-m)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="keyword">int</span> j;</span><br><span class="line">        <span class="keyword">for</span>(j=m<span class="number">-1</span>;j&gt;=<span class="number">0</span>;j--)</span><br><span class="line">            <span class="keyword">if</span>(txt[i+j]!=pat[j])</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>(j&lt;<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        <span class="comment">// 等同于将模式串往后滑动j-bc[(int)a[i+j]]位</span></span><br><span class="line">        i = i + (j - bc[(<span class="keyword">int</span>)txt[i+j]]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于引入好后缀的算法实现这里先不写了，它还需要引入suffix和prefix数组。来完成以下任务</p>
+<ol>
+<li><p>在模式串中，查找跟好后缀匹配的另一个子串；</p>
+</li>
+<li><p>在好后缀的后缀子串中，查找最长的、能跟模式串前缀子串匹配的后缀子串；</p>
+</li>
+</ol>
+<br>
+
+<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h2><p>KMP算法是大家耳熟能详的算法，但总是学了就忘，所以我想简明扼要地把它的算法原理记录下来供以后回顾，KMP 算法是根据三位作者（D.E.Knuth，J.H.Morris 和 V.R.Pratt）的名字来命名的。</p>
+<h4 id="算法思想-2"><a href="#算法思想-2" class="headerlink" title="算法思想"></a><strong>算法思想</strong></h4><p>其思想与BM算法类似，朴素的字符串查找算法不匹配时每次只将模式串向后移动一位，而KMP算法试图利用已匹配的字符，当发生某个字符不匹配时能够<strong>将模式串向后多移动多位，跳过那些肯定不能匹配的情况，且主串不回退。</strong></p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191204161525.png" width="70%" height="100%">
+
+<p>如图，当出现某个字符不匹配时，j回退到哪呢？（或者说模式串向后移到几位呢？）利用已经匹配到的信息，我们将j回退到<strong>好前缀的最长可匹配前缀子串的末尾字符的下标位置</strong>。那么，如何来求好前缀的最长可匹配前缀和后缀子串呢？其实这个问题其实不涉及主串，只需要通过模式串本身就能求解。所以，我们能不能事先预处理计算好，在模式串和主串匹配的过程中，直接拿过来就用呢？当然可以，这就要引入next数组了。</p>
+<h4 id="next数组"><a href="#next数组" class="headerlink" title="next数组"></a><strong>next数组</strong></h4><p>也叫失效函数，<strong>数组的下标是每个前缀结尾字符下标，数组的值是这个前缀的<u>最长</u>可以匹配<u>前缀子串</u>的结尾字符下标</strong>。举个栗子如图：</p>
+<img src="https://raw.githubusercontent.com/cszcsz/BlogCloudImg/master/surfaceimg/20191204163537.png" width="70%" height="10%">
+
+<h4 id="next数组的求法"><a href="#next数组的求法" class="headerlink" title="next数组的求法"></a><strong>next数组的求法</strong></h4><p>我们利用数学归纳法的思想，初始化next[0]=-1，这个显而易见。如果我们知道next[i-1]，如何求next[i]呢？如果next[i-1]=k-1(即子串pat[0…k-1]是pat[0…i-1]的最长可匹配前缀子串)，这时若pat[k]=pat[i]，那么pat[0…k]就是pat[0…i]的最长可匹配前缀子串，即next=[i]=next[i-1]+1;若pat[k]≠pat[i]呢？这时我们就要找pat[0…i-1]的次长可匹配前缀子串，直到找到一个可匹配的且该串的下一个字符等于pat[i]就可以了。</p>
+<h4 id="时间复杂度分析-3"><a href="#时间复杂度分析-3" class="headerlink" title="时间复杂度分析"></a><strong>时间复杂度分析</strong></h4><p><strong>KMP 算法的时间复杂度就是 O(m+n)，空间复杂度是O(m)。</strong></p>
+<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a><strong>代码实现</strong></h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// KMP匹配代码</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">KMP</span><span class="params">(String txt,String pat)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = txt.length();</span><br><span class="line">    <span class="keyword">int</span> m = pat.length();</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(txt[i]!=pat[j] &amp;&amp; j&gt;<span class="number">0</span>)</span><br><span class="line">            j = next[j<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(txt[i]==pat[j])</span><br><span class="line">            j++;</span><br><span class="line">        <span class="keyword">if</span>(j==m)</span><br><span class="line">            <span class="keyword">return</span> i-m+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求next数组</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">getNext</span><span class="params">(String pat)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = pat.length();</span><br><span class="line">    <span class="keyword">int</span>* next = <span class="keyword">new</span> <span class="keyword">int</span>[m];</span><br><span class="line">    next[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(pat[k+<span class="number">1</span>]!=pat[i] &amp;&amp; k!=<span class="number">-1</span>)</span><br><span class="line">            k = next[k];</span><br><span class="line">        <span class="keyword">if</span>(pat[k+<span class="number">1</span>]==pat[i])</span><br><span class="line">            k++;</span><br><span class="line">        next[i] = k;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/12/02/算法笔记-10图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="csz">
+      <meta itemprop="description" content="个人学习生活记录">
+      <meta itemprop="image" content="/images/touxiang2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="csz的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/12/02/算法笔记-10图/" class="post-title-link" itemprop="url">算法笔记-10图</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-02 22:52:20" itemprop="dateCreated datePublished" datetime="2019-12-02T22:52:20+08:00">2019-12-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-03 10:57:37" itemprop="dateModified" datetime="2019-12-03T10:57:37+08:00">2019-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构与算法学习笔记/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h2>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/11/26/算法笔记-09堆/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="csz">
+      <meta itemprop="description" content="个人学习生活记录">
+      <meta itemprop="image" content="/images/touxiang2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="csz的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/26/算法笔记-09堆/" class="post-title-link" itemprop="url">算法笔记-09堆</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-26 17:01:18" itemprop="dateCreated datePublished" datetime="2019-11-26T17:01:18+08:00">2019-11-26</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-03 10:51:50" itemprop="dateModified" datetime="2019-12-03T10:51:50+08:00">2019-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构与算法学习笔记/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>堆是一种特殊的树，且满足以下两个条件：</p>
+<ul>
+<li>堆是一个完全二叉树</li>
+<li>堆中的每个节点的值都必须大于等于(或小于等于)其左右子节点的值</li>
+</ul>
+<p>堆又分为最小堆(小顶堆)和最大堆(大顶堆)</p>
+<h3 id="堆的存储"><a href="#堆的存储" class="headerlink" title="堆的存储"></a>堆的存储</h3><p>由于堆是完全二叉树，所以一般用数组来存储。</p>
+<p>若从数组下标为1的位置开始存储根节点，则左子节点下标为<code>2i</code>，右子节点下标为<code>2i+1</code>，节点的父节点则是<code>i/2</code></p>
+<p>若从数组下标为0的位置开始，则左子节点下标为<code>2i+1</code>，右子节点下标为<code>2i+2</code>，节点的父节点则是<code>(i-1)/2</code></p>
+<br>
+
+<h3 id="堆化-Heapify"><a href="#堆化-Heapify" class="headerlink" title="堆化(Heapify)"></a>堆化(Heapify)</h3><p>堆的构建、插入和删除操作背后涉及到堆化(heapify)的原理，其原理非常简单：<strong>就是顺着节点所在路径，向上或者向下，对比，然后交换，使其满足堆的性质。</strong></p>
+<p>最下堆的自上往下堆化代码实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Heapify</span><span class="params">(<span class="keyword">int</span> data[], <span class="keyword">int</span> n, <span class="keyword">int</span> i)</span>      <span class="comment">//最小堆自上而下堆化</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> minPos = i;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">2</span> * i &lt;= n &amp;&amp; data[<span class="number">2</span> * i] &lt; data[minPos])</span><br><span class="line">            minPos = <span class="number">2</span> * i;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">2</span> * i + <span class="number">1</span> &lt;= n &amp;&amp; data[<span class="number">2</span> * i + <span class="number">1</span>] &lt; data[minPos])</span><br><span class="line">            minPos = <span class="number">2</span> * i + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (i == minPos)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        swap(data[i], data[minPos]);</span><br><span class="line">        i = minPos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="建堆-Build"><a href="#建堆-Build" class="headerlink" title="建堆(Build)"></a>建堆(Build)</h3><p>堆的构建过程如下：从第一个非叶子节点开始到根节点依次执行堆化操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BuildHeap</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n / <span class="number">2</span>; i &gt;= <span class="number">1</span>; i--)  <span class="comment">// n为最后一个节点，n/2则为第一个非叶子节点</span></span><br><span class="line">    &#123;</span><br><span class="line">        Heapify(a, n, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="向堆中插入一个元素-Insert"><a href="#向堆中插入一个元素-Insert" class="headerlink" title="向堆中插入一个元素(Insert)"></a>向堆中插入一个元素(Insert)</h3><p>原理:将待插入元素放到堆的末尾，然后从该节点开始自下而上堆化。时间复杂度：O(logn)，与堆的高度成正比。</p>
+<p>注：一个包含n个节点的完全二叉树，树的高度不会超过log<sub>2</sub>n</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    data[++count] = x;       <span class="comment">// count是堆中已存储数据的个数</span></span><br><span class="line">    <span class="keyword">int</span> i = count;</span><br><span class="line">    <span class="keyword">while</span> (i / <span class="number">2</span> &gt;= <span class="number">1</span> &amp;&amp; data[i] &lt; data[i / <span class="number">2</span>])     <span class="comment">// 以最小堆为例</span></span><br><span class="line">    &#123;</span><br><span class="line">        swap(data[i], data[i / <span class="number">2</span>]);</span><br><span class="line">        i /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="删除堆顶元素-Delete"><a href="#删除堆顶元素-Delete" class="headerlink" title="删除堆顶元素(Delete)"></a>删除堆顶元素(Delete)</h3><p>原理：把最后一个元素放到堆顶，然后从上往下堆化</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DeleteMin</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(count==<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    a[<span class="number">1</span>]=a[count--];</span><br><span class="line">    Heapify(a, count, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="堆排序-Sort"><a href="#堆排序-Sort" class="headerlink" title="堆排序(Sort)"></a>堆排序(Sort)</h3><p>堆排序包含两个步骤：1. 建堆 2.排序</p>
+<h4 id="建堆时间复杂度分析："><a href="#建堆时间复杂度分析：" class="headerlink" title="建堆时间复杂度分析："></a>建堆时间复杂度分析：</h4><p>我们需要对<code>n/2</code>个节点进行堆化操作，每个节点堆化过程中需要比较和交换的节点个数跟这个节点的高度成正比。我们将每个节点的高度求和得到的就是建堆的时间复杂度：</p>
+<p><code>S = 1*h + 2*(h-1) + 4*(h-2) + 8*(h-3) +...+2^(n-1)*1</code></p>
+<p>利用错位相减可得<code>S = 2^(h+1)-h-2</code>，又因为h=log<sub>2</sub>n，代入S可得<code>S=O(n)</code></p>
+<p><strong>所以建堆的时间复杂度是O(n)！</strong></p>
+<h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><p>排序操作类似与删除操作，我们把堆顶元素和最后一个元素互换，然后对剩下的n-1个元素进行堆化，重复这个过程，就完成了排序，时间复杂度为O(nlogn)。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    BuildHeap(a, n);</span><br><span class="line">    <span class="keyword">int</span> k = n;</span><br><span class="line">    <span class="keyword">while</span>(k&gt;<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(a[k], a[<span class="number">1</span>]);</span><br><span class="line">        k--;</span><br><span class="line">        Heapify(a, k, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>综上：堆排序整体的时间复杂度为O(nlogn)，是原地排序，但不是稳定的排序算法（因为在排序的过程中存在将最后一个节点跟堆顶节点互换的操作，所以有可能改变值相同数据的原始相对顺序）</strong></p>
+<br>
+
+<h3 id="堆排序vs快速排序"><a href="#堆排序vs快速排序" class="headerlink" title="堆排序vs快速排序"></a>堆排序vs快速排序</h3><p>为什么在实际开发中<strong>快速排序要比堆排序性能好</strong>？</p>
+<ol>
+<li><p>快速排序是顺序访问数组的；而堆排序是跳着访问的，这样对CPU缓存不友好。</p>
+</li>
+<li><p>对于同样的数据，在排序过程中，堆排序算法的交换次数可能要多于快速排序</p>
+<p>分析：快速排序数据的交换次数不会比<strong>逆序度</strong>多。但是堆排序的第一步是建堆，而建堆的过程会打乱原始数据的相对先后顺序，可能导致原有数据的有序度降低。比如对于一组有序数据，经过建堆之后反而无序了。</p>
+</li>
+</ol>
+<br>
+
+<h3 id="堆的应用"><a href="#堆的应用" class="headerlink" title="堆的应用"></a>堆的应用</h3><h4 id="应用一：优先级队列"><a href="#应用一：优先级队列" class="headerlink" title="应用一：优先级队列"></a>应用一：优先级队列</h4><ul>
+<li><p>合并有序小文件（多路归并）</p>
+<p>若每次从取出的n条数据顺序查找到最小值并放到大文件中中时间复杂度为O(n)。如果我们维护一个大小为n的最小堆，每次将堆顶元素放入大文件中并将其从堆中删除，然后再从小文件中取出下一条数据放入堆中。这样时间复杂度是O(logn)，比原来高效了很多。</p>
+</li>
+<li><p>高性能定时器</p>
+</li>
+</ul>
+<br>
+
+<h4 id="应用二：求Top-K问题"><a href="#应用二：求Top-K问题" class="headerlink" title="应用二：求Top K问题"></a>应用二：求Top K问题</h4><p>如何在一个包含n个数据的数组中查找前K大数据呢？</p>
+<p>我们可以<strong>维护一个大小为K的最小堆</strong>(小顶堆)，顺序遍历数组（事先要用数组里的数填满堆），从数组中取出数据与堆顶比较。如果比堆顶元素大，我们就把堆顶元素删除，并且把这个元素插入堆中；如果比堆顶元素小，则什么也不做，继续遍历数组。这样遍历完后，堆中的数据就是前K大数据了。</p>
+<p>遍历数组需要O(n)时间复杂度，一次堆化操作需要O(logk)的时间复杂度，所以最坏情况下每个元素都插入堆一次，<strong>最坏时间复杂度就是O(nlogk)</strong></p>
+<br>
+
+<h4 id="应用三：求中位数"><a href="#应用三：求中位数" class="headerlink" title="应用三：求中位数"></a>应用三：求中位数</h4><p>对于<strong>动态数据集合</strong>如果每次都是先排序，再求中位数，那效率不怎么高。借助堆，我们可以高效地求中位数。</p>
+<p>我们<strong>维护两个堆，一个最大堆，一个最小堆，最大堆存储前半部分数据，最小堆存储后半部分数据</strong>，这样小顶堆中的数据都大于大顶堆中的数据。</p>
+<p>举个栗子：假设有n个数据，我们从小到大排序，若n为奇数，那么前n/2+1个数据存储到最大堆中，后n/2个数据存储在最小堆中。<strong>这样，最大堆中的堆顶元素就是我们要找的中位数</strong>。</p>
+<p>对于动态数据集合，如果新加入的数据小于等于最大堆的堆顶元素，就插入到最大堆中；否则插入到最小堆中。这时，如果两个堆的数据个数不符合前面的约定(不平衡)，我们可以从一个堆中不停的将堆顶元素移动到另一个堆上。</p>
+<p>实际上，不仅可以利用两个堆来求中位数，进一步推广可以求其他<strong>百分位的数据</strong>，原理和求中位数一样。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/11/26/C++知识仓库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="csz">
+      <meta itemprop="description" content="个人学习生活记录">
+      <meta itemprop="image" content="/images/touxiang2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="csz的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/26/C++知识仓库/" class="post-title-link" itemprop="url">C++知识仓库</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-26 11:52:50" itemprop="dateCreated datePublished" datetime="2019-11-26T11:52:50+08:00">2019-11-26</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-03 10:51:50" itemprop="dateModified" datetime="2019-12-03T10:51:50+08:00">2019-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="C-知识仓库"><a href="#C-知识仓库" class="headerlink" title="C++知识仓库"></a>C++知识仓库</h2><p>本仓库旨在收集我在学习c++时学习到的知识点，方便复习和准备面试。</p>
+<br>
+
+<ul>
+<li><strong>指针和引用</strong></li>
+</ul>
+<p><strong>引用</strong>：我们可以把引用理解成变量的别名。定义一个引用的时候，程序把该引用和它的初始值绑定在一起，而不是拷贝它。计算机必须<strong>在声明引用的同时就要对它初始化</strong>，并且，<strong>引用一经声明，就不可以再和其它对象绑定在一起了</strong></p>
+<p>指针：<strong>指针</strong>p也是<strong>对象</strong>，它同样有地址&amp;p和存储的值p，只不过，<strong>p存储的数据类型是数据的地址</strong>。对于指针来说，它是一个地址，这个地址是一个数值，那么就意味这个数值可以为0(空指针)，也可以为其他，即指针可以不指向任何东西。</p>
+<p>使用场景：当我们需要某个判断是否指向为空的时候或者指向的对象需要变化的时候，我们需要使用指针。其他地方一般推荐引用。具体深入了解可以看《effective C++》和《more effective C++》。</p>
+<br>
+
+<ul>
+<li><strong>struct和class</strong></li>
+</ul>
+<p>区别：</p>
+<ol>
+<li>成员的默认访问权限：在c++中class成员默认访问权限是private的，而struct默认是public的</li>
+<li>默认继承权限：class的继承默认按照private继承来处理，而struct按照public继承来处理</li>
+</ol>
+<p>注意：在C语言中，定义结构体变量需要加上struct如：<code>struct node p;</code>，而C++中可以直接用结构体名来定义(和class一样)如：<code>node p;</code>，但为了兼容C的写法，加上struct关键字也可以。</p>
+<br>
+
+<ul>
+<li><strong>常量指针和指针常量</strong></li>
+</ul>
+<ol>
+<li>const int p;</li>
+<li>const int* p;</li>
+<li>int const* p;</li>
+<li>int * const p;</li>
+<li>const int * const p;</li>
+<li>int const * const p;</li>
+</ol>
+<p>常量指针：指向常量的指针，无法通过指针改变所指向变量的值。注意：只能防止通过指针修改内存中的数据，并不保护指针所指向的对象。</p>
+<p>指针常量：指针对象本身存储的值不能改变，不能指向别的对象了，但是指针所指向的内容可以改变。注意：指针常量必须在声明的同时对其初始化，不允许先声明一个指针常量随后再对其赋值，这和声明一般的常量是一样的。</p>
+<p>记忆法：从<strong>右往左读</strong>，遇到p就替换成“p is a ”，遇到*就替换成“point to”比如说②，读作：p is a point to int const.</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/11/24/算法笔记-08红黑树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -289,11 +824,19 @@
                 
               
 
-              <time title="创建时间：2019-11-24 10:20:17 / 修改时间：16:52:16" itemprop="dateCreated datePublished" datetime="2019-11-24T10:20:17+08:00">2019-11-24</time>
+              <time title="创建时间：2019-11-24 10:20:17" itemprop="dateCreated datePublished" datetime="2019-11-24T10:20:17+08:00">2019-11-24</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-03 10:51:50" itemprop="dateModified" datetime="2019-12-03T10:51:50+08:00">2019-12-03</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -428,33 +971,15 @@
 <li>如果左子结点是红色的且它的左子结点也是红色的，进行右旋转</li>
 <li>如果左右子节点都是红色的，进行颜色转换</li>
 </ul>
-<br>
-
-<h4 id="红黑树插入算法实现"><a href="#红黑树插入算法实现" class="headerlink" title="红黑树插入算法实现"></a>红黑树插入算法实现</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node* <span class="title">set</span><span class="params">(Node* h, Key key, Value val)</span>                 <span class="comment">//C++的map容器就是用红黑树实现的</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(h==<span class="literal">nullptr</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Node(key,val,RED);</span><br><span class="line">    <span class="keyword">int</span> cmp = key.compareTo(h.key);</span><br><span class="line">    <span class="keyword">if</span>(cmp&lt;<span class="number">0</span>) h-&gt;left = put(h-&gt;left,key,val);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(cmp&gt;<span class="number">0</span>) h-&gt;right = put(h-&gt;right,key,val);</span><br><span class="line">    <span class="keyword">else</span> h.val = val;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;right) &amp;&amp; !isRed(h-&gt;left)) h = rotateLeft(h);</span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;left) &amp;&amp; isRed(h-&gt;left-&gt;left)) h = rotateRight(h);</span><br><span class="line">    <span class="keyword">if</span>(isRed(h-&gt;left) &amp;&amp; isRed(h-&gt;right)) flipColors(h);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> h</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>红黑树的删除操作比插入操作更复杂一点，这里就不说明了，详情可以看《算法》上的分析。</p>
-<br>
-
-<h4 id="红黑树的性质"><a href="#红黑树的性质" class="headerlink" title="红黑树的性质"></a>红黑树的性质</h4><ul>
-<li><p><strong>一颗大小为N的红黑树高度不会超过2lgN</strong></p>
-<p>红黑树的<strong>最差情况</strong>是它所对应的2-3树左边的路径结点全是3-结点而其余均为2-结点。这样将3-结点展开用红链接+两个2-结点表示的话，最左边的路径长度是只包含2-结点路径长度(lgN)的两倍，即2lgN。</p>
-</li>
-<li><p><strong>红黑树中查找、插入、删除等操作最坏情况下所需时间是对数级别的，即O(logN)</strong></p>
-</li>
-<li><p><strong>红黑树支持有序性的操作</strong>（因为红黑树也是二叉查找树嘛~）</p>
-</li>
-</ul>
-<br>
-
-<h4 id="红黑树-VS-AVL树"><a href="#红黑树-VS-AVL树" class="headerlink" title="红黑树 VS AVL树"></a>红黑树 VS AVL树</h4><ul>
-<li><p>红黑树的查询性能略微逊色于AVL树。(AVL树高度平衡，最多存在1层的高度差；而红黑树最坏情况存在lgN的高度差)</p>
-</li>
-<li><p>红黑树在插入和删除上优于AVL树。(AVL树每次插入删除会进行大量的平衡度计算，而红黑树为了维持红黑性质所做的红黑变换和旋转的开销，相较于AVL树为了维持平衡的开销要小得多)</p>
-</li>
-<li><p><strong>红黑树有着良好的稳定性和完整的功能，性能表现也很不错，综合实力强</strong> </p>
-</li>
-</ul>
-
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/11/24/算法笔记-08红黑树/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1060,7 +1585,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-24 10:15:54" itemprop="dateModified" datetime="2019-11-24T10:15:54+08:00">2019-11-24</time>
+                <time title="修改时间：2019-12-03 20:49:37" itemprop="dateModified" datetime="2019-12-03T20:49:37+08:00">2019-12-03</time>
               </span>
             
           
@@ -1231,462 +1756,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/11/01/算法笔记-02递归的理解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="csz">
-      <meta itemprop="description" content="个人学习生活记录">
-      <meta itemprop="image" content="/images/touxiang2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="csz的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/11/01/算法笔记-02递归的理解/" class="post-title-link" itemprop="url">算法笔记-02递归的理解</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-11-01 10:31:55" itemprop="dateCreated datePublished" datetime="2019-11-01T10:31:55+08:00">2019-11-01</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-10 10:51:16" itemprop="dateModified" datetime="2019-11-10T10:51:16+08:00">2019-11-10</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构与算法学习笔记/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法学习笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-关于递归的感受"><a href="#1-关于递归的感受" class="headerlink" title="1. 关于递归的感受"></a>1. 关于递归的感受</h2><h4 id="1-1-什么是递归"><a href="#1-1-什么是递归" class="headerlink" title="1.1 什么是递归"></a>1.1 什么是递归</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在我学习数据结构和算法的时候，<strong>递归</strong>和<strong>动态规划</strong>是我觉得最难啃的两块硬骨头，在此我想记录下我对递归的一些理解和想法。首先，什么是递归？递归是一个函数自己调用自己的过程，调用的过程可称之为<strong>递</strong>，结果返回的时候可称之为<strong>归</strong>。</p>
-<p>   &nbsp;&nbsp; 递归是一种十分优雅的编程技巧，十分适合计算机来干，但却有点不适合人脑的思维方式。我们通常喜欢从简单问题出发，发现事物的规律，从而推导出一般性的结论（类似<em>数学归纳法</em>的过程）。而递归则是从最后要解决的问题着眼，将问题分解为一个或若干个子问题，从而继续解决子问题直到遇到边界条件。<br></p>
-<p>​    例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 经典的爬楼梯问题:一步可以上一阶或两阶台阶，问n阶台阶有多少种走法？</span></span><br><span class="line"><span class="comment">// 递推公式:f(n)=f(n-1)+f(n-2)   边界条件:f(1)=1,f(2)=2</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> f(n<span class="number">-1</span>)+f(n<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    </p>
-<h4 id="1-2-思维误区"><a href="#1-2-思维误区" class="headerlink" title="1.2 思维误区"></a>1.2 思维误区</h4><p>  &nbsp;&nbsp;  我们往往陷入了一个<strong>思维误区：遇到递归问题时，总是下意识的尝试用人脑去模拟递归调用的过程，觉得不模拟出这个过程就认为自己没有理解递归，甚至打击到自己的自信心。其实这是不对的！！！很多大牛都无法人脑模拟稍微复杂点的递归问题，我们完全不用想一层层的调用关系。</strong>  </p>
-<p>​     </p>
-<h4 id="1-3-如何思考递归问题"><a href="#1-3-如何思考递归问题" class="headerlink" title="1.3 如何思考递归问题"></a>1.3 如何思考递归问题</h4><p>​    &nbsp;&nbsp;那么怎样去思考递归问题呢？举个例子，我们将待分析的问题A分解成若干个子问题B、C、D，然后去思考A与子问题B、C、D之间的关系，再摸索出边界条件就可以了<strong>。简而言之，就是寻找原问题和子问题之间的关系，找到递推公式，再找到边界条件。这样，递归的代码也自然好实现了。</strong>  </p>
-<p>​     </p>
-<h4 id="1-4-什么情况下可以用递归来解决问题"><a href="#1-4-什么情况下可以用递归来解决问题" class="headerlink" title="1.4 什么情况下可以用递归来解决问题"></a>1.4 什么情况下可以用递归来解决问题</h4><ol>
-<li>原问题可以分解为一个或多个子问题</li>
-<li>子问题除了问题规模比原问题小外，求解思路完全相同</li>
-<li>存在边界条件（递归终止条件）      </li>
-</ol>
-<p>​    </p>
-<h4 id="1-5-递归的利与弊"><a href="#1-5-递归的利与弊" class="headerlink" title="1.5 递归的利与弊"></a>1.5 递归的利与弊</h4><ul>
-<li><p>递归代码的表达力很强，十分简洁优雅。</p>
-</li>
-<li><p>空间复杂度高，有堆栈溢出风险，过多的函数调用会耗时</p>
-</li>
-</ul>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/10/24/算法笔记-01复杂度分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="csz">
-      <meta itemprop="description" content="个人学习生活记录">
-      <meta itemprop="image" content="/images/touxiang2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="csz的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/24/算法笔记-01复杂度分析/" class="post-title-link" itemprop="url">算法笔记-01复杂度分析</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-24 10:31:55" itemprop="dateCreated datePublished" datetime="2019-10-24T10:31:55+08:00">2019-10-24</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-10 10:51:16" itemprop="dateModified" datetime="2019-11-10T10:51:16+08:00">2019-11-10</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构与算法学习笔记/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法学习笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-为什么要做这个笔记"><a href="#1-为什么要做这个笔记" class="headerlink" title="1. 为什么要做这个笔记"></a>1. 为什么要做这个笔记</h2><p>​    最近开始重新学习数据结构与算法知识，俗话说：读书白遍，其义自见，要想真正学好数据结构与算法，必须要经过不断地反复锤炼才行，做笔记是一个消化知识的过程，在脑海中将学到的知识重演一遍并以自己的话总结出来，这样自身的内功才能得以提升。</p>
-<h2 id="2、时间复杂度"><a href="#2、时间复杂度" class="headerlink" title="2、时间复杂度"></a>2、时间复杂度</h2><h4 id="2-1-什么是时间复杂度"><a href="#2-1-什么是时间复杂度" class="headerlink" title="2.1 什么是时间复杂度"></a>2.1 什么是时间复杂度</h4><ul>
-<li><p>时间复杂度描述的是算法的<strong>执行时间随问题规模增长变化的趋势</strong></p>
-<p>​      </p>
-</li>
-</ul>
-<h4 id="2-2-为什么要引入时间复杂度"><a href="#2-2-为什么要引入时间复杂度" class="headerlink" title="2.2 为什么要引入时间复杂度"></a>2.2 为什么要引入时间复杂度</h4><ul>
-<li><p>事前对算法进行分析，指导我们写出高效的程序</p>
-</li>
-<li><p>提高我们的逻辑思维能力和分析问题的能力</p>
-</li>
-<li><p>与性能测试并不冲突，性能测试更为具体，而时间复杂度分析的是随问题规模增长下程序运行时间的变化趋势</p>
-</li>
-</ul>
-<h4 id="2-3-怎样判断一个程序的时间复杂度（重点）"><a href="#2-3-怎样判断一个程序的时间复杂度（重点）" class="headerlink" title="2.3 怎样判断一个程序的时间复杂度（重点）"></a>2.3 怎样判断一个程序的时间复杂度（重点）</h4><ol>
-<li><strong>单段代码看高频</strong>：看最内层代码的执行次数（如：循环）</li>
-<li><strong>多段代码取最大</strong>：只考虑最高阶的项，低阶项、系数、常数都可以忽略（加法法则）</li>
-<li><strong>嵌套代码求乘积</strong>：时间复杂度为内层和外层的乘积（乘法法则）</li>
-<li><strong>多个规模求加法</strong>：时间复杂度为其求和的结果（如：O(n+m)）</li>
-</ol>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/10/24/算法笔记-01复杂度分析/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/10/04/自我提升-表达沟通/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="csz">
-      <meta itemprop="description" content="个人学习生活记录">
-      <meta itemprop="image" content="/images/touxiang2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="csz的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/04/自我提升-表达沟通/" class="post-title-link" itemprop="url">自我提升-表达技巧</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-04 09:34:00" itemprop="dateCreated datePublished" datetime="2019-10-04T09:34:00+08:00">2019-10-04</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-10 10:51:16" itemprop="dateModified" datetime="2019-11-10T10:51:16+08:00">2019-11-10</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/自我提升/" itemprop="url" rel="index"><span itemprop="name">自我提升</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="如何逻辑清晰地向别人表达自己的观点？"><a href="#如何逻辑清晰地向别人表达自己的观点？" class="headerlink" title="如何逻辑清晰地向别人表达自己的观点？"></a>如何逻辑清晰地向别人表达自己的观点？</h2><h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a><em>基本</em></h3><ul>
-<li>好的表达包含<strong>“观点”</strong>+<strong>”客观事实“</strong></li>
-<li>好的表达要有结构，可以使用<strong>“讲三点”</strong>方法（重要的事情讲三点）</li>
-<li>好的表达应富有<strong>逻辑</strong>，经得起<strong>推敲</strong></li>
-</ul>
-<p><img src="https://i.loli.net/2019/10/04/95eHDRgNlKtdkIm.jpg" alt="1.jpg"></p>
-<h3 id="训练方法"><a href="#训练方法" class="headerlink" title="训练方法"></a><em>训练方法</em></h3><h4 id="1-复盘练习法"><a href="#1-复盘练习法" class="headerlink" title="1.复盘练习法"></a>1.复盘练习法</h4><p>​    回顾当时沟通的目的，<strong>重演过程</strong>并分析原因，探寻对话规律</p>
-<h4 id="2-复述练习法"><a href="#2-复述练习法" class="headerlink" title="2.复述练习法"></a>2.复述练习法</h4><p>​    想提高沟通表达能力，最简单有效的方法就是<strong>复述一个故事</strong>，可以用手机录音</p>
-<h4 id="3-电梯法则练习法"><a href="#3-电梯法则练习法" class="headerlink" title="3.电梯法则练习法"></a>3.电梯法则练习法</h4><p>​     要在最短的时间内，把事情表达清楚，凡事直奔主题、结果，将表达内容<strong>归纳</strong>在3个要点以内，30s之内完成。</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/09/22/PAT知识点回顾/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="csz">
-      <meta itemprop="description" content="个人学习生活记录">
-      <meta itemprop="image" content="/images/touxiang2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="csz的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/22/PAT知识点回顾/" class="post-title-link" itemprop="url">PAT算法知识点回顾</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-22 19:44:14" itemprop="dateCreated datePublished" datetime="2019-09-22T19:44:14+08:00">2019-09-22</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-10 10:51:16" itemprop="dateModified" datetime="2019-11-10T10:51:16+08:00">2019-11-10</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数据结构与算法知识点总结："><a href="#数据结构与算法知识点总结：" class="headerlink" title="数据结构与算法知识点总结："></a>数据结构与算法知识点总结：</h1><h4 id="实用技巧："><a href="#实用技巧：" class="headerlink" title="实用技巧："></a>实用技巧：</h4><h5 id="1-fill-函数的使用"><a href="#1-fill-函数的使用" class="headerlink" title="1.  fill()函数的使用"></a>1.  fill()函数的使用</h5><p>​    填充一维数组：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">int</span> arr[<span class="number">10</span>];</span><br><span class="line">  fill(arr, arr + <span class="number">10</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;;</span><br><span class="line">  fill(v.begin(), v.end(), <span class="number">-1</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-<p>​    填充二维数组：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fill(dis[<span class="number">0</span>], dis[<span class="number">0</span>]+maxn*maxn, INF);</span><br><span class="line"><span class="comment">// 因为dis[0]才是dis的首元素dis[0][0]的地址fill()函数的使用</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="2-memset-函数的使用"><a href="#2-memset-函数的使用" class="headerlink" title="2. memset()函数的使用"></a>2. memset()函数的使用</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span> a); </span><br><span class="line">    <span class="comment">//注意：memset为字节填充，如果填充整形数组只能填充0和-1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="3-count用于统计数组或向量中某个值出现的次数"><a href="#3-count用于统计数组或向量中某个值出现的次数" class="headerlink" title="3. count用于统计数组或向量中某个值出现的次数"></a>3. count用于统计数组或向量中某个值出现的次数</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//向量计数</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(v.begin(), v.end(), <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(v.begin(), v.end(), <span class="number">5</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(v.begin(), v.end(), <span class="number">6</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//数组计数</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(a, a + <span class="number">10</span>, <span class="number">0</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(a, a + <span class="number">10</span>, <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; count(a, a + <span class="number">10</span>, <span class="number">4</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-
-<h5 id="4-erase-和remove-结合起来删除容器中的指定元素"><a href="#4-erase-和remove-结合起来删除容器中的指定元素" class="headerlink" title="4.erase()和remove()结合起来删除容器中的指定元素"></a>4.erase()和remove()结合起来删除容器中的指定元素</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vec.erase( remove(vec.begin(), vec.end(), <span class="string">'A'</span>), vec.end() );</span><br></pre></td></tr></table></figure>
-
-<h5 id="5-利用find-查找所有子串或字符在原字符串中的位置"><a href="#5-利用find-查找所有子串或字符在原字符串中的位置" class="headerlink" title="5.利用find()查找所有子串或字符在原字符串中的位置"></a>5.利用find()查找所有子串或字符在原字符串中的位置</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>((pos=str.find(c,pos))!=<span class="built_in">string</span>::npos)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 其它代码</span></span><br><span class="line">	pos++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="5-C语言读入一行带空格的字符串-读到的回车符丢掉"><a href="#5-C语言读入一行带空格的字符串-读到的回车符丢掉" class="headerlink" title="5.C语言读入一行带空格的字符串(读到的回车符丢掉)"></a>5.C语言读入一行带空格的字符串(读到的回车符丢掉)</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]"</span>,str);    <span class="comment">//^表示非，意思只要没有遇到回车符\n，都读进来</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="7-大整数乘法核心代码"><a href="#7-大整数乘法核心代码" class="headerlink" title="7.大整数乘法核心代码"></a>7.大整数乘法核心代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num1.size();i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;num2.size();j++)</span><br><span class="line">    &#123;</span><br><span class="line">        result[i+j]+=num1[i]*num2[j];       <span class="comment">//核心</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;result.size();i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(result[i]&gt;=<span class="number">10</span>)                       <span class="comment">//统一处理进位</span></span><br><span class="line">    &#123;</span><br><span class="line">        result[i+<span class="number">1</span>]+=result[i]/<span class="number">10</span>;       </span><br><span class="line">        result[i]=result[i]%<span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/09/22/PAT知识点回顾/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1739,7 +1808,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1764,7 +1833,9 @@
         
           
         
-        <span class="site-state-item-count">5</span>
+          
+        
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1805,7 +1876,11 @@
         
           
         
-        <span class="site-state-item-count">13</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
