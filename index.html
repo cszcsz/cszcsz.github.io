@@ -260,6 +260,170 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/12/06/python核心赋值、浅拷贝、深拷贝、参数传递python核心赋值、浅拷贝、深拷贝、参数传递/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="csz">
+      <meta itemprop="description" content="个人学习生活记录">
+      <meta itemprop="image" content="/images/touxiang2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="csz的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/12/06/python核心赋值、浅拷贝、深拷贝、参数传递python核心赋值、浅拷贝、深拷贝、参数传递/" class="post-title-link" itemprop="url">python核心-赋值、浅拷贝、深拷贝、参数传递</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-06 19:02:26 / 修改时间：20:37:27" itemprop="dateCreated datePublished" datetime="2019-12-06T19:02:26+08:00">2019-12-06</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>首先总结一下Python中的核心：</p>
+<ul>
+<li>Python中一切都是对象，对象拥有自己的内存空间、地址(id)、类型等信息</li>
+<li>Python中的变量没有类型，可以理解为就是个标签(引用)</li>
+<li>Python中给变量赋值就相当于把标签贴到相应的对象上</li>
+<li>Python中函数参数的传递和返回实质就是赋值的过程</li>
+<li>在 Python 中，可变对象包括 list、dict、set、自定义类型等；不可变对象包括 int、float、bool、str、tuple 等</li>
+<li>浅拷贝仅仅只拷贝了一层，即拷贝了最外围的对象本身，内部的元素都只是拷贝了一个引用</li>
+<li>深拷贝出来的对象是一个全新的对象，不再与原来的对象有任何关联。</li>
+</ul>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p><strong>Python里给某个变量赋值，就像把标签贴到相应的对象上。</strong>而不像C++：变量拥有自己的类型和内存空间，此时变量就像个“容器”，给变量赋值就像把值放到这个容器里，再次赋值就是把容器里的数据替换掉。不能用C++中的赋值来理解Python中的赋值！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 赋值知识点考察小demo(先不看输出，检验自己是否真的理解了)</span></span><br><span class="line">a = <span class="number">1</span></span><br><span class="line">print(<span class="string">'a'</span>,a,id(a))</span><br><span class="line">b = <span class="number">2</span></span><br><span class="line">print(<span class="string">'b'</span>,b,id(b))</span><br><span class="line">c = <span class="number">1</span></span><br><span class="line">print(<span class="string">'c'</span>,c,id(c))</span><br><span class="line">a = b</span><br><span class="line">print(<span class="string">'a'</span>,a,id(a))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输出：</span><br><span class="line">a 1 4301490544</span><br><span class="line">b 2 4301490576</span><br><span class="line">c 1 4301490544  # 因为数字对象是不可变的，为了提高效率，python会使用一些公用的对象</span><br><span class="line">a 2 4301490576</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="函数参数传递"><a href="#函数参数传递" class="headerlink" title="函数参数传递"></a>函数参数传递</h3><p><strong>Python里的参数是通过赋值传递的</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># demo</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(a)</span>:</span></span><br><span class="line">    a[<span class="number">0</span>] = <span class="number">10</span></span><br><span class="line">    a = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line">l = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">fun(l)</span><br><span class="line">print(<span class="string">'l='</span>,l)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输出：</span><br><span class="line">l= [10,2,3]</span><br></pre></td></tr></table></figure>
+
+<p>很多地方将 Python 中的函数参数传递分为可变对象和不可变对象来说明，然后类比到 C++ 的值传递和引用传递，这样理解是相当不好的！</p>
+<br>
+
+<h3 id="可变对象和不可变对象"><a href="#可变对象和不可变对象" class="headerlink" title="可变对象和不可变对象"></a>可变对象和不可变对象</h3><p>在 Python 中，</p>
+<p><strong>可变对象</strong>包括 <strong>list、dict、set、自定义类型</strong>等；<br><strong>不可变对象</strong>包括 <strong>int、float、bool、str、tuple</strong> 等。</p>
+<p>不可变对象不允许对自身内容进行修改。如果我们对一个不可变对象进行赋值，实际上是生成一个新对象，再让变量指向这个对象。</p>
+<p>两者在功能上的最大区别就是：<strong>不可变对象可以作为字典 dict 的键 key，而可变对象不行</strong>。比如 list 不能作为字典的键，但 tuple 可以。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># demo</span></span><br><span class="line">s = <span class="string">'csz'</span>    <span class="comment"># 字符串是不可变对象</span></span><br><span class="line">s2 = s.replace(<span class="string">'z'</span>,<span class="string">'s'</span>)</span><br><span class="line">print(<span class="string">'s'</span>,s)</span><br><span class="line">print(<span class="string">'s2'</span>,s2)</span><br><span class="line">l = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]  <span class="comment"># 列表是可变对象</span></span><br><span class="line">l2 = l.reverse()</span><br><span class="line">print(<span class="string">'l'</span>,l)</span><br><span class="line">print(<span class="string">'l2'</span>,l2)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输出：</span><br><span class="line">s csz</span><br><span class="line">s2 css</span><br><span class="line">l [3,2,1]</span><br><span class="line">l2 None</span><br></pre></td></tr></table></figure>
+
+<p>解释：因为 <code>str</code> 是不可变对象，所以它的方法如 <code>replace</code>、<code>strip</code>、<code>upper</code> 都不可能修改原对象，<strong>只会返回一个新对象</strong>。而 <code>list</code> 是可变对象，它的方法如 <code>reverse</code>、<code>sort</code>、<code>append</code>，都是<strong>在原有对象上直接修改</strong>，无返回值。</p>
+<p>但是要注意一个列外：<code>l = l +</code> 和 <code>l +=</code> 虽然是一样的结果，但 l 指向的对象却发生了变化。原因在于，前者是做了赋值操作，而后者其实是调用的 <code>__iadd__</code> 方法。</p>
+<br>
+
+<h3 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h3><p><strong>浅拷贝</strong>: 创建新对象，其内容是原对象的引用。浅拷贝之所以称为浅拷贝，是<strong>它仅仅只拷贝了一层，拷贝了最外围的对象本身，内部的元素都只是拷贝了一个引用</strong>而已。</p>
+<p><strong>深拷贝</strong>：深拷贝拷贝了对象的所有元素，包括多层嵌套的元素。深拷贝出来的对象是一个全新的对象，<strong>不再与原来的对象有任何关联</strong>。</p>
+<p>浅拷贝有<strong>三</strong>种形式：<strong>切片操作，工厂函数，copy模块中的copy函数</strong></p>
+<p>如：切片操作：lst1=lst[:] 或 lst1 = [x for x in lst]；工厂函数：lst1=list(lst)；copy函数：lst1=copy.copy(lst)</p>
+<p>深拷贝只有<strong>一</strong>种形式：<strong>copy模块中的deepcopy函数</strong></p>
+<p>如：lst1=copy.deepcopy(lst)</p>
+<p>注意：</p>
+<ul>
+<li>不可变对象类型，没有被拷贝的说法，即便是用深拷贝，查看id的话也是一样的，如果对其重新赋值，也只是新创建一个对象，替换掉旧的而已。</li>
+<li>深拷贝的实现过程并不是完全的递归，否则如果对象的某级子元素是它自身的话，这个过程就死循环了。实际上，如果遇到已经处理过的对象，就会直接使用其引用，而不再重复处理。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># demo1</span></span><br><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>]]</span><br><span class="line">b = a[:]    <span class="comment"># 切片操作相当于浅拷贝</span></span><br><span class="line">b[<span class="number">1</span>] = <span class="number">4</span></span><br><span class="line">b[<span class="number">2</span>][<span class="number">0</span>] = <span class="number">5</span></span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输出：</span><br><span class="line">[1,2,[5]]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># demo2</span></span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line">a = [<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">b = [<span class="number">1</span>,<span class="number">2</span>,a,[<span class="number">5</span>,a]]</span><br><span class="line">c = deepcopy(b)</span><br><span class="line">c[<span class="number">3</span>][<span class="number">1</span>][<span class="number">0</span>] = <span class="number">-1</span></span><br><span class="line">print(c)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输出：</span><br><span class="line">[1,2,[-1,4],[5,[-1,4]]]</span><br></pre></td></tr></table></figure>
+
+<p>总结一下：</p>
+<ol>
+<li>外层添加元素时，浅拷贝不会随原列表变化而变化；内层添加元素时，浅拷贝才会变化。</li>
+<li>无论原列表如何变化，深拷贝都保持不变。</li>
+<li>赋值对象随着原列表一起变化。</li>
+</ol>
+<br>
+
+<h3 id="全局变量和局部变量"><a href="#全局变量和局部变量" class="headerlink" title="全局变量和局部变量"></a>全局变量和局部变量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># demo</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(x)</span>:</span></span><br><span class="line">    print(<span class="string">'x='</span>,x)</span><br><span class="line">    y = <span class="number">5</span></span><br><span class="line">    x += y</span><br><span class="line">    print(<span class="string">'x='</span>,x)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">x = <span class="number">5</span></span><br><span class="line">fun(x)</span><br><span class="line">print(<span class="string">'x='</span>,x)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输出：</span><br><span class="line">x=5</span><br><span class="line">x=10</span><br><span class="line">x=5</span><br></pre></td></tr></table></figure>
+
+<p>若想在函数内部修改函数外部的变量，需要加上<code>global</code>关键字声明：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># demo2</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">()</span>:</span>   </span><br><span class="line">    <span class="keyword">global</span> x   <span class="comment">#这种情况下,x不能作为形参出现</span></span><br><span class="line">    x = <span class="number">10</span></span><br><span class="line">x = <span class="number">5</span></span><br><span class="line">fun()</span><br><span class="line">print(<span class="string">'x='</span>,x)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输出：</span><br><span class="line">x=10</span><br></pre></td></tr></table></figure>
+
+<p>如果仅需要在函数内部读取外部变量的值，则不需要<code>global</code>声明</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># demo3</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">()</span>:</span></span><br><span class="line">    y = x</span><br><span class="line">    print(<span class="string">'y='</span>,y)</span><br><span class="line">x = <span class="number">5</span></span><br><span class="line">fun()</span><br><span class="line">print(<span class="string">'x='</span>,x)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输出：</span><br><span class="line">y=5</span><br><span class="line">x=5</span><br></pre></td></tr></table></figure>
+
+<p><strong>写入的时候 ，<code>global</code> 的用于区分全局变量和局部变量，而读取不存在这样的问题</strong></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/12/03/算法笔记-11字符串匹配算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1540,222 +1704,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://cszcsz.gihub.io/2019/11/16/算法笔记-03排序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="csz">
-      <meta itemprop="description" content="个人学习生活记录">
-      <meta itemprop="image" content="/images/touxiang2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="csz的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/11/16/算法笔记-03排序/" class="post-title-link" itemprop="url">算法笔记-03排序</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-11-16 19:42:41" itemprop="dateCreated datePublished" datetime="2019-11-16T19:42:41+08:00">2019-11-16</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-03 20:49:37" itemprop="dateModified" datetime="2019-12-03T20:49:37+08:00">2019-12-03</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构与算法学习笔记/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法学习笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h3 id="总结表"><a href="#总结表" class="headerlink" title="总结表"></a>总结表</h3><table>
-<thead>
-<tr>
-<th align="center">排序算法</th>
-<th align="center">平均时间复杂度</th>
-<th align="center">最好情况</th>
-<th align="center">最坏情况</th>
-<th align="center">空间复杂度</th>
-<th align="center">稳定性</th>
-<th align="center">排序方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">冒泡排序</td>
-<td align="center">O(n<sup>2</sup>)</td>
-<td align="center">O(n)</td>
-<td align="center">O(n<sup>2</sup>)</td>
-<td align="center">O(1)</td>
-<td align="center">稳定</td>
-<td align="center">in-place</td>
-</tr>
-<tr>
-<td align="center">选择排序</td>
-<td align="center">O(n<sup>2</sup>)</td>
-<td align="center">O(n<sup>2</sup>)</td>
-<td align="center">O(n<sup>2</sup>)</td>
-<td align="center">O(1)</td>
-<td align="center">不稳定</td>
-<td align="center">in-place</td>
-</tr>
-<tr>
-<td align="center">插入排序</td>
-<td align="center">O(n<sup>2</sup>)</td>
-<td align="center">O(n)</td>
-<td align="center">O(n<sup>2</sup>)</td>
-<td align="center">O(1)</td>
-<td align="center">稳定</td>
-<td align="center">in-place</td>
-</tr>
-<tr>
-<td align="center">希尔排序</td>
-<td align="center">O(n<sup>1.3</sup>)</td>
-<td align="center">O(n)</td>
-<td align="center">O(n<sup>2</sup>)</td>
-<td align="center">O(1)</td>
-<td align="center">不稳定</td>
-<td align="center">in-place</td>
-</tr>
-<tr>
-<td align="center">归并排序</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(n)</td>
-<td align="center">稳定</td>
-<td align="center">out-place</td>
-</tr>
-<tr>
-<td align="center">快速排序</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(n<sup>2</sup>)</td>
-<td align="center">O(logn)</td>
-<td align="center">不稳定</td>
-<td align="center">in-place</td>
-</tr>
-<tr>
-<td align="center">堆排序</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(nlogn)</td>
-<td align="center">O(1)</td>
-<td align="center">不稳定</td>
-<td align="center">in-place</td>
-</tr>
-<tr>
-<td align="center">桶排序</td>
-<td align="center">O(n+k)</td>
-<td align="center">O(n+k)</td>
-<td align="center">O(n<sup>2</sup>)</td>
-<td align="center">O(n+k)</td>
-<td align="center">稳定</td>
-<td align="center">out-place</td>
-</tr>
-<tr>
-<td align="center">计数排序</td>
-<td align="center">O(n+k)</td>
-<td align="center">O(n+k)</td>
-<td align="center">O(n+k)</td>
-<td align="center">O(k)</td>
-<td align="center">稳定</td>
-<td align="center">out-place</td>
-</tr>
-<tr>
-<td align="center">基数排序</td>
-<td align="center">O(n*k)</td>
-<td align="center">O(n*k)</td>
-<td align="center">O(n*k)</td>
-<td align="center">O(n+k)</td>
-<td align="center">稳定</td>
-<td align="center">out-place</td>
-</tr>
-</tbody></table>
-<p>  注：排序方式in-place意思是原地排序，与内部排序和外部排序(数据存储在外部磁盘中，无法一次全部加载到内存中)的概念不同。</p>
-<p><strong>排序的本质就是消除逆序数</strong>，如果采用”交换相邻元素”的办法来消除逆序，每次正好只消除一个，因此必须执行O(n<sup>2</sup>)的交换次数，这就是冒泡、插入等算法只能到平方级的原因。<strong>基于交换元素的排序想要突破这个下界，必须执行一些比较、交换相隔比较远的元素，使得一次交换能消除多个逆序</strong>，像希尔、快排、堆排等算法都是交换比较远的元素，只不过规则各不相同罢了。</p>
-<br>
-
-<h3 id="各类排序算法实现"><a href="#各类排序算法实现" class="headerlink" title="各类排序算法实现"></a>各类排序算法实现</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a><strong>冒泡排序</strong></h4><p><strong>基本思想</strong>：每一趟逐次比较相邻元素，总是把值大的元素(泡泡)往上冒，一趟可以放好一个元素的位置，执行n趟即可。加入一个flag标志(如果某一趟没有执行交换操作则说明已经有序，即可提前结束排序)可以优化最好情况的时间复杂度到O(n)。</p>
-<p>C++实现：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.冒泡排序</span></span><br><span class="line"><span class="comment">// 时间复杂度:最好-O(n),最坏-O(n^2)，平均-O(n^2)  </span></span><br><span class="line"><span class="comment">// 空间复杂度:O(1)</span></span><br><span class="line"><span class="comment">// 稳定排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="keyword">int</span> nums[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> flag;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        flag=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n-i<span class="number">-1</span>;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j]&gt;nums[j+<span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                flag=<span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">int</span> temp = nums[j];</span><br><span class="line">                nums[j]=nums[j+<span class="number">1</span>];</span><br><span class="line">                nums[j+<span class="number">1</span>]=temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Python实现：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">BubbleSort</span><span class="params">(data)</span>:</span></span><br><span class="line">    length = len(data)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(length):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(length-i<span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> data[j]&gt;data[j+<span class="number">1</span>]:</span><br><span class="line">                data[j+<span class="number">1</span>],data[j] = data[j],data[j+<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/11/16/算法笔记-03排序/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1808,7 +1756,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1835,7 +1783,9 @@
         
           
         
-        <span class="site-state-item-count">6</span>
+          
+        
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
